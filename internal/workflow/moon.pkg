@@ -1,0 +1,22 @@
+import {
+  "moonbit-community/actionlint/internal/config",
+  "moonbit-community/actionlint/internal/data",
+  "moonbit-community/actionlint/internal/expression",
+  "moonbit-community/actionlint/internal/json" @jsonutil,
+  "moonbit-community/actionlint/internal/matching",
+  "moonbit-community/actionlint/internal/model",
+  "moonbit-community/actionlint/internal/project",
+  "moonbit-community/actionlint/internal/yaml",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/process",
+  "moonbitlang/core/string",
+  "moonbitlang/core/encoding/utf8",
+}
+
+import {
+  "moonbit-community/actionlint/internal/output",
+  "moonbit-community/actionlint/internal/template",
+  "moonbitlang/core/json",
+} for "wbtest"

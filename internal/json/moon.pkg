@@ -1,0 +1,5 @@
+import {
+  "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/json" @core_json,
+  "moonbitlang/core/encoding/utf8",
+}

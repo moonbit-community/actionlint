@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/model"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn char_quote(Char, ascii? : Bool) -> String
+
+pub fn node(Int, String, Int, Int, Int, String, Int) -> Node
+
+pub fn quote(String) -> String
+
+pub fn quotes(Array[String]) -> String
+
+pub fn sorted_diagnostics(Array[Diagnostic]) -> Array[Diagnostic]
+
+pub fn string_quote(String, ascii? : Bool) -> String
+
+// Errors
+pub(all) suberror CliError {
+  CliError(String)
+}
+
+// Types and methods
+pub(all) struct Check {
+  errors : Array[Diagnostic]
+}
+pub fn Check::report(Self, Node, String, String) -> Unit
+pub fn Check::syntax(Self, Node, String) -> Unit
+
+pub(all) struct Diagnostic {
+  message : String
+  line : Int
+  column : Int
+  kind : String
+}
+pub fn Diagnostic::oneline(Self, String) -> String
+
+pub(all) struct Node {
+  mut retained : Bool
+  kind : Int
+  value : String
+  mut line : Int
+  mut column : Int
+  mut document_line : Int
+  mut document_column : Int
+  style : Int
+  tag : String
+  anchor : Int
+  mut tagged : Bool
+  mut anchor_name : String
+  children : Array[Node]
+} derive(@debug.Debug)
+pub fn Node::contains_expression(Self) -> Bool
+pub fn Node::get(Self, String) -> Self?
+pub fn Node::get_ci(Self, String) -> Self?
+pub fn Node::is_expression(Self) -> Bool
+pub fn Node::items(Self) -> Array[Self]
+pub fn Node::key(Self, String) -> Self?
+pub fn Node::kind_name(Self) -> String
+pub fn Node::pairs(Self) -> Array[(Self, Self)]
+pub fn Node::raw_repr(Self) -> String
+pub fn Node::text(Self, String) -> String
+#deprecated
+pub fn Node::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits

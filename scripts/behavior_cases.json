@@ -1,0 +1,2019 @@
+[
+  {
+    "id": "control-valid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "control-invalid-runner",
+    "source": "on: push\njobs:\n  test:\n    runs-on: does-not-exist\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"does-not-exist\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "format-placeholder-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{2147483648}', 1) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{2147483648}\" contains placeholder {2147483648} but only 1 arguments are given to format [expression]\n<stdin>:7:19: format string \"{2147483648}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "comment-only-workflow",
+    "source": "# only a comment\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: workflow is empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "explicit-yaml-int-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "timeout-hex-literal",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 0x10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: invalid float value: \"0x10\": strconv.ParseFloat: parsing \"0x10\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "fromjson-key-uppercase-index",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1}')['Foo'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "fromjson-key-lowercase-index",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1}')['foo'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: property \"foo\" is not defined in object type {Foo: number} [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "format-escaped-braces",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{0}}', 'x') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{{0}}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "docker-invalid-url",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: docker://a%xx\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://a%xx\" is invalid: parse \"docker://a%xx\": invalid URL escape \"%xx\" (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "docker-nonempty-tag-ending-colon",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:b:\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "deprecated-command-false-positive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ::set-output::x\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "deprecated-command-tab-separator",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output\tname=x::v\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:14: workflow command \"set-output\" was deprecated. use `echo \"{name}={value}\" >> $GITHUB_OUTPUT` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "cron-unsatisfiable-date",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 31 FEB *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: scheduled job runs too frequently. it runs once per 0 seconds. the shortest interval is once every 5 minutes [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "cron-invalid-timezone-prefix",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=Bad/Zone 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"TZ=Bad/Zone 0 0 * * *\" in schedule event: provided bad location Bad/Zone: unknown time zone Bad/Zone [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "composite-empty-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-steps-scalar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: 1\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 5: cannot unmarshal !!int `1` into []interface {} [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-required-yaml-yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: yes\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"foo\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"foo\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-required-invalid-string",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: garbage\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 10: cannot unmarshal !!str `garbage` into bool [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: true\n    default: null\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"foo\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"foo\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-empty-disallowed-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\n  args: []\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: \"args\" is not allowed in \"runs\" section because \"Test\" is a Composite action. the action is defined at \"$PROJECT/action\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "action-input-name-diagnostic-case",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  CamelCase:\n    required: true\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"CamelCase\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"CamelCase\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "workflow-required-uppercase-true",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: True\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: input \"foo\" is required by \"./.github/workflows/callee.yml\" reusable workflow [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "workflow-required-invalid-string",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: garbage\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: error while parsing reusable workflow \"./.github/workflows/callee.yml\": yaml: unmarshal errors:   line 6: cannot unmarshal !!str `garbage` into bool [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "workflow-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: true\n        default: null\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: input \"foo\" is required by \"./.github/workflows/callee.yml\" reusable workflow [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "ignore-re2-quoted-literal",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown\\E"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "ignore-re2-repeat-limit",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "unknown{1001}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"unknown{1001}\": error parsing regexp: invalid repeat count: `{1001}`\n"
+    }
+  },
+  {
+    "id": "printf-zero-padding",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04d\" 3}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "0003",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "template-parenthesized-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" (index . 0).Kind}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "events",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "template-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{break}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "template-unknown-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.Unknown}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "variadic-signature-diagnostic",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('x') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: number of arguments is wrong. function \"format(string, any...) -> string\" takes at least 2 parameters but 1 arguments are given [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "explicit-document-start-position",
+    "source": "---\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: \"jobs\" section is missing in workflow [syntax-check]\n<stdin>:1:1: \"on\" section is missing in workflow [syntax-check]\n<stdin>:2:1: \"workflow\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "invalid-yaml-parser-diagnostic",
+    "source": "on: [push\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:4: could not parse as YAML: did not find expected ',' or ']' [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "template-error-suppression",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ fromJSON('null') }} ${{ no_such }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:47: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "pyflakes-missing-final-newline",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nprint(\"<stdin>:1:1: undefined name missing\", end=\"\")\nsys.exit(1)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "error message from pyflakes does not end with \\n nor \\r\\n while checking script at line:6,col:9. output: \"<stdin>:1:1: undefined name missing\"\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "boundary-format-int64-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{9223372036854775807}', 1) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{9223372036854775807}\" contains placeholder {9223372036854775807} but only 1 arguments are given to format [expression]\n<stdin>:7:19: format string \"{9223372036854775807}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-int64-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{9223372036854775808}', 1) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{9223372036854775808}\" contains placeholder {9223372036854775807} but only 1 arguments are given to format [expression]\n<stdin>:7:19: format string \"{9223372036854775808}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-huge-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{99999999999999999999999999999999999999999999999999999999999999999999999999999999}', 1) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{99999999999999999999999999999999999999999999999999999999999999999999999999999999}\" contains placeholder {9223372036854775807} but only 1 arguments are given to format [expression]\n<stdin>:7:19: format string \"{99999999999999999999999999999999999999999999999999999999999999999999999999999999}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-int32-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{2147483647}', 1) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{2147483647}\" contains placeholder {2147483647} but only 1 arguments are given to format [expression]\n<stdin>:7:19: format string \"{2147483647}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-even-close",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{0}}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n<stdin>:7:19: format string \"{0}}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-odd-close",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{0}}}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-escaped-opening",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{{0}}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{{{0}}}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n<stdin>:7:19: format string \"{}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-restart",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{x{0}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{x{0}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-consecutive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}{1}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-mixed",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{0}} {1}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{{0}} {1}\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-trailing",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{0\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n<stdin>:7:19: format string \"{0\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-format-leading-zeros",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0000}', 1, 2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"{0000}\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-fromjson-distinct-keys",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1,\"foo\":true}')['Foo'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-context-case-insensitive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ GITHUB.WorkFlow }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-interpolation-null-valid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: \"${{ null }} ${{ 1 }}\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:16: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type null [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-interpolation-error-before-null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: \"${{ no_such }} ${{ null }}\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-empty",
+    "source": "",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: workflow is empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-blank",
+    "source": " \n\t\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:0: could not parse as YAML: found character that cannot start any token [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-comments",
+    "source": "\n# hi\n# bye\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: workflow is empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-document-comment",
+    "source": "# hi\n---\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:1: \"jobs\" section is missing in workflow [syntax-check]\n<stdin>:2:1: \"on\" section is missing in workflow [syntax-check]\n<stdin>:3:1: \"workflow\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-document-null",
+    "source": "---\nnull\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: \"jobs\" section is missing in workflow [syntax-check]\n<stdin>:1:1: \"on\" section is missing in workflow [syntax-check]\n<stdin>:2:1: \"workflow\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-document-content",
+    "source": "---\non: push\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: \"jobs\" section is missing in workflow [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-flow-map",
+    "source": "on: {push\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:4: could not parse as YAML: did not find expected ',' or '}' [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-flow-nested",
+    "source": "on:\n  push: [foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:8: could not parse as YAML: did not find expected ',' or ']' [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-flow-multiline",
+    "source": "on: [push,\n  pull_request\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:4: could not parse as YAML: did not find expected ',' or ']' [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-yaml-flow-mismatch",
+    "source": "on: [push}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:0:4: could not parse as YAML: did not find expected ',' or ']' [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-explicit-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"-1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: value at \"timeout-minutes\" must be greater than zero: -1 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-verbatim-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !<tag:yaml.org,2002:int> \"1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-explicit-invalid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"garbage\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: invalid float value: \"garbage\": strconv.ParseFloat: parsing \"garbage\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-octal",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 0o10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: invalid float value: \"0o10\": strconv.ParseFloat: parsing \"0o10\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-underscores",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 1_000\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 1e999\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: -1\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:22: value at \"timeout-minutes\" must be greater than zero: -1 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-number-float-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!float \"1.5\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-integer-hex",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 0x10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:21: invalid integer value: \"0x10\": strconv.Atoi: parsing \"0x10\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-integer-int64-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 9223372036854775807\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-integer-int64-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 9223372036854775808\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:21: invalid integer value: \"9223372036854775808\": strconv.Atoi: parsing \"9223372036854775808\": value out of range [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-integer-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: -1\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:21: value at \"max-parallel\" must be greater than zero: -1 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-quoted-yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: \"yes\"\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"CamelCase\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"CamelCase\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-on",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: on\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"CamelCase\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"CamelCase\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-no",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: no\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-quoted-false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: \"false\"\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 8: cannot unmarshal !!str `false` into bool [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-numeric",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: 1\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 8: cannot unmarshal !!int `1` into bool [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-sequence",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: []\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 8: cannot unmarshal !!seq into bool [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-empty-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: \"\"\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-false-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: false\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-map-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 9: cannot unmarshal !!map into string [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: yes\n    default: ~\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: missing input \"CamelCase\" which is required by action \"Test\" defined at \"./action\". all required inputs are \"CamelCase\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-missing-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: \"steps\" is required in \"runs\" section because \"Test\" is a Composite action. the action is defined at \"$PROJECT/action\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-null-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: null\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: \"steps\" is required in \"runs\" section because \"Test\" is a Composite action. the action is defined at \"$PROJECT/action\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-map-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 5: cannot unmarshal !!map into []interface {} [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-empty-env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  env: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: \"env\" is not allowed in \"runs\" section because \"Test\" is a Composite action. the action is defined at \"$PROJECT/action\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-null-env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  env: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-null-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  args: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-scalar-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  args: x\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 6: cannot unmarshal !!str `x` into []interface {} [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-empty-main",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  main: \"\"\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-sequence-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: []\ndescription: Test\nruns:\n  using: composite\n  steps: []\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 1: cannot unmarshal !!seq into string [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-scalar-runs",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns: 1\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 3: cannot unmarshal !!int `1` into actionlint.ActionMetadataRuns [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-action-scalar-input",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  foo: 1\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 7: cannot unmarshal !!int `1` into actionlint.actionInputMetadata [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-quoted-yes",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: \"yes\"\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: input \"CamelCase\" is required by \"./.github/workflows/callee.yml\" reusable workflow [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-false",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: false\njobs: {}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-null",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: null\njobs: {}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-numeric",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: 1\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: error while parsing reusable workflow \"./.github/workflows/callee.yml\": yaml: unmarshal errors:   line 5: cannot unmarshal !!int `1` into bool [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-empty-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: true\n        default: \"\"\njobs: {}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-map-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: true\n        default: {}\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: error while parsing reusable workflow \"./.github/workflows/callee.yml\": yaml: unmarshal errors:   line 6: cannot unmarshal !!map into string [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-secret-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    secrets:\n      CamelCase:\n        required: true\n        default: \"\"\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: secret \"CamelCase\" is required by \"./.github/workflows/callee.yml\" reusable workflow [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-workflow-required-secret-yes",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    secrets:\n      CamelCase:\n        required: yes\njobs: {}\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: secret \"CamelCase\" is required by \"./.github/workflows/callee.yml\" reusable workflow [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-empty-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: tag of Docker action should not be empty: \"docker://a\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-host-space",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a b\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://a b\" is invalid: parse \"docker://a b\": invalid character \" \" in host name (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-host-ascii-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a%41\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://a%41\" is invalid: parse \"docker://a%41\": invalid URL escape \"%41\" (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-host-utf8-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a%ff\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-path-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a/x%zz\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://a/x%zz\" is invalid: parse \"docker://a/x%zz\": invalid URL escape \"%zz\" (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-query-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a?x=%zz\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-fragment-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a#%zz\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://a#%zz\" is invalid: parse \"docker://a#%zz\": invalid URL escape \"%zz\" (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-missing-bracket",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://[abc\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:15: URI for Docker container \"docker://[abc\" is invalid: parse \"docker://[abc\": missing ']' in host (tag=) [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-tag-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:b%zz\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-docker-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-empty-value",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=x::\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:14: workflow command \"set-output\" was deprecated. use `echo \"{name}={value}\" >> $GITHUB_OUTPUT` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-digit-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=x1::v\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-bad-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=1x::v\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-path",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::add-path::/bin\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:14: workflow command \"add-path\" was deprecated. use `echo \"{path}\" >> $GITHUB_PATH` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-path-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::add-path::\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:14: workflow command \"add-path\" was deprecated. use `echo \"{path}\" >> $GITHUB_PATH` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-command-spaces",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::save-state  name=x::v\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:14: workflow command \"save-state\" was deprecated. use `echo \"{name}={value}\" >> $GITHUB_STATE` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-bad-cron-tz",
+    "source": "on:\n  schedule:\n    - cron: \"CRON_TZ=No/Such 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"CRON_TZ=No/Such 0 0 * * *\" in schedule event: provided bad location No/Such: unknown time zone No/Such [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-valid-tz",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=Asia/Shanghai 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-empty-tz",
+    "source": "on:\n  schedule:\n    - cron: \"TZ= 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-invalid-location",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=../UTC 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"TZ=../UTC 0 0 * * *\" in schedule event: provided bad location ../UTC: time: invalid location name [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-feb-leap",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 29 FEB *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-cron-feb-sunday",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 31 FEB SUN\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-quoted-metachar",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown Webhook\\E"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"unknown-runner\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-unclosed-quote",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-quoted-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown{1001}\\E"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"typo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n<stdin>:4:14: label \"unknown-runner\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-max-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1000}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"typo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n<stdin>:4:14: label \"unknown-runner\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-open-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1000,}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"typo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n<stdin>:4:14: label \"unknown-runner\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-range-max",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1,1000}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"typo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-range-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1,1001}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"x{1,1001}\": error parsing regexp: invalid repeat count: `{1,1001}`\n"
+    }
+  },
+  {
+    "id": "boundary-ignore-nested-max",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(x{100}){10}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"typo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n<stdin>:4:14: label \"unknown-runner\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-ignore-nested-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(x{100}){11}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"(x{100}){11}\": error parsing regexp: invalid repeat count: `{11}`\n"
+    }
+  },
+  {
+    "id": "boundary-ignore-reversed",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{2,1}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"x{2,1}\": error parsing regexp: invalid repeat count: `{2,1}`\n"
+    }
+  },
+  {
+    "id": "boundary-config-ignore-quoted",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {
+      ".github/actionlint.yaml": "paths:\n  '**':\n    ignore: ['\\Qunknown\\E']\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-config-ignore-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {
+      ".github/actionlint.yaml": "paths:\n  '**':\n    ignore: ['unknown{1001}']\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"$PROJECT/.github/actionlint.yaml\": could not parse config file \"$PROJECT/.github/actionlint.yaml\": yaml: unmarshal errors:   line 3: invalid regular expression \"unknown{1001}\" in \"ignore\" at line3,col:13: error parsing regexp: invalid repeat count: `{1001}`\n"
+    }
+  },
+  {
+    "id": "boundary-template-printf-width",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04d|%6.2f|%-5s|%.2s\" 3 1.234 \"x\" \"hello\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "0003|  1.23|x    |he",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-printf-sign",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%05d|%+05d|%5.3d\" -3 3 3}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "-0003|+0003|  003",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-printf-hex",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04x|%.3d|%8q\" 15 3 \"x\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "000f|003|     \"x\"",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-parenthesis-pipeline",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" ((index . 0).Kind)}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "events",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-continue",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}A{{continue}}B{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "AA",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-nested-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}A{{range $x := $}}{{break}}B{{end}}C{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "ACAC",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-conditional-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{if .Kind}}X{{break}}{{end}}Y{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "X",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-partial-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{range .}}X{{.Unknown}}Y{{end}}after"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "beforeX",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-multi-partial-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{range .}}X{{.Unknown}}Y{{end}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ],
+    "expected": {
+      "code": 3,
+      "stdout": "beforeX",
+      "stderr": "could not format error messages: template: error formatter:1:20: executing \"error formatter\" at <.Unknown>: can't evaluate field Unknown in type *actionlint.ErrorTemplateFields\n"
+    }
+  },
+  {
+    "id": "boundary-template-index-error",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{index . 99}}after"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-multi-index-error",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{index . 99}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ],
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index . 99>: error calling index: index out of range: 99\n"
+    }
+  },
+  {
+    "id": "boundary-template-nil",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{nil}}after"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-multi-nil",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{nil}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ],
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <nil>: nil is not a command\n"
+    }
+  },
+  {
+    "id": "boundary-template-field-case",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.kind}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-template-multi-field-case",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.kind}}{{end}}"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ],
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not format error messages: template: error formatter:1:13: executing \"error formatter\" at <.kind>: can't evaluate field kind in type *actionlint.ErrorTemplateFields\n"
+    }
+  },
+  {
+    "id": "boundary-template-break-outside",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{break}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"{{break}}\" to format error messages could not be parsed: template: error formatter:1: {{break}} outside {{range}}\n"
+    }
+  },
+  {
+    "id": "boundary-empty-snippet",
+    "source": "",
+    "flags": [
+      "-format",
+      "{{range .}}[{{.Snippet}}]{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "[]",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary-pyflakes-lf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:1: undefined name missing\\n')\nsys.exit(1)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:1: undefined name missing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "boundary-pyflakes-crlf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:1: undefined name missing\\r\\n')\nsys.exit(1)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:1: undefined name missing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "boundary-pyflakes-irrelevant",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('ignored output')\nsys.exit(1)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "boundary-pyflakes-syntax-tail",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:7: unexpected EOF while parsing\\nprint(\\n      ^')\nsys.exit(1)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:7: unexpected EOF while parsing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  }
+]

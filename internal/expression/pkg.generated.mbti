@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/expression"
+
+import {
+  "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn initial_contexts() -> Map[String, ExprType]
+
+pub fn object_type(props? : Map[String, ExprType], mapped? : ExprType) -> ExprType
+
+pub fn parse_expression(String) -> (Expr, Int) raise ExprError
+
+pub fn untrusted_checker() -> UntrustedChecker
+
+// Errors
+pub suberror ExprError {
+  ExprError(Int, String)
+}
+
+// Types and methods
+pub struct Expr {
+  kind : String
+  value : String
+  children : Array[Expr]
+  // private fields
+} derive(@debug.Debug)
+pub fn Expr::constant(Self) -> Bool
+#deprecated
+pub fn Expr::to_repr(Self) -> @debug.Repr
+
+pub(all) struct ExprScope {
+  check : @model.Check
+  contexts : Map[String, ExprType]
+  variables : Array[String]?
+  node : @model.Node
+  source : String
+  base : Int
+  untrusted : UntrustedChecker?
+  workflow_key : String
+}
+pub fn ExprScope::infer(Self, Expr) -> ExprType
+pub fn ExprScope::report(Self, Int, String) -> Unit
+pub fn ExprScope::untrusted_end(Self, UntrustedChecker) -> Unit
+
+pub(all) enum ExprType {
+  AnyTy
+  NullTy
+  BoolTy
+  NumberTy
+  StringTy
+  ObjectTy(Map[String, ExprType], ExprType?)
+  ArrayTy(ExprType, Bool)
+} derive(Eq, @debug.Debug)
+pub fn ExprType::assignable(Self, Self) -> Bool
+#deprecated
+pub fn ExprType::equal(Self, Self) -> Bool
+pub fn ExprType::merge(Self, Self) -> Self
+pub fn ExprType::name(Self) -> String
+#deprecated
+pub fn ExprType::not_equal(Self, Self) -> Bool
+#deprecated
+pub fn ExprType::to_repr(Self) -> @debug.Repr
+
+pub struct UntrustedChecker {
+  // private fields
+}
+
+// Type aliases
+
+// Traits

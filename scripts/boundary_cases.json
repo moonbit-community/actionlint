@@ -1,0 +1,2436 @@
+[
+  {
+    "id": "boundary:bool-valid:step:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:step:false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ false }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:step:fromJSON(vars.FLAG)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ fromJSON(vars.FLAG) }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:job:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:job:false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ false }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:job:fromJSON(vars.FLAG)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ fromJSON(vars.FLAG) }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:strategy:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:strategy:false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ false }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:strategy:fromJSON(vars.FLAG)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ fromJSON(vars.FLAG) }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:concurrency:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency: {group: a, cancel-in-progress: \"${{ true }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:concurrency:false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency: {group: a, cancel-in-progress: \"${{ false }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:concurrency:fromJSON(vars.FLAG)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency: {group: a, cancel-in-progress: \"${{ fromJSON(vars.FLAG) }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:environment:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:environment:false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ false }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:environment:fromJSON(vars.FLAG)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ fromJSON(vars.FLAG) }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:dispatch-required:true",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean, required: \"${{ true }}\"}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:dispatch-required:false",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean, required: \"${{ false }}\"}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:call-required:true",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: boolean, required: \"${{ true }}\"}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:bool-valid:call-required:false",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: boolean, required: \"${{ false }}\"}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:if-truthiness:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"1\" in condition. remove the if: section [if-cond]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:if-truthiness:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"'false'\" in condition. remove the if: section [if-cond]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:if-truthiness:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {} [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:if-truthiness:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type array<any> [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:if-truthiness:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"null\" in condition. remove the if: section [if-cond]\n<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type null [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:matrix-types:24",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[{\"y\":true}]') }}\n    name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:matrix-types:25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ fromJSON('{\"y\":true}') }}\n    name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:matrix-types:26",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ fromJSON('[{\"y\":true}]') }}\n    name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:event-description:workflow_call:outputs",
+    "source": "on:\n  workflow_call:\n    outputs:\n      x:\n        description: ${{ no_such }}\n        value: ok\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:event-description:workflow_call:secrets",
+    "source": "on:\n  workflow_call:\n    secrets:\n      x:\n        description: ${{ no_such }}\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:event-description:workflow_call:inputs",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x:\n        description: ${{ no_such }}\n        type: string\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:event-description:workflow_dispatch:inputs",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x:\n        description: ${{ no_such }}\n        type: string\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github.event.*.title[0]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.*.title[0] }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.discussion.title\", \"github.event.issue.title\", \"github.event.pull_request.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github.event.commits.*.message",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.commits.*.message }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: \"github.event.commits.*.message\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github.event.issue.*[0]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.*[0] }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.issue.body\", \"github.event.issue.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:toJSON(github.event.issue.title)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ toJSON(github.event.issue.title) }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:30: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:contains(github.event.issue.title, '')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains(github.event.issue.title, '') }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github.event.issue[github.event.issue.title]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue[github.event.issue.title] }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:42: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github.event.issue.title.bar.baz",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.title.bar.baz }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:security:github['event']['Issue']['title']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github['event']['Issue']['title'] }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:foo[!x]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo[!x]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:foo[^x]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo[^x]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:{foo,bar}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"{foo,bar}\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"{foo,bar}\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:foo/**/bar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo/**/bar\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo/**/bar\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:a**b",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"a**b\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"a**b\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:foo/**",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo/**\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo/**\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:[a-]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[a-]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label pattern \"[a-]\" is an invalid glob. kindly check list of labels in actionlint.yaml config file: syntax error in pattern [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label pattern \"[]\" is an invalid glob. kindly check list of labels in actionlint.yaml config file: syntax error in pattern [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:[!]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[!]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[!]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:[z-a]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[z-a]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[z-a]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:runner-pattern:[é-中]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo!\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[\\u00e9-\\u4e2d]\"]\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[é-中]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:config-pattern:[!]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"[!]\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[!]\" in \"paths\"\n"
+    }
+  },
+  {
+    "id": "boundary:config-pattern:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"[]\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[]\" in \"paths\"\n"
+    }
+  },
+  {
+    "id": "boundary:config-pattern:{foo,bar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"{foo,bar\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"{foo,bar\" in \"paths\"\n"
+    }
+  },
+  {
+    "id": "boundary:config-pattern:foo/**/bar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"foo/**/bar\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:config-pattern:**/*.yml",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"**/*.yml\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:config-pattern:{.github,other}/**/*.yml",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"{.github,other}/**/*.yml\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:config-pattern:[z-a]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"[z-a]\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:config-pattern:foo[!x]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"foo[!x]\": {ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:[[:^alpha:]]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "[[:^alpha:]]"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:\\P{Greek}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\P{Greek}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:(?i:a)(?-i:b)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?i:a)(?-i:b)"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:(?U:a+?)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?U:a+?)"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:\\Afoo\\z",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Afoo\\z"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:a{01}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "a{01}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:(a)\\1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(a)\\1"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"(a)\\\\1\": error parsing regexp: invalid escape sequence: `\\1`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:\\8",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\8"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"\\\\8\": error parsing regexp: invalid escape sequence: `\\8`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:\\u0041",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\u0041"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"\\\\u0041\": error parsing regexp: invalid escape sequence: `\\u`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:[abc",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "[abc"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"[abc\": error parsing regexp: missing closing ]: `[abc`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:(",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "("
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"(\": error parsing regexp: missing closing ): `(`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:a{1001}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "a{1001}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"a{1001}\": error parsing regexp: invalid repeat count: `{1001}`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:a{2,1}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "a{2,1}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"a{2,1}\": error parsing regexp: invalid repeat count: `{2,1}`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:[z-a]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "[z-a]"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"[z-a]\": error parsing regexp: invalid character class range: `z-a`\n"
+    }
+  },
+  {
+    "id": "boundary:regex:\\123",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\123"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:\\x{41}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\x{41}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:\\Q[]{}\\E",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Q[]{}\\E"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:regex:(?i)\\Qab\\E+",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?i)\\Qab\\E+"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:*/9223372036854775807 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"*/9223372036854775807 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:*/9223372036854775808 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"*/9223372036854775808 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"*/9223372036854775808 * * * *\" in schedule event: failed to parse int from 9223372036854775808: strconv.Atoi: parsing \"9223372036854775808\": value out of range [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:*/-1 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"*/-1 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"*/-1 * * * *\" in schedule event: negative number (-1) not allowed: -1 [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:*/0 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"*/0 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"*/0 * * * *\" in schedule event: step of range should be a positive number: */0 [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:0 0 */2 * 1",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 */2 * 1\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:0 0 */1 * 1",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 */1 * 1\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:0 0 *-2 * *",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 *-2 * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:0 0 1-2-3 * *",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 1-2-3 * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"0 0 1-2-3 * *\" in schedule event: too many hyphens: 1-2-3 [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:0 0 * * MON-FRI",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * MON-FRI\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:cron:@hourly",
+    "source": "on:\n  schedule:\n    - cron: \"@hourly\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"@hourly\" in schedule event: parser does not accept descriptors: @hourly [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:owner/repo/path@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/path@ref\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:owner/repo/path@@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/path@@ref\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:owner/repo/@a@b",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/@a@b\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/@a@b\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:owner/repo/path@",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/path@\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/path@\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:./workflows/build.yml",
+    "source": "on: push\njobs:\n  test:\n    uses: ./workflows/build.yml\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:workflow-reference:./@a",
+    "source": "on: push\njobs:\n  test:\n    uses: ./@a\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"./@a\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Local reusable workflow paths must not contain @ref; the same validation rule applies as for ./@foo."
+  },
+  {
+    "id": "boundary:template:{{$x := \"outer\"}}{{if true}}{{$x := \"inner\"}}{{$x}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{$x := \"outer\"}}{{if true}}{{$x := \"inner\"}}{{$x}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "innerouter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{$x := \"outer\"}}{{if true}}{{$x = \"inner\"}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{$x := \"outer\"}}{{if true}}{{$x = \"inner\"}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "inner",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{$x := \"outer\"}}{{range .}}{{$x := \"inner\"}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{$x := \"outer\"}}{{range .}}{{$x := \"inner\"}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "outer",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{$x := \"outer\"}}{{range .}}{{$x = \"inner\"}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{$x := \"outer\"}}{{range .}}{{$x = \"inner\"}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "inner",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{if $x := true}}{{$x}}{{else}}{{$x}}{{end}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{if $x := true}}{{$x}}{{else}}{{$x}}{{end}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "true",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{$x := \"outer\"}}{{define \"t\"}}{{$x}}{{end}}{{template \"t\" .}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{$x := \"outer\"}}{{define \"t\"}}{{$x}}{{end}}{{template \"t\" .}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"{{$x := \\\"outer\\\"}}{{define \\\"t\\\"}}{{$x}}{{end}}{{template \\\"t\\\" .}}\" to format error messages could not be parsed: template: error formatter:1: undefined variable \"$x\"\n"
+    }
+  },
+  {
+    "id": "boundary:template:{{define \"t\"}}{{$}}{{end}}{{template \"t\" \"inner\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{define \"t\"}}{{$}}{{end}}{{template \"t\" \"inner\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "inner",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{and false (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{and false (index . 99)}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "false",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{or true (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{or true (index . 99)}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "true",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{and true (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{and true (index . 99)}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{or false (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{or false (index . 99)}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{eq 1 1.0}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{eq 1 1.0}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{lt 1 \"2\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{lt 1 \"2\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%T %T %T %T %T\" 1 1.0 true nil \"x\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%T %T %T %T %T\" 1 1.0 true nil \"x\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "int float64 bool <nil> string",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%#b %#o %#x %#X\" 12 12 12 12}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%#b %#o %#x %#X\" 12 12 12 12}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "0b1100 014 0xc 0XC",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%d\" \"x\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%d\" \"x\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "%!d(string=x)",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%s\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "%!s(MISSING)",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%s\" \"a\" \"b\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" \"a\" \"b\"}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "a%!(EXTRA string=b)",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%d %T\" 9223372036854775807 9223372036854775807}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%d %T\" 9223372036854775807 9223372036854775807}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "9223372036854775807 int",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%c %q %U\" 65 65 65}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%c %q %U\" 65 65 65}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "A 'A' U+0041",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:template:{{printf \"%.2f\" 1.25}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%.2f\" 1.25}}"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "1.25",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('null')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[null]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[null]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('{}')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal object into Go value of type []actionlint.shellcheckError: stdout=\"{}\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:true",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('true')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal bool into Go value of type []actionlint.shellcheckError: stdout=\"true\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:42",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('42')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number into Go value of type []actionlint.shellcheckError: stdout=\"42\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:\"x\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('\"x\"')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal string into Go value of type []actionlint.shellcheckError: stdout=\"\\\"x\\\"\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[1]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[1]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number into Go value of type actionlint.shellcheckError: stdout=\"[1]\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{\"line\":\"1\"}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{\"line\":\"1\"}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal string into Go struct field shellcheckError.line of type int: stdout=\"[{\\\"line\\\":\\\"1\\\"}]\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{\"line\":1.0}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{\"line\":1.0}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number 1.0 into Go struct field shellcheckError.line of type int: stdout=\"[{\\\"line\\\":1.0}]\\n\"\n"
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{\"code\":2147483648}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{\"code\":2147483648}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC2147483648::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{\"message\":null,\"level\":null}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{\"message\":null,\"level\":null}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:shellcheck:[{\"file\":{},\"endLine\":[],\"code\":0}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint('[{\"file\":{},\"endLine\":[],\"code\":0}]')\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:.nan",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: .nan\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \".nan\": strconv.ParseFloat: parsing \".nan\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:.inf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: .inf\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \".inf\": strconv.ParseFloat: parsing \".inf\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:2026-01-01",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 2026-01-01\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expected scalar node for float value but found scalar node with \"!!timestamp\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:2026-02-30",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 2026-02-30\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:1e-999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1e-999\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: value at \"timeout-minutes\" must be greater than zero: 0 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:1e999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1e999\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:NaN",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: NaN\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "boundary:yaml-timeout:Inf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: Inf\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    }
+  }
+]

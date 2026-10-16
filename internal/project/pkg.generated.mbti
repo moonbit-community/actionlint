@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/project"
+
+// Values
+pub async fn collect_workflows(String, Array[String]) -> Unit
+
+pub fn file_error(Error, String) -> String
+
+pub async fn find_project(String) -> String?
+
+pub fn path_join(String, String) -> String
+
+pub fn path_relative(String, String) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

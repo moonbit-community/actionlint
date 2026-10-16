@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/json"
+
+import {
+  "moonbit-community/actionlint/internal/model",
+}
+
+// Values
+pub fn data_get(Json, String) -> Json
+
+pub fn data_keys(Json) -> Array[String]
+
+pub fn json_encode(Json) -> String
+
+pub fn json_preserve_numbers(String) -> Json raise @model.CliError
+
+pub fn json_strings(Json) -> Array[String]
+
+pub fn json_syntax_error(String) -> (Int, String)
+
+pub fn template_string(Json) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

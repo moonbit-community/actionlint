@@ -1,0 +1,4849 @@
+[
+  {
+    "id": "review-boundary:matrix-key/include/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        include: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/include/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        include: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/include/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        include: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/include/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        include: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/include/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        include: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"include\" must be object but found type number [expression]\n",
+      "stderr": ""
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Elements of include must be objects; the port retains stricter validation for all casing variants."
+  },
+  {
+    "id": "review-boundary:matrix-key/INCLUDE/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        INCLUDE: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/INCLUDE/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        INCLUDE: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/INCLUDE/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        INCLUDE: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/INCLUDE/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        INCLUDE: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/INCLUDE/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        INCLUDE: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"include\" must be object but found type number [expression]\n",
+      "stderr": ""
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Elements of include must be objects; the port retains stricter validation for all casing variants."
+  },
+  {
+    "id": "review-boundary:matrix-key/InClUdE/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        InClUdE: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/InClUdE/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        InClUdE: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"include\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/InClUdE/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        InClUdE: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/InClUdE/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        InClUdE: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/InClUdE/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        InClUdE: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"include\" must be object but found type number [expression]\n",
+      "stderr": ""
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Elements of include must be objects; the port retains stricter validation for all casing variants."
+  },
+  {
+    "id": "review-boundary:matrix-key/exclude/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        exclude: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/exclude/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        exclude: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/exclude/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        exclude: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: value \"b\" in \"exclude\" does not match in matrix \"x\" combinations. possible values are \"a\" [matrix]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/exclude/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        exclude: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/exclude/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        exclude: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"exclude\" must be object but found type number [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/EXCLUDE/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        EXCLUDE: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/EXCLUDE/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        EXCLUDE: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/EXCLUDE/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        EXCLUDE: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: value \"b\" in \"exclude\" does not match in matrix \"x\" combinations. possible values are \"a\" [matrix]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/EXCLUDE/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        EXCLUDE: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/EXCLUDE/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        EXCLUDE: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"exclude\" must be object but found type number [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/ExClUdE/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        ExClUdE: []\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section should not be empty [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/ExClUdE/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        ExClUdE: {}\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: \"exclude\" section must be sequence node but got mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/ExClUdE/[{X: b}]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        ExClUdE: [{X: b}]\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: value \"b\" in \"exclude\" does not match in matrix \"x\" combinations. possible values are \"a\" [matrix]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/ExClUdE/\"${{ missing }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        ExClUdE: \"${{ missing }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:23: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:matrix-key/ExClUdE/\"${{ fromJSON('[1]') }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        X: [a]\n        ExClUdE: \"${{ fromJSON('[1]') }}\"\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression at \"exclude\" must be object but found type number [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[]').*||fromJSON('[{\"x\":1}]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[]').* || fromJSON('[{\"x\":1}]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:15: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type array<any> [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[{\"x\":1}]').*||fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[{\"x\":1}]').* || fromJSON('[]')).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<any>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[1]').*||fromJSON('[2]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[1]').* || fromJSON('[2]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<number>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[{\"x\":1}]').*||fromJSON('[{\"x\":2}]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[{\"x\":1}]').* || fromJSON('[{\"x\":2}]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<{x: number}>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[]').*&&fromJSON('[{\"x\":1}]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[]').* && fromJSON('[{\"x\":1}]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:15: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type array<any> [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[{\"x\":1}]').*&&fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[{\"x\":1}]').* && fromJSON('[]')).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<any>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[1]').*&&fromJSON('[2]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[1]').* && fromJSON('[2]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<number>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:array/fromJSON('[{\"x\":1}]').*&&fromJSON('[{\"x\":2}]').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ (fromJSON('[{\"x\":1}]').* && fromJSON('[{\"x\":2}]').*).x }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:20: receiver of object dereference \"x\" must be type of object but got \"array<{x: number}>\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callnumberbooleaninputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: number}\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callnumberbooleangithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: number}\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callstringnumberinputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: string}\n  workflow_dispatch:\n    inputs:\n      x: {type: number}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callstringnumbergithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: string}\n  workflow_dispatch:\n    inputs:\n      x: {type: number}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callbooleanbooleaninputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: boolean}\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"bool\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_callbooleanbooleangithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_call:\n    inputs:\n      x: {type: boolean}\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchnumberbooleaninputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: number}\n  workflow_call:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchnumberbooleangithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: number}\n  workflow_call:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchstringnumberinputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: string}\n  workflow_call:\n    inputs:\n      x: {type: number}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchstringnumbergithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: string}\n  workflow_call:\n    inputs:\n      x: {type: number}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchbooleanbooleaninputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\n  workflow_call:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"bool\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:inputs/workflow_dispatchbooleanbooleangithub.event.inputs.x.foo",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      x: {type: boolean}\n  workflow_call:\n    inputs:\n      x: {type: boolean}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: ${{ github.event.inputs.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:13:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/abc${{",
+    "source": "on: push\njobs:\n  \"abc${{\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:3: invalid job ID \"abc${{\". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/abc${{",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"abc${{\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: invalid step ID \"abc${{\". step ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/foo}}${{bar",
+    "source": "on: push\njobs:\n  \"foo}}${{bar\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:3: invalid job ID \"foo}}${{bar\". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/foo}}${{bar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"foo}}${{bar\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: invalid step ID \"foo}}${{bar\". step ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/${{",
+    "source": "on: push\njobs:\n  \"${{\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:3: invalid job ID \"${{\". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/${{",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"${{\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: invalid step ID \"${{\". step ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/${{ x }}",
+    "source": "on: push\njobs:\n  \"${{ x }}\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/${{ x }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"${{ x }}\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:18: undefined variable \"x\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/foo${{ x }}",
+    "source": "on: push\njobs:\n  \"foo${{ x }}\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/foo${{ x }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"foo${{ x }}\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:21: undefined variable \"x\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-id/foo}}${{x}}",
+    "source": "on: push\njobs:\n  \"foo}}${{x}}\":\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:3: invalid job ID \"foo}}${{x}}\". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-id/foo}}${{x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        id: \"foo}}${{x}}\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: invalid step ID \"foo}}${{x}}\". step ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\nname: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:7: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/run-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\nrun-name: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:11: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/permissions",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\npermissions: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:15: unknown permission scope \"unknown\". all available permission scopes are \"actions\", \"artifact-metadata\", \"attestations\", \"checks\", \"contents\", \"deployments\", \"discussions\", \"id-token\", \"issues\", \"models\", \"packages\", \"pages\", \"pull-requests\", \"repository-projects\", \"security-events\", \"statuses\" [permissions]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/defaults",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\ndefaults: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:11: \"defaults\" section should have \"run\" section [syntax-check]\n<stdin>:7:12: expected \"run\" key for \"defaults\" section but got \"unknown\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/concurrency",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\nconcurrency: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:1: group name is missing in \"concurrency\" section [syntax-check]\n<stdin>:7:15: unexpected key \"unknown\" for \"concurrency\" section. expected one of \"cancel-in-progress\", \"group\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:root-rejected/unknown",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\nunknown: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:1: unexpected key \"unknown\" for \"workflow\" section. expected one of \"concurrency\", \"defaults\", \"env\", \"jobs\", \"name\", \"on\", \"permissions\", \"run-name\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/container",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    container: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: \"image\" is missing in \"container\" section [syntax-check]\n<stdin>:7:17: unexpected key \"unknown\" for \"container\" section. expected one of \"credentials\", \"env\", \"image\", \"options\", \"ports\", \"volumes\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/environment",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    environment: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: name is missing in \"environment\" section [syntax-check]\n<stdin>:7:19: unexpected key \"unknown\" for \"environment\" section. expected one of \"deployment\", \"name\", \"url\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/concurrency",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    concurrency: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: group name is missing in \"concurrency\" section [syntax-check]\n<stdin>:7:19: unexpected key \"unknown\" for \"concurrency\" section. expected one of \"cancel-in-progress\", \"group\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/runs-on",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    runs-on: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: key \"runs-on\" is duplicated in \"test\" job. previously defined at line:4,col:5 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/strategy",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    strategy: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:16: unexpected key \"unknown\" for \"strategy\" section. expected one of \"fail-fast\", \"matrix\", \"max-parallel\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/defaults",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    defaults: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:15: \"defaults\" section should have \"run\" section [syntax-check]\n<stdin>:7:16: expected \"run\" key for \"defaults\" section but got \"unknown\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/snapshot",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    snapshot: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: \"snapshot\" section must have \"image-name\" configuration [syntax-check]\n<stdin>:7:16: unexpected key \"unknown\" for \"snapshot\" section. expected one of \"if\", \"image-name\", \"version\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:job-rejected/unknown",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n    unknown: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:5: unexpected key \"unknown\" for \"job\" section. expected one of \"concurrency\", \"container\", \"continue-on-error\", \"defaults\", \"env\", \"environment\", \"if\", \"name\", \"needs\", \"outputs\", \"permissions\", \"runs-on\", \"secrets\", \"services\", \"snapshot\", \"steps\", \"strategy\", \"timeout-minutes\", \"uses\", \"with\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        name: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:15: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/uses",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        uses: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: unexpected key \"run\" for step to execute action. expected one of \"continue-on-error\", \"env\", \"id\", \"if\", \"name\", \"timeout-minutes\", \"uses\", \"with\" [syntax-check]\n<stdin>:7:15: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n<stdin>:7:15: specifying action \"\" in invalid format because ref is missing. available formats are \"{owner}/{repo}@{ref}\" or \"{owner}/{repo}/{path}@{ref}\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/run",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        run: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:9: key \"run\" is duplicated in element of \"steps\" section. previously defined at line:6,col:9 [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/if",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n<stdin>:7:13: unexpected end of input while parsing variable access, function call, null, bool, int, float or string. expecting \"IDENT\", \"(\", \"INTEGER\", \"FLOAT\", \"STRING\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        env: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:29: undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/with",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        with: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:9: unexpected key \"with\" for step to run shell command. expected one of \"continue-on-error\", \"env\", \"id\", \"if\", \"name\", \"run\", \"shell\", \"timeout-minutes\", \"working-directory\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:step-rejected/unknown",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        unknown: {unknown: \"${{ missing }}\"}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:9: unexpected key \"unknown\" for step to run shell command. expected one of \"continue-on-error\", \"env\", \"id\", \"if\", \"name\", \"run\", \"shell\", \"timeout-minutes\", \"working-directory\" [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: []\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: expected scalar node for string value but found sequence node with \"!!seq\" tag [syntax-check]\n<stdin>:7:13: unexpected end of input while parsing variable access, function call, null, bool, int, float or string. expecting \"IDENT\", \"(\", \"INTEGER\", \"FLOAT\", \"STRING\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: {}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: expected scalar node for string value but found mapping node with \"!!map\" tag [syntax-check]\n<stdin>:7:13: unexpected end of input while parsing variable access, function call, null, bool, int, float or string. expecting \"IDENT\", \"(\", \"INTEGER\", \"FLOAT\", \"STRING\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: null\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"null\" in condition. remove the if: section [if-cond]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: false\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"false\" in condition. remove the if: section [if-cond]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/'hello'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: 'hello'\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: undefined variable \"hello\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:condition/\"${{ false }}\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n        if: \"${{ false }}\"\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"false\" in condition. remove the if: section [if-cond]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x9",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\t* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0xb",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u000b* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0xd",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\r* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x85",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u0085* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0xa0",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u00a0* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x1680",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u1680* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x2007",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u2007* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x202f",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u202f* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x3000",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u3000* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:cron-space/0x200b",
+    "source": "on:\n  schedule:\n    - cron: \"*/5\\u200b* * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"*/5\\u200b* * * *\" in schedule event: expected exactly 5 fields, found 4: [*/5​* * * *] [events]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true\u0001}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:0:0: could not parse as YAML: control characters are not allowed [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x7",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true\u0007}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:0:0: could not parse as YAML: control characters are not allowed [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0xb",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true\u000b}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:0:0: could not parse as YAML: control characters are not allowed [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x7f",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:0:0: could not parse as YAML: control characters are not allowed [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x85",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:0: could not parse as YAML: did not find expected key [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0xa0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '\\u00a0' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x2028",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true }}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:0: could not parse as YAML: did not find expected key [syntax-check]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x200d",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true‍}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '\\u200d' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0xe000",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '\\ue000' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0xe0001",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true󠀁}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '\\U000e0001' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x4e2d",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true中}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '中' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:char-escape/0x1f600",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ true😀}}\n",
+    "flags": [],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:27: got unexpected character '😀' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:config/unknown: {x: 1, x: 2}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "unknown: {x: 1, x: 2}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:config/unknown: {x: {a: 1, a: 2}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "unknown: {x: {a: 1, a: 2}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:config/self-hosted-runner: {unknown: {x: 1, x: 2}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "self-hosted-runner: {unknown: {x: 1, x: 2}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:config/self-hosted-runner: {labels: [], labels: []}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "self-hosted-runner: {labels: [], labels: []}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"config.yml\": yaml: unmarshal errors:   line 1: mapping key \"labels\" already defined at line 1\n"
+    }
+  },
+  {
+    "id": "review-boundary:config/paths: {\"*\": {unknown: {x: 1, x: 2}}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "paths: {\"*\": {unknown: {x: 1, x: 2}}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:config/paths: {\"*\": {ignore: [], ignore: []}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
+    "flags": [
+      "-config-file",
+      "config.yml"
+    ],
+    "files": {
+      "config.yml": "paths: {\"*\": {ignore: [], ignore: []}}\n"
+    },
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"config.yml\": yaml: unmarshal errors:   line 1: mapping key \"ignore\" already defined at line 1\n"
+    }
+  },
+  {
+    "id": "review-boundary:metadata/name: x\nname: y\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\nname: x\nname: y\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": yaml: unmarshal errors:  line 4: mapping key \"name\" already defined at line 1  line 5: mapping key \"name\" already defined at line 1  line 5: mapping key \"name\" already defined at line 4 [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/unknown: {x: 1, x: 2}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\nunknown: {x: 1, x: 2}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/branding: {icon: x, icon: y}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\nbranding: {icon: x, icon: y}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: mapping key \"icon\" already defined at line 4 [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/inputs: {x: {required: true, required: false}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\ninputs: {x: {required: true, required: false}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: mapping key \"required\" already defined at line 4 [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/inputs: {X: {}, x: {}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\ninputs: {X: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: input \"x\" is duplicated [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/inputs: {x: {}, x: {}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\ninputs: {x: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: input \"x\" is duplicated [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/outputs: {X: {}, x: {}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\noutputs: {X: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: output \"x\" is duplicated [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/outputs: {x: {}, x: {}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\noutputs: {x: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: output \"x\" is duplicated [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/outputs: {x: {value: a, value: b}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\noutputs: {x: {value: a, value: b}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:metadata/inputs: {x: {unknown: {x: 1, x: 2}}}\n",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./local\n",
+      "local/action.yml": "name: local\ndescription: local\nruns: {using: composite, steps: []}\ninputs: {x: {unknown: {x: 1, x: 2}}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/local\": line 4: unexpected key \"unknown\" for definition of input \"x\" [action]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/inputs{X: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    inputs: {X: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/inputs{x: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    inputs: {x: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/inputs{x: {required: true, required: false}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    inputs: {x: {required: true, required: false}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: error while parsing reusable workflow \"./.github/workflows/call.yml\": yaml: unmarshal errors:   line 3: mapping key \"required\" already defined at line 3 [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/inputs{x: {unknown: {x: 1, x: 2}}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    inputs: {x: {unknown: {x: 1, x: 2}}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/outputs{X: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    outputs: {X: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/outputs{x: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    outputs: {x: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/outputs{x: {required: true, required: false}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    outputs: {x: {required: true, required: false}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/outputs{x: {unknown: {x: 1, x: 2}}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    outputs: {x: {unknown: {x: 1, x: 2}}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/secrets{X: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    secrets: {X: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/secrets{x: {}, x: {}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    secrets: {x: {}, x: {}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/secrets{x: {required: true, required: false}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    secrets: {x: {required: true, required: false}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:4:11: error while parsing reusable workflow \"./.github/workflows/call.yml\": yaml: unmarshal errors:   line 3: mapping key \"required\" already defined at line 3 [workflow-call]\n",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:reusable/secrets{x: {unknown: {x: 1, x: 2}}}",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/call.yml\n",
+      ".github/workflows/call.yml": "on:\n  workflow_call:\n    secrets: {x: {unknown: {x: 1, x: 2}}}\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.5 2.5 2.5 2.5 2.5 2.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.5 2.5 2.5 2.5 2.5 2.5}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before2|2.50|2.5|2.500e+00|2.500000|2.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.5 2.5 2.5 2.5 2.5 2.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.5 2.5 2.5 2.5 2.5 2.5}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before2|2.50|2.5|2.500e+00|2.500000|2.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 3.5 3.5 3.5 3.5 3.5 3.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 3.5 3.5 3.5 3.5 3.5 3.5}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before4|3.50|3.5|3.500e+00|3.500000|3.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 3.5 3.5 3.5 3.5 3.5 3.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 3.5 3.5 3.5 3.5 3.5 3.5}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before4|3.50|3.5|3.500e+00|3.500000|3.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -2.5 -2.5 -2.5 -2.5 -2.5 -2.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -2.5 -2.5 -2.5 -2.5 -2.5 -2.5}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-2|-2.50|-2.5|-2.500e+00|-2.500000|-2.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -2.5 -2.5 -2.5 -2.5 -2.5 -2.5",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -2.5 -2.5 -2.5 -2.5 -2.5 -2.5}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-2|-2.50|-2.5|-2.500e+00|-2.500000|-2.5after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.125 0.125 0.125 0.125 0.125 0.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.125 0.125 0.125 0.125 0.125 0.125}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.12|0.125|1.250e-01|0.125000|0.125after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.125 0.125 0.125 0.125 0.125 0.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.125 0.125 0.125 0.125 0.125 0.125}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.12|0.125|1.250e-01|0.125000|0.125after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.375 0.375 0.375 0.375 0.375 0.375",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.375 0.375 0.375 0.375 0.375 0.375}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.38|0.375|3.750e-01|0.375000|0.375after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.375 0.375 0.375 0.375 0.375 0.375",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.375 0.375 0.375 0.375 0.375 0.375}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.38|0.375|3.750e-01|0.375000|0.375after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.675 2.675 2.675 2.675 2.675 2.675",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.675 2.675 2.675 2.675 2.675 2.675}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before3|2.67|2.6749999999999998|2.675e+00|2.675000|2.675after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.675 2.675 2.675 2.675 2.675 2.675",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 2.675 2.675 2.675 2.675 2.675 2.675}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before3|2.67|2.6749999999999998|2.675e+00|2.675000|2.675after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.005 1.005 1.005 1.005 1.005 1.005",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.005 1.005 1.005 1.005 1.005 1.005}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1|1.00|1.0049999999999999|1.005e+00|1.005000|1.005after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.005 1.005 1.005 1.005 1.005 1.005",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.005 1.005 1.005 1.005 1.005 1.005}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1|1.00|1.0049999999999999|1.005e+00|1.005000|1.005after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 9.999 9.999 9.999 9.999 9.999 9.999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 9.999 9.999 9.999 9.999 9.999 9.999}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before10|10.00|9.9990000000000006|9.999e+00|9.999000|9.999after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 9.999 9.999 9.999 9.999 9.999 9.999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 9.999 9.999 9.999 9.999 9.999 9.999}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before10|10.00|9.9990000000000006|9.999e+00|9.999000|9.999after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|9.9989999999999996e-05|9.999e-05|0.000100|9.999E-05after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999 0.00009999}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|9.9989999999999996e-05|9.999e-05|0.000100|9.999E-05after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e30 1e30 1e30 1e30 1e30 1e30",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e30 1e30 1e30 1e30 1e30 1e30}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1000000000000000019884624838656|1000000000000000019884624838656.00|1e+30|1.000e+30|1000000000000000019884624838656.000000|1E+30after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e30 1e30 1e30 1e30 1e30 1e30",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e30 1e30 1e30 1e30 1e30 1e30}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1000000000000000019884624838656|1000000000000000019884624838656.00|1e+30|1.000e+30|1000000000000000019884624838656.000000|1E+30after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e-300 1e-300 1e-300 1e-300 1e-300 1e-300",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e-300 1e-300 1e-300 1e-300 1e-300 1e-300}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|1e-300|1.000e-300|0.000000|1E-300after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e-300 1e-300 1e-300 1e-300 1e-300 1e-300",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1e-300 1e-300 1e-300 1e-300 1e-300 1e-300}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|1e-300|1.000e-300|0.000000|1E-300after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 5e-324 5e-324 5e-324 5e-324 5e-324 5e-324",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 5e-324 5e-324 5e-324 5e-324 5e-324 5e-324}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|4.9406564584124654e-324|4.941e-324|0.000000|5E-324after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 5e-324 5e-324 5e-324 5e-324 5e-324 5e-324",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 5e-324 5e-324 5e-324 5e-324 5e-324 5e-324}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0.00|4.9406564584124654e-324|4.941e-324|0.000000|5E-324after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368|179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00|1.7976931348623157e+308|1.798e+308|179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000|1.7976931348623157E+308after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308 1.7976931348623157e308}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368|179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00|1.7976931348623157e+308|1.798e+308|179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000|1.7976931348623157E+308after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -0.0 -0.0 -0.0 -0.0 -0.0 -0.0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -0.0 -0.0 -0.0 -0.0 -0.0 -0.0}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-0|-0.00|-0|-0.000e+00|-0.000000|-0after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -0.0 -0.0 -0.0 -0.0 -0.0 -0.0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.0f|%.2f|%.17g|%.3e|%F|%G\" -0.0 -0.0 -0.0 -0.0 -0.0 -0.0}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-0|-0.00|-0|-0.000e+00|-0.000000|-0after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%[2]s %[1]s\" \"a\" \"b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[2]s %[1]s\" \"a\" \"b\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforeb aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%[2]s %[1]s\" \"a\" \"b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[2]s %[1]s\" \"a\" \"b\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforeb aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%[2]*[1]s\" \"a\" 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[2]*[1]s\" \"a\" 3}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before  aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%[2]*[1]s\" \"a\" 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[2]*[1]s\" \"a\" 3}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before  aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%*.*f\" 8 2 1.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*.*f\" 8 2 1.125}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before    1.12after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%*.*f\" 8 2 1.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*.*f\" 8 2 1.125}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before    1.12after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%*s\" -4 \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*s\" -4 \"a\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforea   after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%*s\" -4 \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*s\" -4 \"a\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforea   after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%*s\" \"x\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*s\" \"x\" \"a\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!(BADWIDTH)aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%*s\" \"x\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%*s\" \"x\" \"a\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!(BADWIDTH)aafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%.*f\" -1 1.25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.*f\" -1 1.25}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!(BADPREC)1.250000after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%.*f\" -1 1.25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%.*f\" -1 1.25}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!(BADPREC)1.250000after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%[0]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[0]s\" \"a\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%[0]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[0]s\" \"a\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%[9]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[9]s\" \"a\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%[9]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[9]s\" \"a\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%[x]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[x]s\" \"a\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%[x]s\" \"a\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[x]s\" \"a\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!s(BADINDEX)after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#08x\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08x\" -1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-0x0000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#08x\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08x\" -1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-0x0000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#08X\" 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08X\" 1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0X00000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#08X\" 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08X\" 1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0X00000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#08b\" 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08b\" 1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0b00000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#08b\" 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#08b\" 1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0b00000001after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#o|%#O|%O\" 0 1 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#o|%#O|%O\" 0 1 1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0o01|0o1after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#o|%#O|%O\" 0 1 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#o|%#O|%O\" 0 1 1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before0|0o01|0o1after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#v|%+v\" (index . 0) (index . 0)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#v|%+v\" (index . 0) (index . 0)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before&actionlint.ErrorTemplateFields{Message:\"undefined variable \\\"missing\\\". available variables are \\\"env\\\", \\\"github\\\", \\\"inputs\\\", \\\"job\\\", \\\"matrix\\\", \\\"needs\\\", \\\"runner\\\", \\\"secrets\\\", \\\"steps\\\", \\\"strategy\\\", \\\"vars\\\"\", Filepath:\"<stdin>\", Line:6, Column:23, Kind:\"expression\", Snippet:\"      - run: echo ${{ missing }}\\n                      ^~~~~~~\", EndColumn:29}|&{Message:undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" Filepath:<stdin> Line:6 Column:23 Kind:expression Snippet:      - run: echo ${{ missing }}\n                      ^~~~~~~ EndColumn:29}after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#v|%+v\" (index . 0) (index . 0)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#v|%+v\" (index . 0) (index . 0)}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before&actionlint.ErrorTemplateFields{Message:\"undefined variable \\\"missing\\\". available variables are \\\"env\\\", \\\"github\\\", \\\"inputs\\\", \\\"job\\\", \\\"matrix\\\", \\\"needs\\\", \\\"runner\\\", \\\"secrets\\\", \\\"steps\\\", \\\"strategy\\\", \\\"vars\\\"\", Filepath:\"a.yml\", Line:6, Column:23, Kind:\"expression\", Snippet:\"      - run: echo ${{ missing }}\\n                      ^~~~~~~\", EndColumn:29}|&{Message:undefined variable \"missing\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" Filepath:a.yml Line:6 Column:23 Kind:expression Snippet:      - run: echo ${{ missing }}\n                      ^~~~~~~ EndColumn:29}after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%x|% X|%#x|%# X|%.2x\" \"中\" \"ab\" \"ab\" \"ab\" \"中\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%x|% X|%#x|%# X|%.2x\" \"中\" \"ab\" \"ab\" \"ab\" \"中\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforee4b8ad|61 62|0x6162|0X61 0X62|e4b8after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%x|% X|%#x|%# X|%.2x\" \"中\" \"ab\" \"ab\" \"ab\" \"中\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%x|% X|%#x|%# X|%.2x\" \"中\" \"ab\" \"ab\" \"ab\" \"中\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforee4b8ad|61 62|0x6162|0X61 0X62|e4b8after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%q|%+q|%#q|%#q\" 10 233 \"abc\" \"a\\nb\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%q|%+q|%#q|%#q\" 10 233 \"abc\" \"a\\nb\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"before{{printf \\\"%q|%+q|%#q|%#q\\\" 10 233 \\\"abc\\\" \\\"a\\\\nb\\\"}}after\" to format error messages could not be parsed: template: error formatter:1: unterminated quoted string\n"
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%q|%+q|%#q|%#q\" 10 233 \"abc\" \"a\\nb\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%q|%+q|%#q|%#q\" 10 233 \"abc\" \"a\\nb\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"before{{printf \\\"%q|%+q|%#q|%#q\\\" 10 233 \\\"abc\\\" \\\"a\\\\nb\\\"}}after\" to format error messages could not be parsed: template: error formatter:1: unterminated quoted string\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/printf \"%#g|%#.0f|%#.0e|%#.4g\" 1.25 1.5 1.5 1.25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#g|%#.0f|%#.0e|%#.4g\" 1.25 1.5 1.5 1.25}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1.25000|2.|2.e+00|1.250after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/printf \"%#g|%#.0f|%#.0e|%#.4g\" 1.25 1.5 1.5 1.25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#g|%#.0f|%#.0e|%#.4g\" 1.25 1.5 1.5 1.25}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1.25000|2.|2.e+00|1.250after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/html 1 2 \"a\" 3 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{html 1 2 \"a\" 3 4}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1 2a3 4after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/html 1 2 \"a\" 3 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{html 1 2 \"a\" 3 4}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1 2a3 4after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/js 1 2 \"<a=b>&c'\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{js 1 2 \"<a=b>&c'\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1 2\\u003Ca\\u003Db\\u003E\\u0026c\\'after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/js 1 2 \"<a=b>&c'\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{js 1 2 \"<a=b>&c'\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1 2\\u003Ca\\u003Db\\u003E\\u0026c\\'after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/urlquery 1 2 \"a b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{urlquery 1 2 \"a b\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1+2a+bafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/urlquery 1 2 \"a b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{urlquery 1 2 \"a b\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1+2a+bafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/replace \"中文\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"中文\" \"\" \"-\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": {
+        "hex": "6265666f72652de42db82dad2de62d962d872d6166746572"
+      },
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/replace \"中文\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"中文\" \"\" \"-\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": {
+        "hex": "6265666f72652de42db82dad2de62d962d872d6166746572"
+      },
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/replace \"a\" \"\" \"-\" \"a\" \"b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"a\" \"\" \"-\" \"a\" \"b\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-b-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/replace \"a\" \"\" \"-\" \"a\" \"b\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"a\" \"\" \"-\" \"a\" \"b\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-b-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/replace \"abc\" \"a\" \"x\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"abc\" \"a\" \"x\" \"\" \"-\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforex-b-c-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/replace \"abc\" \"a\" \"x\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"abc\" \"a\" \"x\" \"\" \"-\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforex-b-c-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/replace \"\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"\" \"\" \"-\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/replace \"\" \"\" \"-\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{replace \"\" \"\" \"-\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before-after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/eq (index . 0) (index . 0)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{eq (index . 0) (index . 0)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforetrueafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/eq (index . 0) (index . 0)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{eq (index . 0) (index . 0)}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforetrueafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/eq (index . 0) (index . 1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{eq (index . 0) (index . 1)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/eq (index . 0) (index . 1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{eq (index . 0) (index . 1)}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforefalseafter",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/index (index . 0) \"Message\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index (index . 0) \"Message\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index (index . 0) \"Message\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index (index . 0) \"Message\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index (index . 0) \"Message\">: error calling index: can't index item of type actionlint.ErrorTemplateFields\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/index \"abc\" 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" 4}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index \"abc\" 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" 4}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index \"abc\" 4>: error calling index: index out of range: 4\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/index \"abc\" 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" 3}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index \"abc\" 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" 3}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index \"abc\" 3>: error calling index: reflect: string index out of range\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/index \"abc\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" -1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index \"abc\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" -1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index \"abc\" -1>: error calling index: index out of range: -1\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/index \"abc\" \"1\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" \"1\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index \"abc\" \"1\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index \"abc\" \"1\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index \"abc\" \"1\">: error calling index: cannot index slice/array with type string\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/index nil 0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index nil 0}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/index nil 0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{index nil 0}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index nil 0>: error calling index: index of untyped nil\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice nil",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice nil}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice nil",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice nil}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice nil>: error calling slice: slice of untyped nil\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" 0 2 2",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 2 2}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" 0 2 2",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 2 2}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" 0 2 2>: error calling slice: cannot 3-index slice a string\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" 2 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 2 1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" 2 1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 2 1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" 2 1>: error calling slice: invalid slice index: 2 > 1\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" -1}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" -1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" -1}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" -1>: error calling slice: index out of range: -1\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" \"x\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" \"x\"}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" \"x\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" \"x\"}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" \"x\">: error calling slice: cannot index slice/array with type string\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" 0 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 4}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" 0 4",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 4}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" 0 4>: error calling slice: index out of range: 4\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/slice . 0 1 0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice . 0 1 0}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice . 0 1 0",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice . 0 1 0}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice . 0 1 0>: error calling slice: invalid slice index: 1 > 0\n"
+    }
+  },
+  {
+    "id": "review-boundary:template/len (slice . 0 1 1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{len (slice . 0 1 1)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/len (slice . 0 1 1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{len (slice . 0 1 1)}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template/slice \"abc\" 0 1 2 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 1 2 3}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:template-multi/slice \"abc\" 0 1 2 3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{slice \"abc\" 0 1 2 3}}after"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "before",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <slice \"abc\" 0 1 2 3>: error calling slice: too many slice indexes: 4\n"
+    }
+  },
+  {
+    "id": "review-boundary:multi-fatal/249",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not read \"b.yml\": open b.yml: no such file or directory\n"
+    }
+  },
+  {
+    "id": "review-boundary:multi-fatal/250",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      ".github/actionlint.yml": "paths: broken"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"$PROJECT/.github/actionlint.yml\": could not parse config file \"$PROJECT/.github/actionlint.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!str `broken` into map[string]actionlint.PathConfig\n"
+    }
+  },
+  {
+    "id": "review-boundary:multi-fatal/251",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "prefix{{index . 99}}suffix"
+    ],
+    "files": {
+      "a.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+      "b.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n"
+    },
+    "arguments": [
+      "a.yml",
+      "b.yml"
+    ],
+    "stdin": false,
+    "write_workflow": false,
+    "expected": {
+      "code": 3,
+      "stdout": "prefix",
+      "stderr": "could not format error messages: template: error formatter:1:8: executing \"error formatter\" at <index . 99>: error calling index: index out of range: 99\n"
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/printf \"%#g|%#g|%#g\" 1.234567890123 10000000.0 1e30",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#g|%#g|%#g\" 1.234567890123 10000000.0 1e30}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1.234567890123|1.00000e+07|1.00000e+30after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/printf \"%g|%G|%#.15G\" 10000000.0 1e-8 1.2345678901234567",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%g|%G|%#.15G\" 10000000.0 1e-8 1.2345678901234567}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1e+07|1E-08|1.23456789012346after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/printf \"%#q|%+q|%q|%#U|%c\" \"abc\" \"é\" 10 65 55296",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%#q|%+q|%q|%#U|%c\" \"abc\" \"é\" 10 65 55296}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before`abc`|\"\\u00e9\"|'\\n'|U+0041 'A'|�after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/printf \"%[2]*.[1]*[3]f\" 2 8 1.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[2]*.[1]*[3]f\" 2 8 1.125}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before    1.12after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/printf \"%[1]2d|%.[2]3f|%[2]*.[1]*[3]f\" 2 8 1.125",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{printf \"%[1]2d|%.[2]3f|%[2]*.[1]*[3]f\" 2 8 1.125}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before%!d(BADINDEX)|%!f(int=008)|    1.12after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/len (slice . 0 1 1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{len (slice . 0 1 1)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "before1after",
+      "stderr": ""
+    }
+  },
+  {
+    "id": "review-boundary:extra-template/eq (index . 0) (index $ 0)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ missing }}\n",
+    "flags": [
+      "-format",
+      "before{{eq (index . 0) (index $ 0)}}after"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 1,
+      "stdout": "beforetrueafter",
+      "stderr": ""
+    }
+  }
+]

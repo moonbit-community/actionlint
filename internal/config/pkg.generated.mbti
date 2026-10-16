@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/config"
+
+import {
+  "moonbit-community/actionlint/internal/model",
+}
+
+// Values
+pub let default_config : String
+
+pub async fn load_config(String, String?) -> Config
+
+pub fn parse_config(String) -> Config raise @model.CliError
+
+// Errors
+
+// Types and methods
+pub(all) struct Config {
+  labels : Array[String]
+  variables : Array[String]?
+  paths : Array[(String, Array[String])]
+}
+pub fn Config::ignored(Self, String, String, String?) -> Bool
+
+// Type aliases
+
+// Traits

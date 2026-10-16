@@ -1,0 +1,264 @@
+[
+  {
+    "id": "pyflakes-removal-flag-short-bare",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-pyflakes"
+    ],
+    "files": {},
+    "arguments": [],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag needs an argument: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -pyflakes string\n    \tCommand name or file path of \"pyflakes\" external command. If empty, pyflakes integration will be disabled (default \"pyflakes\")\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-short-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-pyflakes="
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-short-value",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-pyflakes=actionlint-missing-pyflakes-checker"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-short-separate",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-pyflakes",
+      "actionlint-missing-pyflakes-checker"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-short-separate-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-pyflakes",
+      ""
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-long-bare",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "--pyflakes"
+    ],
+    "files": {},
+    "arguments": [],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag needs an argument: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -pyflakes string\n    \tCommand name or file path of \"pyflakes\" external command. If empty, pyflakes integration will be disabled (default \"pyflakes\")\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-long-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "--pyflakes="
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-long-value",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "--pyflakes=actionlint-missing-pyflakes-checker"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-long-separate",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "--pyflakes",
+      "actionlint-missing-pyflakes-checker"
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-flag-long-separate-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "--pyflakes",
+      ""
+    ],
+    "files": {},
+    "arguments": [
+      "-"
+    ],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "pyflakes-removal-help",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: print(missing)\n        shell: python\n",
+    "flags": [
+      "-help"
+    ],
+    "files": {},
+    "arguments": [],
+    "stdin": true,
+    "write_workflow": false,
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -pyflakes string\n    \tCommand name or file path of \"pyflakes\" external command. If empty, pyflakes integration will be disabled (default \"pyflakes\")\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration; the help text no longer lists the -pyflakes argument."
+  }
+]

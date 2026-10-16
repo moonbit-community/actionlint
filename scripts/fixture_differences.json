@@ -1,0 +1,48 @@
+{
+  "baseline/testdata/err/assign_expression.yaml": {
+    "difference_reason": "An expression for the entire include value must produce an array of objects; the baseline misses expressions that produce non-array values.",
+    "baseline_expected": [
+      "test.yaml:11:19: expecting a single ${{...}} expression or boolean literal \"true\" or \"false\", but found plain text node [syntax-check]",
+      "test.yaml:20:21: expecting a single ${{...}} expression or integer literal, but found plain text node [syntax-check]",
+      "test.yaml:24:22: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]"
+    ],
+    "expected": [
+      "test.yaml:11:19: expecting a single ${{...}} expression or boolean literal \"true\" or \"false\", but found plain text node [syntax-check]",
+      "test.yaml:20:21: expecting a single ${{...}} expression or integer literal, but found plain text node [syntax-check]",
+      "test.yaml:24:22: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]",
+      "test.yaml:33:18: type of expression at \"include\" must be array but found type {} [expression]"
+    ]
+  },
+  "baseline/testdata/err/pyflakes_job_default_shell.yaml": {
+    "difference_reason": "This port intentionally removes Pyflakes integration; Python shells and Actions expression checks are retained, but Python script diagnostics are no longer reported.",
+    "baseline_expected": [
+      "/test\\.yaml:9:9: pyflakes reported issue in this script: .+ \\[pyflakes\\]/"
+    ],
+    "expected": []
+  },
+  "baseline/testdata/err/pyflakes_step_shell.yaml": {
+    "difference_reason": "This port intentionally removes Pyflakes integration; Python shells and Actions expression checks are retained, but Python script diagnostics are no longer reported.",
+    "baseline_expected": [
+      "/test\\.yaml:7:9: pyflakes reported issue in this script: .+ \\[pyflakes\\]/",
+      "/test\\.yaml:10:9: pyflakes reported issue in this script: .+ \\[pyflakes\\]/",
+      "/test\\.yaml:13:9: pyflakes reported issue in this script: .+ \\[pyflakes\\]/"
+    ],
+    "expected": []
+  },
+  "baseline/testdata/err/pyflakes_workflow_default_shell.yaml": {
+    "difference_reason": "This port intentionally removes Pyflakes integration; Python shells and Actions expression checks are retained, but Python script diagnostics are no longer reported.",
+    "baseline_expected": [
+      "/test\\.yaml:11:9: pyflakes reported issue in this script: .+ \\[pyflakes\\]/"
+    ],
+    "expected": []
+  },
+  "baseline/testdata/examples/pyflakes_integration.yaml": {
+    "difference_reason": "This port intentionally removes Pyflakes integration; Python shells and Actions expression checks are retained, but Python script diagnostics are no longer reported.",
+    "baseline_expected": [
+      "test.yaml:10:9: pyflakes reported issue in this script: 1:7: undefined name 'hello' [pyflakes]",
+      "test.yaml:19:9: pyflakes reported issue in this script: 2:5: import 'sys' from line 1 shadowed by loop variable [pyflakes]",
+      "test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' imported but unused [pyflakes]"
+    ],
+    "expected": []
+  }
+}

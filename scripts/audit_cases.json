@@ -1,0 +1,4687 @@
+[
+  {
+    "id": "audit:expr:True",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ True }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"True\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:TRUE",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ TRUE }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"TRUE\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:Null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ Null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"Null\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:NULL",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ NULL }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"NULL\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:False",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ False }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"False\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:! github",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ ! github }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:github[true]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ github[true] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: property access of object must be type of string but got \"bool\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:github[no_such]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ github[no_such] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:no_such[github.foo]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ no_such[github.foo] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n<stdin>:7:27: property \"foo\" is not defined in object type {action: string; action_path: string; action_ref: string; action_repository: string; action_status: string; actor: string; actor_id: string; api_url: string; artifact_cache_size_limit: number; base_ref: string; env: string; event: object; event_name: string; event_path: string; graphql_url: string; head_ref: string; job: string; output: string; path: string; ref: string; ref_name: string; ref_protected: bool; ref_type: string; repository: string; repository_id: string; repository_owner: string; repository_owner_id: string; repository_visibility: string; repositoryurl: string; retention_days: number; run_attempt: string; run_id: string; run_number: string; secret_source: string; server_url: string; sha: string; state: string; step_summary: string; token: string; triggering_actor: string; workflow: string; workflow_ref: string; workflow_sha: string; workspace: string} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('{\"a\":1}').*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"a\":1}').* }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: object type \"{a: number}\" cannot be filtered by object filtering `.*` since it has no object element [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('[{}]').*.foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('[{}]').*.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: property \"foo\" is not defined in object type {} as element of filtered array [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('[null, 1]')[0].foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('[null, 1]')[0].foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('[{},1]')[0].foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('[{},1]')[0].foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('[true,1]')[0].foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('[true,1]')[0].foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:fromJSON('[null,1]') == fromJSON('[1]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('[null,1]') == fromJSON('[1]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:foo @",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ foo @ }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:23: got unexpected character '@' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:github. @",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ github. @ }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:27: got unexpected character '@' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:contains(, @",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ contains(, @ }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: unexpected token \",\" while parsing variable access, function call, null, bool, int, float or string. expecting \"IDENT\", \"(\", \"INTEGER\", \"FLOAT\", \"STRING\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:1 2 @",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ 1 2 @ }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:21: parser did not reach end of input after parsing the expression. 1 remaining token(s) in the input: \"INTEGER\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:1e-999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ 1e-999 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:1e999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ 1e999 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: parsing invalid float literal \"1e999\": strconv.ParseFloat: parsing \"1e999\": value out of range [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:-0x00",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ -0x00 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:23: got unexpected character '0' while lexing character following hex integer -0x0, expecting ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' ' [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:format('x',1,2)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('x',1,2) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: format string \"x\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n<stdin>:7:19: format string \"x\" does not contain placeholder {1}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:case(true, 1, false, 2, null)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ case(true, 1, false, 2, null) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:vars['GITHUB_X']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ vars['GITHUB_X'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr:vars['bad-name']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ vars['bad-name'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:contains()",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: contains()\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"contains()\" in condition. remove the if: section [if-cond]\n<stdin>:7:13: number of arguments is wrong. function \"contains(array<any>, any) -> bool\" takes 2 parameters but 0 arguments are given [expression]\n<stdin>:7:13: number of arguments is wrong. function \"contains(string, string) -> bool\" takes 2 parameters but 0 arguments are given [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:fromJSON('bad')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: fromJSON('bad')\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:22: broken JSON string is passed to fromJSON() at offset 1: invalid character 'b' looking for beginning of value [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:contains('x', null)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: contains('x', null)\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"contains('x', null)\" in condition. remove the if: section [if-cond]\n<stdin>:7:22: 1st argument of function call is not assignable. \"string\" cannot be assigned to \"array<any>\". called function type is \"contains(array<any>, any) -> bool\" [expression]\n<stdin>:7:27: 2nd argument of function call is not assignable. \"null\" cannot be assigned to \"string\". called function type is \"contains(string, string) -> bool\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:contains('x', true)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: contains('x', true)\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"contains('x', true)\" in condition. remove the if: section [if-cond]\n<stdin>:7:22: 1st argument of function call is not assignable. \"string\" cannot be assigned to \"array<any>\". called function type is \"contains(array<any>, any) -> bool\" [expression]\n<stdin>:7:27: 2nd argument of function call is not assignable. \"bool\" cannot be assigned to \"string\". called function type is \"contains(string, string) -> bool\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:format('x',1)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: format('x',1)\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: constant expression \"format('x',1)\" in condition. remove the if: section [if-cond]\n<stdin>:7:13: format string \"x\" does not contain placeholder {0}. remove argument which is unused in the format string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:if:unknown('x')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        if: unknown('x')\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:13: undefined function \"unknown\". available functions are \"always\", \"cancelled\", \"case\", \"contains\", \"endswith\", \"failure\", \"format\", \"fromjson\", \"hashfiles\", \"join\", \"startswith\", \"success\", \"tojson\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:32",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[{\"y\":1}]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:33",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[{\"y\":1}]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:34",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[{\"y\":1}]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:19: property \"foo\" is not defined in object type {x: number; y: number} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:35",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:36",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:37",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[]') }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:38",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ matrix.foo }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:17: context \"matrix\" is not allowed here. available contexts are \"github\", \"inputs\", \"needs\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n<stdin>:9:17: property \"foo\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix:39",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ matrix.foo }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:17: context \"matrix\" is not allowed here. available contexts are \"github\", \"inputs\", \"needs\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n<stdin>:9:17: property \"foo\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 1,
+      "stdout": "<stdin>:12:19: property \"y\" is not defined in object type {x: number} [expression]\n",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix:40",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ matrix.foo }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:17: context \"matrix\" is not allowed here. available contexts are \"github\", \"inputs\", \"needs\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n<stdin>:9:17: property \"foo\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 1,
+      "stdout": "<stdin>:12:19: property \"foo\" is not defined in object type {x: number} [expression]\n",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix:41",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - y: ${{ github.run_id }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:42",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - y: ${{ github.run_id }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:43",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - y: ${{ github.run_id }}\n    steps:\n      - run: echo hello\n        name: ${{ matrix.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:12:19: property \"foo\" is not defined in object type {x: number; y: string} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:44",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        include: [{}]\n        exclude: [{x: 1}]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: element in \"include\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n<stdin>:8:20: \"x\" in \"exclude\" section does not exist in matrix. available matrix configurations are  [matrix]\n<stdin>:11:19: property \"x\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:45",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        include: [{}]\n        exclude: [{x: 1}]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: element in \"include\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n<stdin>:8:20: \"x\" in \"exclude\" section does not exist in matrix. available matrix configurations are  [matrix]\n<stdin>:11:19: property \"y\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix:46",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        include: [{}]\n        exclude: [{x: 1}]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: element in \"include\" section should not be empty. please remove this section if it's unnecessary [syntax-check]\n<stdin>:8:20: \"x\" in \"exclude\" section does not exist in matrix. available matrix configurations are  [matrix]\n<stdin>:11:19: property \"foo\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:.nan",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: .nan\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \".nan\": strconv.ParseFloat: parsing \".nan\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:.NaN",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: .NaN\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \".NaN\": strconv.ParseFloat: parsing \".NaN\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:.inf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: .inf\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \".inf\": strconv.ParseFloat: parsing \".inf\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:-.inf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: -.inf\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \"-.inf\": strconv.ParseFloat: parsing \"-.inf\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:+.inf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: +.inf\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \"+.inf\": strconv.ParseFloat: parsing \"+.inf\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:012",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 012\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:0o12",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 0o12\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \"0o12\": strconv.ParseFloat: parsing \"0o12\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:0b10",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 0b10\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: invalid float value: \"0b10\": strconv.ParseFloat: parsing \"0b10\": invalid syntax [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:1_000",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1_000\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:1e3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1e3\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:1E+3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1E+3\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:1e-999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1e-999\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: value at \"timeout-minutes\" must be greater than zero: 0 [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:1e999",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 1e999\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:0x1p2",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 0x1p2\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:0x1.2p3",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 0x1.2p3\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:timeout:2026-01-01",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        timeout-minutes: 2026-01-01\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:26: expected scalar node for float value but found scalar node with \"!!timestamp\" tag [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[true, false]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [true, false]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"bool\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[\"true\", \"false\"]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [\"true\", \"false\"]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"bool\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[null, ~]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [null, ~]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[1, \"1\"]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1, \"1\"]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:16: duplicate value \"1\" is found in matrix \"x\". the same value is at line:7,col:13 [matrix]\n<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"number\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[01, 1]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [01, 1]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"number\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[1e3, 1000]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [1e3, 1000]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"number\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[.nan, .nan]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [.nan, .nan]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:19: duplicate value \".nan\" is found in matrix \"x\". the same value is at line:7,col:13 [matrix]\n<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[\"\", null]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [\"\", null]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrixval:[0x10]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        x: [0x10]\n    steps:\n      - run: echo hello\n        name: ${{ matrix.x.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:19: receiver of object dereference \"foo\" must be type of object but got \"string\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:on",
+    "source": "ON: push\njobs:\n  test:\n    runs-ON: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: \"on\" section is missing in workflow [syntax-check]\n<stdin>:1:1: unexpected key \"ON\" for \"workflow\" section. expected one of \"concurrency\", \"defaults\", \"env\", \"jobs\", \"name\", \"on\", \"permissions\", \"run-name\" [syntax-check]\n<stdin>:3:3: \"runs-on\" section is missing in job \"test\" [syntax-check]\n<stdin>:4:5: unexpected key \"runs-ON\" for \"job\" section. expected one of \"concurrency\", \"container\", \"continue-on-error\", \"defaults\", \"env\", \"environment\", \"if\", \"name\", \"needs\", \"outputs\", \"permissions\", \"runs-on\", \"secrets\", \"services\", \"snapshot\", \"steps\", \"strategy\", \"timeout-minutes\", \"uses\", \"with\" [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:jobs",
+    "source": "on: push\nJOBS:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:1: \"jobs\" section is missing in workflow [syntax-check]\n<stdin>:2:1: unexpected key \"JOBS\" for \"workflow\" section. expected one of \"concurrency\", \"defaults\", \"env\", \"jobs\", \"name\", \"on\", \"permissions\", \"run-name\" [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:permissions",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:defaults",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:concurrency",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:uppercase:run-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:yaml-tail:'---\\nfoo: ['",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n---\nfoo: [",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:yaml-tail:'---\\non: push\\n'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n---\non: push\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:yaml-tail:'...\\nfoo: bar\\n'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n...\nfoo: bar\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:yaml-tail:'...\\n---\\non: push\\n'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n...\n---\non: push\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:yaml-tail:'\\tbad: thing\\n'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n\tbad: thing\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:13: could not parse as YAML: found a tab character that violates indentation [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:!custom foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: !custom foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:!!int \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: !!int \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:!!bool \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: !!bool \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:!!float \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: !!float \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:! foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: ! foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:name:!!null x",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nname: !!null x\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:!custom foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: !custom foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:!!int \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: !!int \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:!!bool \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: !!bool \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:!!float \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: !!float \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:! foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: ! foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:env:!!null x",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nenv: !!null x\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:6: expecting a single ${{...}} expression or mapping value for \"env\" section, but found plain text node [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:!custom foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: !custom foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"foo\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:!!int \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: !!int \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"bad\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:!!bool \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: !!bool \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"bad\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:!!float \"bad\"",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: !!float \"bad\"\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"bad\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:! foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: ! foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"foo\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:permissions:!!null x",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\npermissions: !!null x\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:14: \"x\" is invalid for permission for all the scopes. available values are \"read-all\", \"write-all\" or {} [permissions]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:!custom foo",
+    "source": "on: push\njobs: !custom foo\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:6: could not parse as YAML: mapping values are not allowed in this context [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:!!int \"bad\"",
+    "source": "on: push\njobs: !!int \"bad\"\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:2: could not parse as YAML: did not find expected key [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:!!bool \"bad\"",
+    "source": "on: push\njobs: !!bool \"bad\"\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:2: could not parse as YAML: did not find expected key [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:!!float \"bad\"",
+    "source": "on: push\njobs: !!float \"bad\"\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:2:2: could not parse as YAML: did not find expected key [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:! foo",
+    "source": "on: push\njobs: ! foo\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:6: could not parse as YAML: mapping values are not allowed in this context [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:jobs:!!null x",
+    "source": "on: push\njobs: !!null x\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:6: could not parse as YAML: mapping values are not allowed in this context [syntax-check]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:!custom foo",
+    "source": "on: !custom foo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"foo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:!!int \"bad\"",
+    "source": "on: !!int \"bad\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"bad\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:!!bool \"bad\"",
+    "source": "on: !!bool \"bad\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"bad\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:!!float \"bad\"",
+    "source": "on: !!float \"bad\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"bad\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:! foo",
+    "source": "on: ! foo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"foo\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:tag:on:!!null x",
+    "source": "on: !!null x\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:1:5: unknown Webhook event \"x\". see https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:alias:115",
+    "source": "on: &x push\njobs: {test: {runs-on: ubuntu-latest, steps: [{run: *x}]}}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:alias:116",
+    "source": "on: push\njobs: {test: {runs-on: ubuntu-latest, steps: &steps [{run: echo ok}]}, other: {runs-on: ubuntu-latest, steps: *steps}}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: []\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: {}\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!map into []string\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: 1\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!int `1` into []string\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: yes\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!str `yes` into []string\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:{foo: bar}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: {foo: bar}\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!map into []string\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:config-variables:[{}, null]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "config-variables: [{}, null]\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!map into string\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: []\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!seq into struct { Labels []string \"yaml:\\\"labels\\\"\" }\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: {}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: 1\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!int `1` into struct { Labels []string \"yaml:\\\"labels\\\"\" }\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: yes\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!str `yes` into struct { Labels []string \"yaml:\\\"labels\\\"\" }\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:{foo: bar}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: {foo: bar}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:self-hosted-runner:[{}, null]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: [{}, null]\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!seq into struct { Labels []string \"yaml:\\\"labels\\\"\" }\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: []\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!seq into map[string]actionlint.PathConfig\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:{}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: 1\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!int `1` into map[string]actionlint.PathConfig\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: yes\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!str `yes` into map[string]actionlint.PathConfig\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: null\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:{foo: bar}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {foo: bar}\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!str `bar` into actionlint.PathConfig\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:config:paths:[{}, null]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: [{}, null]\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": yaml: unmarshal errors:   line 1: cannot unmarshal !!seq into map[string]actionlint.PathConfig\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:configspecial:138",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner: &r {labels: [foobar]}\nunused: *r\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:configspecial:139",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"[!]\": {ignore: [foo]}}\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[!]\" in \"paths\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:configspecial:140",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"[]\": {ignore: [foo]}}\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[]\" in \"paths\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:configspecial:141",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"*\": {ignore: [[foo]]}}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:configspecial:142",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "paths: {\"*\": {ignore: [null]}}\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?i)label",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?i)label"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?s)label",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?s)label"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?m)label",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?m)label"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:\\p{Greek}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\p{Greek}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foobar\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:[[:alpha:]]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "[[:alpha:]]"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?P<word>label)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?P<word>label)"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?<word>label)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?<word>label)"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:label(?=x)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "label(?=x)"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"label(?=x)\": error parsing regexp: invalid or unsupported Perl syntax: `(?=`\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(label)\\1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(label)\\1"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"(label)\\\\1\": error parsing regexp: invalid escape sequence: `\\1`\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:a{01}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "a{01}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foobar\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:(?U)a+",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(?U)a+"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:[a-z&&b]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "[a-z&&b]"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:\\z",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\z"
+    ],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:[",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "["
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"[\": error parsing regexp: missing closing ]: `[`\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:regex:\\C",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foobar\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\C"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "invalid regular expression for ignore pattern \"\\\\C\": error parsing regexp: invalid escape sequence: `\\C`\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{len \"中文\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{len \"中文\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "6",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{slice \"中文\" 0 3}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{slice \"中文\" 0 3}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "中",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{printf \"%T\" .}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%T\" .}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "[]*actionlint.ErrorTemplateFields",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{printf \"%#x\" 12}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%#x\" 12}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "0xc",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{printf \"%d\" \"x\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%d\" \"x\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "%!d(string=x)",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{printf \"%s\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "%!s(MISSING)",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{printf \"%s\" \"a\" \"b\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" \"a\" \"b\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "a%!(EXTRA string=b)",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{eq 1 \"1\"}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{eq 1 \"1\"}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{eq true 1}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{eq true 1}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{and false (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{and false (index . 99)}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "false",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{or true (index . 99)}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{or true (index . 99)}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "true",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{range .}}{{$x := .Message}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{$x := .Message}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"{{range .}}{{$x := .Message}}{{end}}{{$x}}\" to format error messages could not be parsed: template: error formatter:1: undefined variable \"$x\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{if false}}{{$x := \"a\"}}{{end}}{{$x}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{if false}}{{$x := \"a\"}}{{end}}{{$x}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "template \"{{if false}}{{$x := \\\"a\\\"}}{{end}}{{$x}}\" to format error messages could not be parsed: template: error formatter:1: undefined variable \"$x\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{with .}}{{$.foo}}{{end}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{with .}}{{$.foo}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{range .}}{{.Unknown}}{{else}}empty{{end}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.Unknown}}{{else}}empty{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:template:{{range .}}{{.Message}}{{end}}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.Message}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\"",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:step:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:24: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:strategy:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job-concurrency:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    concurrency:\n      group: hi\n      cancel-in-progress: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:27: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:workflow-concurrency:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency:\n  group: hi\n  cancel-in-progress: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:23: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:environment:1",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ 1 }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:19: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:dispatch-required:1",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        required: ${{ 1 }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:call-required:1",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        required: ${{ 1 }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:bool:step:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:24: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:strategy:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job-concurrency:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    concurrency:\n      group: hi\n      cancel-in-progress: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:27: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:workflow-concurrency:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency:\n  group: hi\n  cancel-in-progress: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:23: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:environment:'false'",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ 'false' }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:19: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:dispatch-required:'false'",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        required: ${{ 'false' }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:call-required:'false'",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        required: ${{ 'false' }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:bool:step:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:24: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:strategy:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job-concurrency:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    concurrency:\n      group: hi\n      cancel-in-progress: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:27: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:workflow-concurrency:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency:\n  group: hi\n  cancel-in-progress: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:23: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:environment:null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ null }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:19: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:dispatch-required:null",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        required: ${{ null }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:call-required:null",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        required: ${{ null }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type null [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:bool:step:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:24: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:strategy:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job-concurrency:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    concurrency:\n      group: hi\n      cancel-in-progress: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:27: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:workflow-concurrency:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency:\n  group: hi\n  cancel-in-progress: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:23: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:environment:fromJSON('{}')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ fromJSON('{}') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:19: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:dispatch-required:fromJSON('{}')",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        required: ${{ fromJSON('{}') }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:call-required:fromJSON('{}')",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        required: ${{ fromJSON('{}') }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:bool:step:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        continue-on-error: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:28: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    continue-on-error: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:24: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:strategy:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      fail-fast: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:8:18: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:job-concurrency:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    concurrency:\n      group: hi\n      cancel-in-progress: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:27: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:workflow-concurrency:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\nconcurrency:\n  group: hi\n  cancel-in-progress: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:23: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:environment:fromJSON('[]')",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    environment:\n      name: prod\n      deployment: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:19: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:dispatch-required:fromJSON('[]')",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        required: ${{ fromJSON('[]') }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:bool:call-required:fromJSON('[]')",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        required: ${{ fromJSON('[]') }}\n        type: string\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:19: type of expression must be bool but found type array<any> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:matrix-section:include:${{ github.run_id }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ github.run_id }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:18: type of expression at \"include\" must be array but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "An expression for the entire include value must produce an array of objects; the baseline misses non-array values and non-object elements."
+  },
+  {
+    "id": "audit:matrix-section:exclude:${{ github.run_id }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ github.run_id }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:18: type of expression at \"exclude\" must be array but found type string [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:include:${{ no_such }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ no_such }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:22: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:exclude:${{ no_such }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ no_such }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:22: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:include:${{ fromJSON('[]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:exclude:${{ fromJSON('[]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ fromJSON('[]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:include:${{ fromJSON('[1]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[1]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:18: type of expression at \"include\" must be object but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "An expression for the entire include value must produce an array of objects; the baseline misses non-array values and non-object elements."
+  },
+  {
+    "id": "audit:matrix-section:exclude:${{ fromJSON('[1]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ fromJSON('[1]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:10:18: type of expression at \"exclude\" must be object but found type number [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:include:${{ fromJSON('[{}]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include: ${{ fromJSON('[{}]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-section:exclude:${{ fromJSON('[{}]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude: ${{ fromJSON('[{}]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-required-default:true",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: true\n        default: hi\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:7:18: input \"foo\" of workflow_call event has the default value \"hi\", but it is also required. if an input is marked as required, its default value will never be used [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-required-default:True",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: True\n        default: hi\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-required-default:TRUE",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: TRUE\n        default: hi\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-required-default:${{ true }}",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: ${{ true }}\n        default: hi\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:0x10",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: 0x10\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:18: input of workflow_call event \"foo\" is typed as number but its default value \"0x10\" cannot be parsed as a float number: strconv.ParseFloat: parsing \"0x10\": invalid syntax [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:0x10",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: 0x10\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:18: type of \"foo\" input is \"number\" but its default value \"0x10\" cannot be parsed as a float number: strconv.ParseFloat: parsing \"0x10\": invalid syntax [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:1e999",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: 1e999\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:18: input of workflow_call event \"foo\" is typed as number but its default value \"1e999\" cannot be parsed as a float number: strconv.ParseFloat: parsing \"1e999\": value out of range [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:1e999",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: 1e999\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:18: type of \"foo\" input is \"number\" but its default value \"1e999\" cannot be parsed as a float number: strconv.ParseFloat: parsing \"1e999\": value out of range [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:1e-999",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: 1e-999\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:1e-999",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: 1e-999\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:NaN",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: NaN\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:NaN",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: NaN\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:Inf",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: Inf\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:Inf",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: Inf\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_call:1_000",
+    "source": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: number\n        default: 1_000\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:input-number:workflow_dispatch:1_000",
+    "source": "on:\n  workflow_dispatch:\n    inputs:\n      foo:\n        type: number\n        default: 1_000\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-secret-field:description",
+    "source": "on:\n  workflow_call:\n    secrets:\n      foo:\n        description: ${{ no_such }}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:call-secret-field:required",
+    "source": "on:\n  workflow_call:\n    secrets:\n      foo:\n        required: ${{ no_such }}\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:5:23: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "workflow_call.required must be checked for expression semantics and accept only bool/Any; the baseline does not traverse this field."
+  },
+  {
+    "id": "audit:security:github.event.issue.title",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.title }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.issue.title.foo",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.title.foo }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.issue.title[0]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.title[0] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.*.title",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.*.title }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.discussion.title\", \"github.event.issue.title\", \"github.event.pull_request.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.*.*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.*.* }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.comment.body\", \"github.event.discussion.body\", \"github.event.discussion.title\", \"github.event.head_commit.message\", \"github.event.issue.body\", \"github.event.issue.title\", \"github.event.pull_request.body\", \"github.event.pull_request.title\", \"github.event.review.body\", \"github.event.review_comment.body\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.commits[0].message",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.commits[0].message }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: \"github.event.commits.*.message\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github['event']['issue']['title']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github['event']['issue']['title'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github['EVENT']['issue']['title']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github['EVENT']['issue']['title'] }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: property \"EVENT\" is not defined in object type {action: string; action_path: string; action_ref: string; action_repository: string; action_status: string; actor: string; actor_id: string; api_url: string; artifact_cache_size_limit: number; base_ref: string; env: string; event: object; event_name: string; event_path: string; graphql_url: string; head_ref: string; job: string; output: string; path: string; ref: string; ref_name: string; ref_protected: bool; ref_type: string; repository: string; repository_id: string; repository_owner: string; repository_owner_id: string; repository_visibility: string; repositoryurl: string; retention_days: number; run_attempt: string; run_id: string; run_number: string; secret_source: string; server_url: string; sha: string; state: string; step_summary: string; token: string; triggering_actor: string; workflow: string; workflow_ref: string; workflow_sha: string; workspace: string} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.issue",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:github.event.issue.*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ github.event.issue.* }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.issue.body\", \"github.event.issue.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:toJSON(github.event.issue)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ toJSON(github.event.issue) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:foo(github.event.issue.title)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ foo(github.event.issue.title) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:23: undefined function \"foo\". available functions are \"always\", \"cancelled\", \"case\", \"contains\", \"endswith\", \"failure\", \"format\", \"fromjson\", \"hashfiles\", \"join\", \"startswith\", \"success\", \"tojson\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:security:contains(github.event.issue.title, no_such)",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains(github.event.issue.title, no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:58: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:[!]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[!]\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[!]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:[]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[]\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label pattern \"[]\" is an invalid glob. kindly check list of labels in actionlint.yaml config file: syntax error in pattern [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:[z-a]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"[z-a]\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[z-a]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:{a,b}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"{a,b}\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"{a,b}\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:foo/**/bar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo/**/bar\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo/**/bar\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:foo[!x]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo[!x]\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo[!x]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:foo[^x]",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"foo[^x]\"]\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:14: label \"foo\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo[^x]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:*",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"*\"]\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:runner-glob:**",
+    "source": "on: push\njobs:\n  test:\n    runs-on: foo\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-config-file",
+      "custom.yml"
+    ],
+    "files": {
+      "custom.yml": "self-hosted-runner:\n  labels: [\"**\"]\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:workflow-spec:./@foo",
+    "source": "on: push\njobs:\n  test:\n    uses: ./@foo\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"./@foo\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Local reusable workflow paths must not contain @ref, including when @ is the first character of the path; the baseline misses this boundary because it checks idx > 0."
+  },
+  {
+    "id": "audit:workflow-spec:owner/repo/@x@y",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/@x@y\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/@x@y\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:workflow-spec:owner/repo/@path@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/@path@ref\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/@path@ref\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:workflow-spec:owner/repo//path@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo//path@ref\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:workflow-spec:./x@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: ./x@ref\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:4:11: reusable workflow call \"./x@ref\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:workflow-spec:owner/repo/path@@ref",
+    "source": "on: push\njobs:\n  test:\n    uses: owner/repo/path@@ref\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cli:['-stdin-filename', 'missing.yml', '-']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      "-stdin-filename",
+      "missing.yml",
+      "-"
+    ]
+  },
+  {
+    "id": "audit:cli:['-h=false']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      "-h=false"
+    ],
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -pyflakes string\n    \tCommand name or file path of \"pyflakes\" external command. If empty, pyflakes integration will be disabled (default \"pyflakes\")\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration; the help text no longer lists the -pyflakes argument."
+  },
+  {
+    "id": "audit:cli:['-help=false']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      "-help=false"
+    ],
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "Usage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -pyflakes string\n    \tCommand name or file path of \"pyflakes\" external command. If empty, pyflakes integration will be disabled (default \"pyflakes\")\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration; the help text no longer lists the -pyflakes argument."
+  },
+  {
+    "id": "audit:cli:['-debug', '-']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr_events": [
+        "verbose: Reading the input from stdin",
+        "verbose: Linting <stdin>",
+        "verbose: Found 0 parse errors in [0-9]+ ms for <stdin>",
+        "verbose: Rule \"shellcheck\" was disabled since shellcheck command name was empty",
+        "verbose: Found total 0 errors in [0-9]+ ms for <stdin>",
+        "\\[Linter\\] Create a Linter instance",
+        "\\[Linter\\] expression found 0 errors"
+      ],
+      "stderr_absent": [
+        "(?i)pyflakes"
+      ]
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      "-debug",
+      "-"
+    ],
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr_events": [
+        "verbose: Reading the input from stdin",
+        "verbose: Linting <stdin>",
+        "verbose: Found 0 parse errors in [0-9]+ ms for <stdin>",
+        "verbose: Rule \"shellcheck\" was disabled since shellcheck command name was empty",
+        "verbose: Rule \"pyflakes\" was disabled since pyflakes command name was empty",
+        "verbose: Found total 0 errors in [0-9]+ ms for <stdin>",
+        "\\[Linter\\] Create a Linter instance",
+        "\\[Linter\\] expression found 0 errors"
+      ]
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration; verbose/debug output no longer includes logs about disabling or running Pyflakes."
+  },
+  {
+    "id": "audit:cli:['-verbose', '-']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr_events": [
+        "verbose: Reading the input from stdin",
+        "verbose: Linting <stdin>",
+        "verbose: Found 0 parse errors in [0-9]+ ms for <stdin>",
+        "verbose: Rule \"shellcheck\" was disabled since shellcheck command name was empty",
+        "verbose: Found total 0 errors in [0-9]+ ms for <stdin>"
+      ],
+      "stderr_absent": [
+        "(?i)pyflakes"
+      ]
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      "-verbose",
+      "-"
+    ],
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr_events": [
+        "verbose: Reading the input from stdin",
+        "verbose: Linting <stdin>",
+        "verbose: Found 0 parse errors in [0-9]+ ms for <stdin>",
+        "verbose: Rule \"shellcheck\" was disabled since shellcheck command name was empty",
+        "verbose: Rule \"pyflakes\" was disabled since pyflakes command name was empty",
+        "verbose: Found total 0 errors in [0-9]+ ms for <stdin>"
+      ]
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration; verbose/debug output no longer includes logs about disabling or running Pyflakes."
+  },
+  {
+    "id": "audit:metadata-merge:101",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\nruns: {using: node20, main: index.js}\nbase: &base {required: true}\ninputs: {x: {<<: *base}}\n",
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: could not parse action metadata in \"$PROJECT/action\": line 4: unexpected key \"<<\" for definition of input \"x\" [action]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      ".github/workflows/main.yml"
+    ]
+  },
+  {
+    "id": "audit:metadata-merge:102",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\nruns: {using: node20, main: index.js}\ninputs: {x: {default: &value 5}, y: {default: *value}}\n",
+      ".github/workflows/main.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:15: description is required in metadata of \"Test\" action at \"$PROJECT/action/action.yml\" [action]\n.github/workflows/main.yml:6:15: file \"index.js\" does not exist in \"$PROJECT/action\". it is specified at \"main\" key in \"runs\" section in \"Test\" action [action]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "arguments": [
+      ".github/workflows/main.yml"
+    ]
+  },
+  {
+    "id": "audit:cron:0/2147483648 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"0/2147483648 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:1/2147483647 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"1/2147483647 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 *-2 * *",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 *-2 * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 1-2-3 * *",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 1-2-3 * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"0 0 1-2-3 * *\" in schedule event: too many hyphens: 1-2-3 [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:*/+2 * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"*/+2 * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: scheduled job runs too frequently. it runs once per 120 seconds. the shortest interval is once every 5 minutes [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * SUN",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * SUN\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * 7",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * 7\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"0 0 * * 7\" in schedule event: end of range (7) above maximum (6): 7 [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * 0-7",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * 0-7\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"0 0 * * 0-7\" in schedule event: end of range (7) above maximum (6): 0-7 [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * MON-FRI",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * MON-FRI\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * ?",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * ?\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:0 0 * * */2",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 * * */2\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:@daily",
+    "source": "on:\n  schedule:\n    - cron: \"@daily\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: invalid CRON format \"@daily\" in schedule event: parser does not accept descriptors: @daily [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:CRON_TZ=UTC * * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"CRON_TZ=UTC * * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: scheduled job runs too frequently. it runs once per 60 seconds. the shortest interval is once every 5 minutes [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:cron:TZ= * * * * *",
+    "source": "on:\n  schedule:\n    - cron: \"TZ= * * * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:3:13: scheduled job runs too frequently. it runs once per 60 seconds. the shortest interval is once every 5 minutes [events]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr-position:é",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains('é', no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:37: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr-position:中",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains('中', no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:37: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr-position:😀",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains('😀', no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:37: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr-position:‍",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains('‍', no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:37: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:expr-position:́",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ contains('́', no_such) }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:37: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:shellcheck:19",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stderr.write(\"failure\\n\")\nsys.exit(2)\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "`./checker.py --norc -f json -x --shell bash -e SC1091,SC2194,SC2050,SC2153,SC2154,SC2157,SC2043 -` did not run successfully while checking script at line:6,col:9: ./checker.py exited with status 2 but stdout was empty. stderr: \"failure\\n\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:pyflakes:20",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stderr.write(\"failure\\n\")\nsys.exit(2)\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "audit:checker-error:shellcheck:21",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"not json\")\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: invalid character 'o' in literal null (expecting 'u'): stdout=\"not json\\n\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:pyflakes:22",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"not json\")\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "audit:checker-error:shellcheck:23",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"null\")\n"
+    },
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:pyflakes:24",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"null\")\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "audit:checker-error:shellcheck:25",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"{}\")\n"
+    },
+    "expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal object into Go value of type []actionlint.shellcheckError: stdout=\"{}\\n\"\n"
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:pyflakes:26",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"{}\")\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "audit:checker-error:shellcheck:27",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-shellcheck=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"[{}]\")\n"
+    },
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:checker-error:pyflakes:28",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes=./checker.py"
+    ],
+    "files": {
+      "checker.py": "#!/usr/bin/env python3\nprint(\"[{}]\")\n"
+    },
+    "expected": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "flag provided but not defined: -pyflakes\nUsage: actionlint [FLAGS] [FILES...] [-]\n\n  actionlint is a linter for GitHub Actions workflow files.\n\n  To check all YAML files in current repository, just run actionlint without\n  arguments. It automatically finds the nearest '.github/workflows' directory:\n\n    $ actionlint\n\n  To check specific files, pass the file paths as arguments:\n\n    $ actionlint file1.yaml file2.yaml\n\n  To check content which is not saved in file yet (e.g. output from some\n  command), pass - argument. It reads stdin and checks it as workflow file:\n\n    $ actionlint -\n\n  To serialize errors into JSON, use -format option. It allows to format error\n  messages flexibly with Go template syntax.\n\n    $ actionlint -format '{{json .}}'\n\nDocuments:\n\n  - List of checks: https://github.com/rhysd/actionlint/tree/main/docs/checks.md\n  - Usage:          https://github.com/rhysd/actionlint/tree/main/docs/usage.md\n  - Configuration:  https://github.com/rhysd/actionlint/tree/main/docs/config.md\n\nFlags:\n  -color\n    \tAlways enable colorful output. This is useful to force colorful outputs\n  -config-file string\n    \tFile path to config file\n  -debug\n    \tEnable debug output (for development)\n  -format string\n    \tCustom template to format error messages in Go template syntax. See the usage documentation for more details\n  -ignore value\n    \tRegular expression matching to error messages you want to ignore. This flag is repeatable\n  -init-config\n    \tGenerate default config file at .github/actionlint.yaml in current project\n  -no-color\n    \tDisable colorful output\n  -oneline\n    \tUse one line per one error. Useful for reading error messages from programs\n  -shellcheck string\n    \tCommand name or file path of \"shellcheck\" external command. If empty, shellcheck integration will be disabled (default \"shellcheck\")\n  -stdin-filename string\n    \tFile name when reading input from stdin (default \"<stdin>\")\n  -verbose\n    \tEnable verbose output\n  -version\n    \tShow version and how this binary was installed\n"
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments."
+  },
+  {
+    "id": "audit:matrix-entire:include:${{ fromJSON('[{\"y\":1}]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ fromJSON('[{\"y\":1}]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:13: type of expression at \"include\" must be object but found type array<{y: number}> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix-entire:include:${{ no_such }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ no_such }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:17: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix-entire:include:${{ fromJSON('true') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        include:\n          - ${{ fromJSON('true') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:13: type of expression at \"include\" must be object but found type bool [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false,
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "Expressions in include entries must be checked for semantic errors and object types; the baseline incorrectly refers to the expression for the entire include value and skips entry checks. Invalid entries preserve known rows and allow unknown properties."
+  },
+  {
+    "id": "audit:matrix-entire:exclude:${{ fromJSON('[{\"y\":1}]') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude:\n          - ${{ fromJSON('[{\"y\":1}]') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:13: type of expression at \"exclude\" must be object but found type array<{y: number}> [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-entire:exclude:${{ no_such }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude:\n          - ${{ no_such }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:17: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-entire:exclude:${{ fromJSON('true') }}",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix:\n        x: [1]\n        exclude:\n          - ${{ fromJSON('true') }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:11:13: type of expression at \"exclude\" must be object but found type bool [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"include\":[{\"y\":1}]}'):matrix.y",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"include\":[{\"y\":1}]}') }}\n    name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"include\":[{\"y\":1}]}'):matrix.include",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"include\":[{\"y\":1}]}') }}\n    name: ${{ matrix.include }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:15: property \"include\" is not defined in object type {y: number} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"include\":[{\"y\":1}]}'):matrix.exclude",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"include\":[{\"y\":1}]}') }}\n    name: ${{ matrix.exclude }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:15: property \"exclude\" is not defined in object type {y: number} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"exclude\":[{\"y\":1}]}'):matrix.y",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"exclude\":[{\"y\":1}]}') }}\n    name: ${{ matrix.y }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:15: property \"y\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"exclude\":[{\"y\":1}]}'):matrix.include",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"exclude\":[{\"y\":1}]}') }}\n    name: ${{ matrix.include }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:15: property \"include\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:matrix-object:fromJSON('{\"exclude\":[{\"y\":1}]}'):matrix.exclude",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n    strategy:\n      matrix: ${{ fromJSON('{\"exclude\":[{\"y\":1}]}') }}\n    name: ${{ matrix.exclude }}\n",
+    "flags": [],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "<stdin>:9:15: property \"exclude\" is not defined in object type {} [expression]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:unicode-output:['-format', '{{json .}}']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo 中文😀 ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{json .}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "[{\"message\":\"undefined variable \\\"no_such\\\". available variables are \\\"env\\\", \\\"github\\\", \\\"inputs\\\", \\\"job\\\", \\\"matrix\\\", \\\"needs\\\", \\\"runner\\\", \\\"secrets\\\", \\\"steps\\\", \\\"strategy\\\", \\\"vars\\\"\",\"filepath\":\"\\u003cstdin\\u003e\",\"line\":6,\"column\":34,\"kind\":\"expression\",\"snippet\":\"      - run: echo 中文😀 ${{ no_such }}\\n                             ^~~~~~~\",\"end_column\":36}]\n",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  },
+  {
+    "id": "audit:unicode-output:['-format', '{{range .}}{{.EndColumn}}{{end}}']",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo 中文😀 ${{ no_such }}\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.EndColumn}}{{end}}"
+    ],
+    "files": {},
+    "expected": {
+      "code": 1,
+      "stdout": "36",
+      "stderr": ""
+    },
+    "stdin": true,
+    "write_workflow": false
+  }
+]

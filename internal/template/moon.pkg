@@ -1,0 +1,11 @@
+import {
+  "moonbit-community/actionlint/internal/data",
+  "moonbit-community/actionlint/internal/json" @jsonutil,
+  "moonbit-community/actionlint/internal/matching",
+  "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/json",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/buffer",
+  "moonbitlang/core/string",
+  "moonbitlang/core/encoding/utf8",
+}

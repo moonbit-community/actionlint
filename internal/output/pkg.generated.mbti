@@ -1,0 +1,19 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/actionlint/internal/output"
+
+import {
+  "moonbit-community/actionlint/internal/model",
+}
+
+// Values
+pub fn diagnostic_json(@model.Diagnostic, String, String) -> Json
+
+pub fn render_diagnostic(@model.Diagnostic, String, String, Bool, Bool) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

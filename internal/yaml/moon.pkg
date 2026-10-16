@@ -1,0 +1,6 @@
+import {
+  "moonbit-community/actionlint/internal/matching",
+  "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/string",
+  "moonbit-community/yaml" @yaml_parser,
+}

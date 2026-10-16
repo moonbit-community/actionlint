@@ -1,0 +1,15 @@
+import {
+  "moonbit-community/actionlint/internal/cli",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+}
+
+pkgtype(kind: "executable")
+
+options(
+  "native-stub": [ "platform.c" ],
+  targets: {
+    "platform.native.mbt": [ "native" ],
+    "platform.wasm.mbt": [ "wasm" ],
+  },
+)
