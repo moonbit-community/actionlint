@@ -1,4 +1,5 @@
 ///|
+#derive(Debug)
 pub(all) struct Node {
   mut retained : Bool
   kind : Int32
@@ -13,7 +14,7 @@ pub(all) struct Node {
   mut tagged : Bool
   mut anchor_name : String
   children : Array[Node]
-} derive(Debug)
+}
 
 ///|
 pub fn node(

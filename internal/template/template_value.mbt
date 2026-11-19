@@ -1,4 +1,5 @@
 ///|
+#derive(Eq)
 priv enum TemplateValue {
   Missing
   Nil
@@ -9,7 +10,7 @@ priv enum TemplateValue {
   RawText(Bytes)
   Sequence(Array[TemplateValue], String)
   Record(Map[String, TemplateValue], String)
-} derive(Eq)
+}
 
 ///|
 fn template_from_json(value : Json) -> TemplateValue {

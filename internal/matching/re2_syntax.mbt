@@ -118,7 +118,7 @@ fn Re2Parser::escape(
         self.offset += 1
       }
       let digits = self.source[at:self.offset]
-      let code = @string.parse_int(digits, base=16) catch { _ => -1 }
+      let code = @string.parse_int(digits, radix=16) catch { _ => -1 }
       if code < 0 ||
         code > 0x10ffff ||
         (!braced && digits.length() != 2) ||
@@ -152,7 +152,7 @@ fn Re2Parser::escape(
           self.source[start:self.offset].to_owned(),
         )
       }
-      let code = @string.parse_int(self.source[at:self.offset], base=8) catch {
+      let code = @string.parse_int(self.source[at:self.offset], radix=8) catch {
         _ => 0
       }
       "\\u{" + code.to_string(radix=16) + "}"
@@ -283,7 +283,7 @@ fn re2_complement(ranges : String) -> String {
     if source[offset + 1] == 'u' && source[offset + 2] == '{' {
       let end = offset + 3 + source[offset + 3:].find("}").unwrap_or(0)
       return (
-        @string.parse_int(source[offset + 3:end], base=16) catch {
+        @string.parse_int(source[offset + 3:end], radix=16) catch {
           _ => 0
         },
         end + 1,

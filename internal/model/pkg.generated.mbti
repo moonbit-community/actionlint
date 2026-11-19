@@ -8,7 +8,7 @@ import {
 // Values
 pub fn char_quote(Char, ascii? : Bool) -> String
 
-pub fn node(Int, String, Int, Int, Int, String, Int) -> Node
+pub fn node(Int32, String, Int32, Int32, Int32, String, Int32) -> Node
 
 pub fn quote(String) -> String
 
@@ -32,27 +32,28 @@ pub fn Check::syntax(Self, Node, String) -> Unit
 
 pub(all) struct Diagnostic {
   message : String
-  line : Int
-  column : Int
+  line : Int32
+  column : Int32
   kind : String
 }
 pub fn Diagnostic::oneline(Self, String) -> String
 
+#derive(@debug.Debug)
 pub(all) struct Node {
   mut retained : Bool
-  kind : Int
+  kind : Int32
   value : String
-  mut line : Int
-  mut column : Int
-  mut document_line : Int
-  mut document_column : Int
-  style : Int
+  mut line : Int32
+  mut column : Int32
+  mut document_line : Int32
+  mut document_column : Int32
+  style : Int32
   tag : String
-  anchor : Int
+  anchor : Int32
   mut tagged : Bool
   mut anchor_name : String
   children : Array[Node]
-} derive(@debug.Debug)
+}
 pub fn Node::contains_expression(Self) -> Bool
 pub fn Node::get(Self, String) -> Self?
 pub fn Node::get_ci(Self, String) -> Self?

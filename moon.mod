@@ -15,7 +15,7 @@ version = "0.0.1"
 
 readme = "README.md"
 
-repository = ""
+repository = "https://github.com/moonbit-community/actionlint"
 
 license = "Apache-2.0"
 
@@ -27,6 +27,6 @@ description = "A MoonBit CLI port of actionlint 1.7.12 for native and wasm"
 
 import {
   "moonbitlang/async@0.22.5",
-  "moonbit-community/yaml@0.0.7",
+  "moonbit-community/yaml@0.0.10",
   "moonbitlang/regexp@0.3.6",
 }

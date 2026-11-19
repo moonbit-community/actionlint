@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub(all) enum ExprType {
   AnyTy
   NullTy
@@ -7,7 +8,7 @@ pub(all) enum ExprType {
   StringTy
   ObjectTy(Map[String, ExprType], ExprType?)
   ArrayTy(ExprType, Bool)
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn object_type(

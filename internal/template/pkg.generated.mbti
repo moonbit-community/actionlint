@@ -3,12 +3,13 @@ package "moonbit-community/actionlint/internal/template"
 
 import {
   "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/json",
 }
 
 // Values
-pub fn try_format_errors(String, Json, extra_kinds? : Array[String]) -> (String, String?) raise @model.CliError
+pub fn try_format_errors(String, @json.Json, extra_kinds? : Array[String]) -> (String, String?) raise @model.CliError
 
-pub fn try_format_errors_bytes(String, Json, extra_kinds? : Array[String]) -> (Bytes, String?) raise @model.CliError
+pub fn try_format_errors_bytes(String, @json.Json, extra_kinds? : Array[String]) -> (Bytes, String?) raise @model.CliError
 
 pub fn validate_template(String) -> Unit raise @model.CliError
 

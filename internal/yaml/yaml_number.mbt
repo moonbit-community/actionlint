@@ -17,7 +17,7 @@ pub fn parse_yaml_number(
     if !@matching.regex_match("^[+-]?[0-9]+$", value) {
       invalid(value, function, "invalid syntax")
     }
-    let number = @string.parse_int64(value, base=10) catch {
+    let number = @string.parse_int64(value, radix=10) catch {
       _ => {
         invalid(value, function, "value out of range")
         return 0.0
@@ -77,9 +77,9 @@ fn yaml_timestamp(value : String) -> Bool {
   if parts.length() != 3 {
     return false
   }
-  let year = @string.parse_int(parts[0], base=10) catch { _ => 0 }
-  let month = @string.parse_int(parts[1], base=10) catch { _ => 0 }
-  let day = @string.parse_int(parts[2], base=10) catch { _ => 0 }
+  let year = @string.parse_int(parts[0], radix=10) catch { _ => 0 }
+  let month = @string.parse_int(parts[1], radix=10) catch { _ => 0 }
+  let day = @string.parse_int(parts[2], radix=10) catch { _ => 0 }
   let length = if month == 2 {
     if year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) {
       29
@@ -114,19 +114,19 @@ fn yaml_timestamp(value : String) -> Bool {
   }
   if offset is Some(at) {
     let zone = time[at + 1:].split(":").to_array()
-    let hours = @string.parse_int(zone[0], base=10) catch { _ => 99 }
-    let minutes = @string.parse_int(zone[1], base=10) catch { _ => 99 }
+    let hours = @string.parse_int(zone[0], radix=10) catch { _ => 99 }
+    let minutes = @string.parse_int(zone[1], radix=10) catch { _ => 99 }
     if hours > 24 || minutes > 60 {
       return false
     }
     time = time[:at]
   }
   let fields = time.split(":").to_array()
-  let hour = @string.parse_int(fields[0], base=10) catch { _ => 99 }
-  let minute = @string.parse_int(fields[1], base=10) catch { _ => 99 }
+  let hour = @string.parse_int(fields[0], radix=10) catch { _ => 99 }
+  let minute = @string.parse_int(fields[1], radix=10) catch { _ => 99 }
   let second = @string.parse_int(
     fields[2].split(".").next().unwrap_or("").split(",").next().unwrap_or(""),
-    base=10,
+    radix=10,
   ) catch {
     _ => 99
   }

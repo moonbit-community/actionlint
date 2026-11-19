@@ -2,7 +2,7 @@
 package "moonbit-community/actionlint/internal/cli"
 
 // Values
-pub async fn run_cli(Array[String]) -> Int
+pub async fn run_cli(Array[String]) -> Int32
 
 // Errors
 

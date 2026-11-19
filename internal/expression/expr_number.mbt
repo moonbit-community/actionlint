@@ -115,7 +115,7 @@ fn lex_number(
 ///|
 fn check_number_literal(token : ExprToken) -> Unit raise ExprError {
   if token.kind == "INTEGER" {
-    let value = @string.parse_int64(token.value, base=0) catch {
+    let value = @string.parse_int64(token.value, radix=0) catch {
       _ =>
         raise ExprError(
           token.offset,

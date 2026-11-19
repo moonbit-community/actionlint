@@ -7,7 +7,7 @@ fn format_placeholders(format : String) -> Map[Int64, Bool] {
   let mut start = -1
   let mut end = -1
   fn record(used : Map[Int64, Bool], text : StringView) -> Unit {
-    let index = @string.parse_int64(text, base=10) catch {
+    let index = @string.parse_int64(text, radix=10) catch {
       _ => 9223372036854775807L
     }
     used[index] = true

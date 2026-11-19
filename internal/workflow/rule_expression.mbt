@@ -1,4 +1,5 @@
 ///|
+#derive(Eq)
 priv enum ExprExpected {
   Interpolation
   RawValue
@@ -7,7 +8,7 @@ priv enum ExprExpected {
   NumberValue
   RunnerValue
   BoolValue
-} derive(Eq)
+}
 
 ///|
 fn @model.Check::expr_string(

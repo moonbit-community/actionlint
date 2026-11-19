@@ -319,7 +319,7 @@ pub fn parse_yaml(
     used: {},
     document: (1, 1),
   }
-  @yaml_parser.Parser::new(yaml_parser_source(source)).load(receiver, false) catch {
+  @yaml_parser.Parser::Parser(yaml_parser_source(source)).load(receiver, false) catch {
     YamlError(mark~, info~) => {
       if info.contains("unknown anchor") {
         let lines = source.split("\n").to_array()
