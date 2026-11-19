@@ -1,23 +1,82 @@
 name: MoonBit CI
+
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_call:
+
 permissions:
   contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      ACTIONLINT_REQUIRE_CHECKERS: '1'
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
       - name: Install MoonBit
         run: |
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
-      - run: moon version --all
+
+      - name: Ensure ShellCheck is available
+        run: |
+          if ! command -v shellcheck >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install --yes shellcheck
+          fi
+          shellcheck --version
+
+      - name: Show tool versions
+        run: |
+          moon version --all
+          node --version
+
       - run: moon update
-      - run: moon check
-      - run: moon test
+
+      - name: Check native and wasm with warnings as errors
+        run: make check
+
+      - name: Verify generated interfaces
+        run: |
+          moon info
+          changes=$(git status --porcelain --untracked-files=all -- '*.mbti')
+          if [[ -n "$changes" ]]; then
+            echo "$changes"
+            git diff -- '*.mbti'
+            exit 1
+          fi
+
+      - name: Check formatting
+        run: moon fmt --check
+
+      - name: Run native and wasm tests with ShellCheck
+        run: make test
+
+      - name: Test release CLIs and compare behavior on both targets
+        run: make cli-test
+
+      - name: Lint this repository's workflows
+        run: bin/actionlint
+
+      - name: Check production function reachability
+        run: node scripts/audit_reachability.mjs
+
+      - name: Upload regression reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-reports
+          path: |
+            _build/compatibility-*.json
+            _build/projects-*.json
+            _build/cli-*.json
+            _build/behavior-report.json
+          if-no-files-found: ignore

@@ -76,9 +76,21 @@ and the SARIF rule list no longer include this integration.
 The validation scripts and checker fixtures run on Node.js 22 or later.
 
 ```sh
-make check test cli-test
-moon info && moon fmt
+make check
+moon info
+moon fmt --check
+ACTIONLINT_REQUIRE_CHECKERS=1 make test
+make cli-test
+bin/actionlint
+node scripts/audit_reachability.mjs
 ```
+
+Pull requests, pushes to `main`, and manual Mooncakes publishes use the same
+checks. CI requires clean generated interfaces and formatting, treats MoonBit
+warnings as errors on native and wasm, and runs the release CLI against the
+repository's own workflows. The reachability audit uses MoonBit's symbol
+references to find production functions unreachable on every supported target.
+Failed CI runs attach any available regression reports.
 
 Tests cover the original **230 workflow fixtures and 30 project fixtures** on
 native and wasm, comparing diagnostic content, ordering, and positions. Additional
