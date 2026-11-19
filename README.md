@@ -218,7 +218,7 @@ format integration tests live in `internal/workflow/`. Each package exports only
 the interfaces needed by other packages; the root package no longer exposes a
 library API.
 
-`scripts/generate_baseline_data.py` extracts built-in tables from the read-only
+`scripts/generate_baseline_data.mjs` extracts built-in tables from the read-only
 `baseline/` into `internal/data/builtin_data.mbt`, explicitly excluding Pyflakes
 rules. Timezone names are pinned in `scripts/timezones.json`.
 `scripts/generate_regex_unicode.go` generates
