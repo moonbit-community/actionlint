@@ -4282,15 +4282,15 @@
     "id": "audit:checker-error:shellcheck:19",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stderr.write(\"failure\\n\")\nsys.exit(2)\n"
+      "checker.mjs": "#!/usr/bin/env node\nprocess.stderr.write(\"failure\\n\");\nprocess.exitCode = 2;\n"
     },
     "expected": {
       "code": 3,
       "stdout": "",
-      "stderr": "`./checker.py --norc -f json -x --shell bash -e SC1091,SC2194,SC2050,SC2153,SC2154,SC2157,SC2043 -` did not run successfully while checking script at line:6,col:9: ./checker.py exited with status 2 but stdout was empty. stderr: \"failure\\n\"\n"
+      "stderr": "`./checker.mjs --norc -f json -x --shell bash -e SC1091,SC2194,SC2050,SC2153,SC2154,SC2157,SC2043 -` did not run successfully while checking script at line:6,col:9: ./checker.mjs exited with status 2 but stdout was empty. stderr: \"failure\\n\"\n"
     },
     "stdin": true,
     "write_workflow": false
@@ -4299,10 +4299,10 @@
     "id": "audit:checker-error:pyflakes:20",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes=./checker.py"
+      "-pyflakes=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stderr.write(\"failure\\n\")\nsys.exit(2)\n"
+      "checker.mjs": "#!/usr/bin/env node\nprocess.stderr.write(\"failure\\n\");\nprocess.exitCode = 2;\n"
     },
     "expected": {
       "code": 2,
@@ -4322,10 +4322,10 @@
     "id": "audit:checker-error:shellcheck:21",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"not json\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"not json\");\n"
     },
     "expected": {
       "code": 3,
@@ -4339,10 +4339,10 @@
     "id": "audit:checker-error:pyflakes:22",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes=./checker.py"
+      "-pyflakes=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"not json\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"not json\");\n"
     },
     "expected": {
       "code": 2,
@@ -4362,10 +4362,10 @@
     "id": "audit:checker-error:shellcheck:23",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"null\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"null\");\n"
     },
     "expected": {
       "code": 0,
@@ -4379,10 +4379,10 @@
     "id": "audit:checker-error:pyflakes:24",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes=./checker.py"
+      "-pyflakes=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"null\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"null\");\n"
     },
     "expected": {
       "code": 2,
@@ -4402,10 +4402,10 @@
     "id": "audit:checker-error:shellcheck:25",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"{}\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"{}\");\n"
     },
     "expected": {
       "code": 3,
@@ -4419,10 +4419,10 @@
     "id": "audit:checker-error:pyflakes:26",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes=./checker.py"
+      "-pyflakes=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"{}\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"{}\");\n"
     },
     "expected": {
       "code": 2,
@@ -4442,10 +4442,10 @@
     "id": "audit:checker-error:shellcheck:27",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"[{}]\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{}]\");\n"
     },
     "expected": {
       "code": 1,
@@ -4459,10 +4459,10 @@
     "id": "audit:checker-error:pyflakes:28",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes=./checker.py"
+      "-pyflakes=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint(\"[{}]\")\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{}]\");\n"
     },
     "expected": {
       "code": 2,

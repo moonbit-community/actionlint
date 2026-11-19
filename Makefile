@@ -21,9 +21,9 @@ test:
 	moon test --target wasm
 
 cli-test: build
-	python3 scripts/test_cli.py --release
-	python3 scripts/test_cli.py --release --target wasm
-	python3 scripts/test_behavior.py --target all
+	node scripts/test_cli.mjs --release
+	node scripts/test_cli.mjs --release --target wasm
+	node scripts/test_behavior.mjs --target all
 
 fmt:
 	moon info
