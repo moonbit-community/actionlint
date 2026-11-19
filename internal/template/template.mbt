@@ -293,13 +293,3 @@ fn unescape_format(source : String) -> String {
   }
   out.to_string()
 }
-
-///|
-pub fn try_format_errors(
-  format : String,
-  errors : Json,
-  extra_kinds~ : Array[String] = [],
-) -> (String, String?) raise @model.CliError {
-  let (bytes, error) = try_format_errors_bytes(format, errors, extra_kinds~)
-  (@utf8.decode_lossy(bytes), error)
-}
