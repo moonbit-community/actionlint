@@ -13,7 +13,7 @@ fn format_errors(
   errors : Json,
   extra_kinds~ : Array[String] = [],
 ) -> String raise @model.CliError {
-  let (output, error) = @template.try_format_errors(
+  let (output, error) = @template.try_format_errors_bytes(
     format,
     errors,
     extra_kinds~,
@@ -21,5 +21,5 @@ fn format_errors(
   if error is Some(message) {
     raise CliError(message)
   }
-  output
+  @utf8.decode_lossy(output)
 }
