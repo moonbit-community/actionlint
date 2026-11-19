@@ -13,8 +13,8 @@ wasm:
 	cp _build/wasm/release/build/actionlint.wasm bin/actionlint.wasm
 
 check:
-	moon check --target native
-	moon check --target wasm
+	moon check --target native --deny-warn
+	moon check --target wasm --deny-warn
 
 test:
 	moon test --target native

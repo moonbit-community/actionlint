@@ -9,8 +9,12 @@ import {
   "moonbitlang/async",
   "moonbitlang/core/env",
   "moonbitlang/async/fs",
-  "moonbitlang/async/process",
   "moonbitlang/async/stdio",
+}
+
+#cfg(target="wasm")
+import {
+  "moonbitlang/async/process",
 }
 
 options(
