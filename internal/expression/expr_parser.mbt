@@ -1,10 +1,11 @@
 ///|
+#derive(Debug)
 pub struct Expr {
   kind : String
   value : String
   priv offset : Int32
   children : Array[Expr]
-} derive(Debug)
+}
 
 ///|
 priv struct ExprToken {

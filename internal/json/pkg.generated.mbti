@@ -6,19 +6,19 @@ import {
 }
 
 // Values
-pub fn data_get(Json, String) -> Json
+pub fn data_get(@moonbitlang/core/json.Json, String) -> @moonbitlang/core/json.Json
 
-pub fn data_keys(Json) -> Array[String]
+pub fn data_keys(@moonbitlang/core/json.Json) -> Array[String]
 
-pub fn json_encode(Json) -> String
+pub fn json_encode(@moonbitlang/core/json.Json) -> String
 
-pub fn json_preserve_numbers(String) -> Json raise @model.CliError
+pub fn json_preserve_numbers(String) -> @moonbitlang/core/json.Json raise @model.CliError
 
-pub fn json_strings(Json) -> Array[String]
+pub fn json_strings(@moonbitlang/core/json.Json) -> Array[String]
 
-pub fn json_syntax_error(String) -> (Int, String)
+pub fn json_syntax_error(String) -> (Int32, String)
 
-pub fn template_string(Json) -> String
+pub fn template_string(@moonbitlang/core/json.Json) -> String
 
 // Errors
 

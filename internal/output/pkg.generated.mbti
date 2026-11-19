@@ -3,10 +3,11 @@ package "moonbit-community/actionlint/internal/output"
 
 import {
   "moonbit-community/actionlint/internal/model",
+  "moonbitlang/core/json",
 }
 
 // Values
-pub fn diagnostic_json(@model.Diagnostic, String, String) -> Json
+pub fn diagnostic_json(@model.Diagnostic, String, String) -> @json.Json
 
 pub fn render_diagnostic(@model.Diagnostic, String, String, Bool, Bool) -> String
 

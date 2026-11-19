@@ -64,7 +64,7 @@ fn decode_shellcheck(
           match v {
             Number(n, repr~) =>
               (try
-                @string.parse_int64(repr.unwrap_or(n.to_string()), base=10)
+                @string.parse_int64(repr.unwrap_or(n.to_string()), radix=10)
               catch {
                 _ => None
               } noraise {
@@ -110,7 +110,7 @@ fn decode_shellcheck(
 fn shellcheck_int(value : Json) -> Int64 {
   match value {
     Number(n, repr~) =>
-      @string.parse_int64(repr.unwrap_or(n.to_string()), base=10) catch {
+      @string.parse_int64(repr.unwrap_or(n.to_string()), radix=10) catch {
         _ => 0L
       }
     _ => 0L

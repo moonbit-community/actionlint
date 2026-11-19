@@ -14,7 +14,7 @@ fn cron_number(
       "failed to parse int from \{value}: strconv.Atoi: parsing \{@model.quote(value.to_owned())}: invalid syntax",
     )
   }
-  let number = @string.parse_int64(value, base=10) catch {
+  let number = @string.parse_int64(value, radix=10) catch {
     _ =>
       raise CliError(
         "failed to parse int from \{value}: strconv.Atoi: parsing \{@model.quote(value.to_owned())}: value out of range",

@@ -75,13 +75,13 @@ pub fn compile_re2(source : String) -> @regexp.Regexp raise @model.CliError {
       !counts.iter().all(s => s.iter().all(c => c is ('0'..<='9'))) {
       continue
     }
-    let minimum = @string.parse_int64(counts[0], base=10) catch { _ => 1001L }
+    let minimum = @string.parse_int64(counts[0], radix=10) catch { _ => 1001L }
     let maximum = if counts.length() == 1 {
       minimum
     } else if counts[1] == "" {
       -1L
     } else {
-      @string.parse_int64(counts[1], base=10) catch {
+      @string.parse_int64(counts[1], radix=10) catch {
         _ => 1001L
       }
     }

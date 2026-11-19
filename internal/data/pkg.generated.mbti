@@ -1,8 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbit-community/actionlint/internal/data"
 
+import {
+  "moonbitlang/core/json",
+}
+
 // Values
-pub let builtin_data : Json
+pub let builtin_data : @json.Json
 
 // Errors
 
