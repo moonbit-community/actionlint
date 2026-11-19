@@ -426,10 +426,10 @@
     "id": "pyflakes-missing-final-newline",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes={project}/checker.py"
+      "-pyflakes={project}/checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nprint(\"<stdin>:1:1: undefined name missing\", end=\"\")\nsys.exit(1)\n"
+      "checker.mjs": "#!/usr/bin/env node\nimport { readFileSync } from 'node:fs';\nreadFileSync(0);\nprocess.stdout.write(\"<stdin>:1:1: undefined name missing\");\nprocess.exitCode = 1;\n"
     },
     "expected": {
       "code": 2,
@@ -1936,10 +1936,10 @@
     "id": "boundary-pyflakes-lf",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes={project}/checker.py"
+      "-pyflakes={project}/checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:1: undefined name missing\\n')\nsys.exit(1)\n"
+      "checker.mjs": "#!/usr/bin/env node\nimport { readFileSync } from 'node:fs';\nreadFileSync(0);\nprocess.stdout.write('<stdin>:1:1: undefined name missing\\n');\nprocess.exitCode = 1;\n"
     },
     "expected": {
       "code": 2,
@@ -1957,10 +1957,10 @@
     "id": "boundary-pyflakes-crlf",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes={project}/checker.py"
+      "-pyflakes={project}/checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:1: undefined name missing\\r\\n')\nsys.exit(1)\n"
+      "checker.mjs": "#!/usr/bin/env node\nimport { readFileSync } from 'node:fs';\nreadFileSync(0);\nprocess.stdout.write('<stdin>:1:1: undefined name missing\\r\\n');\nprocess.exitCode = 1;\n"
     },
     "expected": {
       "code": 2,
@@ -1978,10 +1978,10 @@
     "id": "boundary-pyflakes-irrelevant",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes={project}/checker.py"
+      "-pyflakes={project}/checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('ignored output')\nsys.exit(1)\n"
+      "checker.mjs": "#!/usr/bin/env node\nimport { readFileSync } from 'node:fs';\nreadFileSync(0);\nprocess.stdout.write('ignored output');\nprocess.exitCode = 1;\n"
     },
     "expected": {
       "code": 2,
@@ -1999,10 +1999,10 @@
     "id": "boundary-pyflakes-syntax-tail",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
     "flags": [
-      "-pyflakes={project}/checker.py"
+      "-pyflakes={project}/checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nimport sys\nsys.stdin.read()\nsys.stdout.write('<stdin>:1:7: unexpected EOF while parsing\\nprint(\\n      ^')\nsys.exit(1)\n"
+      "checker.mjs": "#!/usr/bin/env node\nimport { readFileSync } from 'node:fs';\nreadFileSync(0);\nprocess.stdout.write('<stdin>:1:7: unexpected EOF while parsing\\nprint(\\n      ^');\nprocess.exitCode = 1;\n"
     },
     "expected": {
       "code": 2,

@@ -73,6 +73,8 @@ and the SARIF rule list no longer include this integration.
 
 ## Validation
 
+The validation scripts and checker fixtures run on Node.js 22 or later.
+
 ```sh
 make check test cli-test
 moon info && moon fmt
@@ -121,13 +123,13 @@ Optionally compare CLI behavior with a separately built upstream binary, used
 only for testing:
 
 ```sh
-python3 scripts/test_cli.py --release --reference /path/to/original/actionlint
-python3 scripts/test_cli.py --target wasm --release --reference /path/to/original/actionlint
-python3 scripts/test_behavior.py --target all --reference /path/to/original/actionlint
+node scripts/test_cli.mjs --release --reference /path/to/original/actionlint
+node scripts/test_cli.mjs --target wasm --release --reference /path/to/original/actionlint
+node scripts/test_behavior.mjs --target all --reference /path/to/original/actionlint
 
 # Check a single release artifact against stored expectations
-python3 scripts/test_behavior.py --target native
-python3 scripts/test_behavior.py --target wasm
+node scripts/test_behavior.mjs --target native
+node scripts/test_behavior.mjs --target wasm
 ```
 
 Results are written to `_build/compatibility-{native,wasm}.json`,

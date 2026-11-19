@@ -46,7 +46,7 @@ expectations captured from the independently built baseline.
 | pyflakes_removal_cases.json | 11 | Single/double dashes, empty values, assigned values, standalone arguments, and help text; both expectation sets checked separately |
 | Total | 1602 | Upstream expectations checked against the independently built baseline |
 
-`scripts/test_behavior.py` runs all scenarios, checking isolated temporary projects
+`scripts/test_behavior.mjs` runs all scenarios, checking isolated temporary projects
 concurrently while preserving case order in the results. Only temporary project
 paths are normalized to `$PROJECT`; non-UTF-8 output is stored losslessly as bytes
 in `{"hex": "..."}` form. Boundary cases involving Go pointer addresses observe
@@ -97,9 +97,9 @@ for the port were not updated merely to eliminate failures.
 ```sh
 (cd baseline && go build -o /tmp/actionlint-implementation-reference ./cmd/actionlint)
 make check test cli-test
-python3 scripts/test_behavior.py --target all --reference /tmp/actionlint-implementation-reference
-python3 scripts/test_cli.py --release --reference /tmp/actionlint-implementation-reference
-python3 scripts/test_cli.py --target wasm --release --reference /tmp/actionlint-implementation-reference
+node scripts/test_behavior.mjs --target all --reference /tmp/actionlint-implementation-reference
+node scripts/test_cli.mjs --release --reference /tmp/actionlint-implementation-reference
+node scripts/test_cli.mjs --target wasm --release --reference /tmp/actionlint-implementation-reference
 moon info && moon fmt
 ```
 

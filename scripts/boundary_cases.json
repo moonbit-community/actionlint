@@ -2029,10 +2029,10 @@
     "id": "boundary:shellcheck:null",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('null')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"null\");\n"
     },
     "arguments": [
       "-"
@@ -2049,10 +2049,10 @@
     "id": "boundary:shellcheck:[]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[]\");\n"
     },
     "arguments": [
       "-"
@@ -2069,10 +2069,10 @@
     "id": "boundary:shellcheck:[{}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{}]\");\n"
     },
     "arguments": [
       "-"
@@ -2089,10 +2089,10 @@
     "id": "boundary:shellcheck:[null]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[null]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[null]\");\n"
     },
     "arguments": [
       "-"
@@ -2109,10 +2109,10 @@
     "id": "boundary:shellcheck:{}",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('{}')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"{}\");\n"
     },
     "arguments": [
       "-"
@@ -2129,10 +2129,10 @@
     "id": "boundary:shellcheck:true",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('true')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"true\");\n"
     },
     "arguments": [
       "-"
@@ -2149,10 +2149,10 @@
     "id": "boundary:shellcheck:42",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('42')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"42\");\n"
     },
     "arguments": [
       "-"
@@ -2169,10 +2169,10 @@
     "id": "boundary:shellcheck:\"x\"",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('\"x\"')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"\\\"x\\\"\");\n"
     },
     "arguments": [
       "-"
@@ -2189,10 +2189,10 @@
     "id": "boundary:shellcheck:[1]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[1]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[1]\");\n"
     },
     "arguments": [
       "-"
@@ -2209,10 +2209,10 @@
     "id": "boundary:shellcheck:[{\"line\":\"1\"}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{\"line\":\"1\"}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"line\\\":\\\"1\\\"}]\");\n"
     },
     "arguments": [
       "-"
@@ -2229,10 +2229,10 @@
     "id": "boundary:shellcheck:[{\"line\":1.0}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{\"line\":1.0}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"line\\\":1.0}]\");\n"
     },
     "arguments": [
       "-"
@@ -2249,10 +2249,10 @@
     "id": "boundary:shellcheck:[{\"code\":2147483648}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{\"code\":2147483648}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"code\\\":2147483648}]\");\n"
     },
     "arguments": [
       "-"
@@ -2269,10 +2269,10 @@
     "id": "boundary:shellcheck:[{\"message\":null,\"level\":null}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{\"message\":null,\"level\":null}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"message\\\":null,\\\"level\\\":null}]\");\n"
     },
     "arguments": [
       "-"
@@ -2289,10 +2289,10 @@
     "id": "boundary:shellcheck:[{\"file\":{},\"endLine\":[],\"code\":0}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.py"
+      "-shellcheck=./checker.mjs"
     ],
     "files": {
-      "checker.py": "#!/usr/bin/env python3\nprint('[{\"file\":{},\"endLine\":[],\"code\":0}]')\n"
+      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"file\\\":{},\\\"endLine\\\":[],\\\"code\\\":0}]\");\n"
     },
     "arguments": [
       "-"
