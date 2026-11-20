@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  MOON_SEPARATE_COMPILATION: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest

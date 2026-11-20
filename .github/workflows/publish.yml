@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  MOON_SEPARATE_COMPILATION: "1"
 jobs:
   verify:
     uses: ./.github/workflows/moonbit-ci.yml
