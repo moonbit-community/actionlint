@@ -167,7 +167,7 @@ fn template_printf(args : Array[TemplateValue]) -> Bytes {
           (if flags.contains("0") { "0" } else { " " }).repeat(padding),
         )
       }
-      out.write_bytes(bytes)
+      out.write_bytesview(bytes)
       if flags.contains("-") {
         out.write_string_utf8(" ".repeat(padding))
       }

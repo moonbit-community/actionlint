@@ -437,7 +437,7 @@ fn template_call(
           }
           if old.length() <= source.length() - offset &&
             source[offset:offset + old.length()] == old[:] {
-            out.write_bytes(template_value_bytes(args[i + 1]))
+            out.write_bytesview(template_value_bytes(args[i + 1]))
             if old.is_empty() {
               empty_at = offset
             } else {

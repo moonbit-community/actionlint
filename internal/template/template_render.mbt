@@ -112,7 +112,7 @@ fn template_render(
             ),
           )
         } else {
-          state.out.write_bytes(
+          state.out.write_bytesview(
             template_value_bytes(template_eval(action, dot, env)),
           )
         }
