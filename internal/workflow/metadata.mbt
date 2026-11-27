@@ -366,10 +366,9 @@ async fn @model.Check::validate_action_metadata(
         ("color", "BrandingColors", "colors"),
       ] {
       let value = branding.text(prop)
-      let known = @jsonutil.template_string(
-        @jsonutil.data_get(@data.builtin_data, table),
-      )
-      if value != "" && !known.contains(@model.quote(value.to_lower()) + ":") {
+      let known = @jsonutil.data_get(@data.builtin_data, table)
+      if value != "" &&
+        @jsonutil.data_get(known, value.to_lower()) != Json::boolean(true) {
         self.report(
           uses,
           "action",
