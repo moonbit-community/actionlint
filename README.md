@@ -3,7 +3,6 @@
 A GitHub Actions workflow linter implemented in MoonBit, using this repository's
 `baseline/` (actionlint 1.7.12) as its compatibility reference. Supports native and
 wasm targets without invoking the original actionlint or depending on Go at runtime.
-The native C code is used only for process exit and terminal detection.
 
 ## Build and run
 
@@ -62,6 +61,10 @@ separately. The wasm artifact uses the host interfaces provided by
 Exit codes: `0` for no issues, `1` for detected issues, `2` for CLI argument errors,
 and `3` for file, configuration, or runtime errors. `-version` displays the port's
 version and compatibility baseline.
+
+Standard diagnostics use ANSI colors by default, including when piped or
+redirected. Pass `-no-color` or set `NO_COLOR` to a nonempty value for plain text.
+`TERM=dumb` also disables colors unless `-color` is passed.
 
 Removing Pyflakes is an intentional incompatibility with actionlint 1.7.12.
 `-pyflakes`, `--pyflakes`, and their empty-value, assigned-value, and standalone
@@ -204,13 +207,12 @@ require Pyflakes logs to be absent.
 
 ## Code organization
 
-The root package is the CLI executable entry point, containing `main.mbt` and
-native / wasm process exit adapters. All application logic lives under
-`internal/`, organized by responsibility:
+The root package contains the CLI entry point in `main.mbt`. Application logic
+lives under `internal/`.
 
 | Subpackage | Responsibility |
 | --- | --- |
-| `cli` | Arguments, command execution, help text, and terminal detection |
+| `cli` | Arguments, command execution, and help text |
 | `model` | YAML nodes, diagnostics, error collectors, shared errors, and quoting |
 | `yaml` | YAML parsing, tag / numeric compatibility, and position corrections |
 | `json` | JSON access, numeric value preservation, syntax diagnostics, and encoding |

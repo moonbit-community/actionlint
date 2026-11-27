@@ -3,8 +3,8 @@
 Run from the repository root with `moon testcli test tests/cli --target native`
 or `--target wasm`. These cases assert both output streams and the exit code.
 The Mooncakes `cli/cat` tool pipes fixture files into actionlint.
-Each actionlint command uses `-shellcheck=` to disable ShellCheck and
-`NO_COLOR=1` to disable ANSI color. Fixtures are read relative to this document.
+The commands use `-shellcheck=` to disable ShellCheck and set `NO_COLOR`
+explicitly. Fixtures are read relative to this document.
 
 ## Standard input
 
@@ -88,6 +88,35 @@ $ moonx cli/cat@0.2.4 fixtures/invalid.yaml | NO_COLOR=1 moonx moonbit-community
 ```
 
 ## Output formats
+
+### Diagnostic colors
+
+Standard diagnostics use ANSI colors even when stdout is captured. `TERM=dumb`
+disables colors unless `-color` is passed.
+
+```mooncram moonbit-community/actionlint
+$ NO_COLOR='' TERM=xterm moonx moonbit-community/actionlint -shellcheck= -
+@STDOUT
+"\u001b[33m<stdin>\u001b[0m\u001b[90m:\u001b[0m1\u001b[90m:\u001b[0m1\u001b[90m: \u001b[0m\u001b[1mworkflow is empty\u001b[0m\u001b[90m [syntax-check]" (escaped)
+"\u001b[0m" (escaped) (no-eol)
+@STDERR (empty)
+[1]
+
+$ NO_COLOR='' TERM=dumb moonx moonbit-community/actionlint -shellcheck= -
+@STDOUT
+<stdin>:1:1: workflow is empty [syntax-check]
+@STDERR (empty)
+[1]
+
+$ NO_COLOR='' TERM=dumb moonx moonbit-community/actionlint -shellcheck= -color -
+@STDOUT
+"\u001b[33m<stdin>\u001b[0m\u001b[90m:\u001b[0m1\u001b[90m:\u001b[0m1\u001b[90m: \u001b[0m\u001b[1mworkflow is empty\u001b[0m\u001b[90m [syntax-check]" (escaped)
+"\u001b[0m" (escaped) (no-eol)
+@STDERR (empty)
+[1]
+```
+
+### Formatting modes
 
 Single-line output omits source excerpts (`oneline`).
 

@@ -207,10 +207,7 @@ async fn run_linter(opts : CliOptions) -> Int32 {
   let shellcheck = @workflow.resolve_checker(opts.shellcheck)
   let color = !opts.no_color &&
     @env.get_env_var("NO_COLOR").unwrap_or("") == "" &&
-    (
-      opts.color ||
-      (@env.get_env_var("TERM").unwrap_or("") != "dumb" && stdout_is_terminal())
-    )
+    (opts.color || @env.get_env_var("TERM").unwrap_or("") != "dumb")
   if opts.debug {
     @stdio.stderr.write("[Linter] Create a Linter instance (MoonBit)\n")
   }
