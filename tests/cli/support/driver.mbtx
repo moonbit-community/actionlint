@@ -1,0 +1,333 @@
+---
+import {
+  "moonbitlang/async@0.22.5",
+  "moonbitlang/async@0.22.5/fs",
+  "moonbitlang/async@0.22.5/process",
+  "moonbitlang/async@0.22.5/stdio",
+  "moonbitlang/core/encoding/hex",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/env",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+}
+---
+
+///|
+suberror FixtureError {
+  FixtureError(String)
+}
+
+///|
+#derive(FromJson)
+struct Fixture {
+  source : Json
+  flags : Array[String]
+  files : Map[String, String]?
+  env : Map[String, String]?
+  project : String?
+  prefix : Array[String]?
+  arguments : Array[String]?
+  stdin : Bool?
+  write_workflow : Bool?
+  operation : String?
+  check_pyflakes : Bool?
+  stdout_encoding : String?
+  checker : Json?
+}
+
+///|
+struct Output {
+  code : Int32
+  stdout : Bytes
+  stderr : Bytes
+}
+
+///|
+async fn load_fixture(file : String, index : String) -> Json {
+  let fixtures = @fs.read_file(file).json()
+  guard fixtures is Array(cases) &&
+    cases.get(@string.parse_int(index)) is Some(case) else {
+    raise FixtureError("unknown fixture \{file} at index \{index}")
+  }
+  case
+}
+
+///|
+async fn build_artifact(
+  root : String,
+  target : String,
+  entry : String,
+) -> String {
+  let (code, stdout, stderr) = @process.collect_output(
+    "moon",
+    ["run", "--build-only", "--target", target, entry],
+    cwd=root,
+  )
+  if code != 0 {
+    raise FixtureError(
+      "could not build \{entry} for \{target}: \{stderr.text()}\{stdout.text()}",
+    )
+  }
+  guard stdout.json() is { "artifacts_path": [String(artifact), ..], .. } else {
+    raise FixtureError("Moon did not report an artifact for \{entry}")
+  }
+  artifact
+}
+
+///|
+async fn invoke(
+  command : Array[String],
+  args : Array[String],
+  cwd : String,
+  input : String?,
+  env : Map[String, String],
+) -> Output {
+  @async.with_timeout(30_000, () => {
+    @async.with_task_group(group => {
+      let (reader, writer) = @process.write_to_process()
+      group.spawn_bg(() => {
+        defer writer.close()
+        if input is Some(text) {
+          // Argument errors can close stdin before the workflow has been read.
+          writer.write(text) catch {
+            _ => ()
+          }
+        }
+      })
+      let (code, stdout, stderr) = @process.collect_output(
+        command[0],
+        command[1:].to_owned() + args,
+        cwd~,
+        stdin=reader,
+        extra_env=env,
+      )
+      { code, stdout: stdout.binary(), stderr: stderr.binary(), }
+    })
+  })
+}
+
+///|
+async fn write_project_file(
+  project : String,
+  file : String,
+  content : String,
+) -> Unit {
+  if file.rev_find("/") is Some(end) {
+    @fs.mkdir("\{project}/\{file[:end]}", recursive=true, allow_exist=true)
+  }
+  @fs.write_file(project + "/" + file, content)
+}
+
+///|
+async fn prepare_project(
+  fixture : Fixture,
+  project : String,
+  files : Map[String, String],
+) -> Unit {
+  @fs.mkdir(project + "/.git")
+  @fs.mkdir(project + "/.github/workflows", recursive=true)
+  if fixture.project == Some("cli") {
+    let valid = @fs.read_file("fixtures/valid.yaml").text()
+    let invalid = @fs.read_file("fixtures/invalid.yaml").text()
+    @fs.mkdir(project + "/empty")
+    @fs.mkdir(project + "/outside")
+    write_project_file(project, ".github/workflows/ok.yaml", valid)
+    write_project_file(project, ".github/workflows/bad.yml", invalid)
+    write_project_file(project, ".github/workflows/nested/ok.yml", valid)
+  } else if fixture.write_workflow != Some(false) {
+    guard fixture.source is String(source) else {
+      raise FixtureError("workflow source is missing")
+    }
+    write_project_file(project, ".github/workflows/main.yml", source)
+  }
+  for name, content in files {
+    write_project_file(project, name, content)
+  }
+}
+
+///|
+async fn configure_checkers(
+  fixture : Fixture,
+  root : String,
+  project : String,
+  env : Map[String, String],
+) -> String? {
+  let check_pyflakes = fixture.check_pyflakes.unwrap_or(false)
+  if fixture.checker is None && !check_pyflakes {
+    return None
+  }
+  let artifact = build_artifact(
+    root, "native", "tests/cli/support/checker.mbtx",
+  )
+  let executable = @fs.read_file(artifact)
+  if fixture.checker is Some(config) {
+    guard config is { "path": String(path), .. } else {
+      raise FixtureError("mock checker is missing its executable path")
+    }
+    @fs.write_file(project + "/" + path, executable, permission=0o755)
+    @fs.write_file(project + "/.actionlint-checker.json", config)
+  }
+  if check_pyflakes {
+    let mock_bin = project + "/mock-bin"
+    let pyflakes = mock_bin + "/pyflakes"
+    let marker = project + "/pyflakes-called"
+    @fs.mkdir(mock_bin)
+    @fs.write_file(pyflakes, executable, permission=0o755)
+    env["ACTIONLINT_TEST_PYFLAKES_MARKER"] = marker
+    let probe = invoke([pyflakes], [], project, None, env)
+    if probe.code != 1 || @fs.read_file(marker).text() != "called" {
+      raise FixtureError(
+        "mock Pyflakes executable did not record its invocation",
+      )
+    }
+    @fs.remove(marker)
+    let path = env.get("PATH").unwrap_or(@env.get_env_var("PATH").unwrap_or(""))
+    env["PATH"] = mock_bin + ":" + path
+    Some(marker)
+  } else {
+    None
+  }
+}
+
+///|
+async fn init_config(
+  command : Array[String],
+  project : String,
+  env : Map[String, String],
+) -> Output {
+  let path = project + "/.github/actionlint.yaml"
+  let first = invoke(command, ["-init-config"], project, None, env)
+  let before = @fs.read_file(path).binary()
+  let again = invoke(command, ["-init-config"], project, None, env)
+  let preserved = before == @fs.read_file(path).binary()
+  let first_stdout = @utf8.decode(first.stdout[:], ignore_bom=true)
+  let again_stdout = @utf8.decode(again.stdout[:], ignore_bom=true)
+  let config = @utf8.decode(before[:], ignore_bom=true)
+  let stdout = "first exit: \{first.code}\n\{first_stdout}config:\n\{config}" +
+    "second exit: \{again.code}\n\{again_stdout}preserved: \{preserved}\n"
+  {
+    code: 0,
+    stdout: @utf8.encode(stdout),
+    stderr: first.stderr + again.stderr,
+  }
+}
+
+///|
+fn render_output(bytes : Bytes, project : String, hex : Bool) -> String raise {
+  // Replace the temporary path before decoding so invalid UTF-8 stays intact.
+  let path = @utf8.encode(project)
+  let output = Buffer(capacity=bytes.length())
+  let mut rest = bytes[:]
+  while rest.find(path[:]) is Some(index) {
+    output.write_bytesview(rest[:index])
+    output.write_bytesview(b"$PROJECT"[:])
+    rest = rest[index + path.length():]
+  }
+  output.write_bytesview(rest)
+  let normalized = output.to_bytes()
+  if hex {
+    "hex: " + @hex.encode(normalized[:]) + "\n"
+  } else {
+    @utf8.decode(normalized[:], ignore_bom=true)
+  }
+}
+
+///|
+async fn run_fixture(suite : String, index : String) -> Int32 {
+  guard @env.get_env_var("ACTIONLINT_TEST_TARGET")
+    is Some("native" | "wasm" as target) else {
+    raise FixtureError(
+      "set ACTIONLINT_TEST_TARGET to the moon testcli target (native or wasm)",
+    )
+  }
+  let fixture : Fixture = @json.from_json(
+    load_fixture("fixtures/" + suite + ".json", index),
+  )
+  let root = @fs.realpath("../..")
+  // Resolve the artifact for this invocation, including when running a single Markdown file.
+  let artifact = build_artifact(root, target, ".")
+  let command = if target == "native" {
+    [artifact]
+  } else {
+    ["moonrun", artifact]
+  }
+  let project = @fs.tmpdir(prefix="actionlint-testcli-")
+  defer @fs.rmdir(project, recursive=true)
+  let files = fixture.files.unwrap_or({})
+  prepare_project(fixture, project, files)
+  let env = fixture.env.unwrap_or({})
+  if !env.contains("NO_COLOR") {
+    env["NO_COLOR"] = "1"
+  }
+  let output = if fixture.operation == Some("init-config") {
+    init_config(command, project, env)
+  } else {
+    let marker = configure_checkers(fixture, root, project, env)
+    let cli = fixture.project == Some("cli")
+    let source = match fixture.source {
+      String(text) => Some(text)
+      Null => None
+      _ => raise FixtureError("fixture source must be a string or null")
+    }
+    let stdin = fixture.stdin.unwrap_or(
+      if cli {
+        source is Some(_)
+      } else {
+        files.is_empty()
+      },
+    )
+    let prefix = fixture.prefix.unwrap_or(["-shellcheck=", "-oneline"])
+    let flags = fixture.flags.map(flag => {
+      flag.replace_all(old="{project}", new=project)
+    })
+    let args = fixture.arguments.unwrap_or(
+      if cli {
+        []
+      } else if stdin {
+        ["-"]
+      } else {
+        [".github/workflows/main.yml"]
+      },
+    )
+    let result = invoke(
+      command,
+      prefix + flags + args,
+      project,
+      if stdin {
+        source
+      } else {
+        None
+      },
+      env,
+    )
+    if marker is Some(path) {
+      let observation = @utf8.encode("pyflakes invoked: \{@fs.exists(path)}\n")
+      { ..result, stdout: result.stdout + observation, }
+    } else {
+      result
+    }
+  }
+  @stdio.stdout.write(
+    render_output(
+      output.stdout,
+      project,
+      fixture.stdout_encoding == Some("hex"),
+    ),
+  )
+  @stdio.stderr.write(render_output(output.stderr, project, false))
+  output.code
+}
+
+///|
+async fn main {
+  match @env.args()[:] {
+    [_, "input", file, index] => {
+      guard load_fixture(file, index) is { "source": String(source), .. } else {
+        raise FixtureError("expected fixture source")
+      }
+      @stdio.stdout.write(source)
+    }
+    [_, "run", suite, index] => @env.exit(run_fixture(suite, index))
+    _ => raise FixtureError("expected input FILE INDEX or run SUITE INDEX")
+  }
+}

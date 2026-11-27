@@ -1,4 +1,4 @@
-.PHONY: build native wasm check test cli-test fmt
+.PHONY: build native wasm check test testcli cli-test fmt
 
 build: native wasm
 
@@ -20,10 +20,12 @@ test:
 	moon test --target native
 	moon test --target wasm
 
+testcli:
+	ACTIONLINT_TEST_TARGET=native moon testcli test tests/cli --target native
+	ACTIONLINT_TEST_TARGET=wasm moon testcli test tests/cli --target wasm
+
 cli-test: build
-	node scripts/test_cli.mjs --release
-	node scripts/test_cli.mjs --release --target wasm
-	node scripts/test_behavior.mjs --target all
+	$(MAKE) testcli
 
 fmt:
 	moon info

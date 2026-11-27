@@ -4,11 +4,3 @@ import {
 }
 
 pkgtype(kind: "executable")
-
-options(
-  "native-stub": [ "platform.c" ],
-  targets: {
-    "platform.native.mbt": [ "native" ],
-    "platform.wasm.mbt": [ "wasm" ],
-  },
-)

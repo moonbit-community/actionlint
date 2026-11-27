@@ -1,0 +1,51 @@
+---
+import {
+  "moonbitlang/async@0.22.5/fs",
+  "moonbitlang/async@0.22.5/stdio",
+  "moonbitlang/core/env",
+}
+---
+
+///|
+async fn main {
+  let args = @env.args()
+  let program = args[0]
+  if program == "pyflakes" || program.has_suffix("/pyflakes") {
+    guard @env.get_env_var("ACTIONLINT_TEST_PYFLAKES_MARKER") is Some(marker) else {
+      abort("mock Pyflakes marker is missing")
+    }
+    @fs.write_file(marker, "called")
+    @stdio.stdout.write("<stdin>:1:1: unexpected Pyflakes invocation\n")
+    @env.exit(1)
+  }
+  let config = @fs.read_file(".actionlint-checker.json").json()
+  match config {
+    { "kind": String("shellcheck-arguments"), .. } => {
+      assert_eq(args[1], "shell argument")
+      assert_eq(args[args.length() - 1], "-")
+      assert_true(@stdio.stdin.read_all().text().contains("echo"))
+      let diagnostic =
+        #|[{"code":2086,"level":"info","line":2,"column":6,"message":"Double quote to prevent globbing and word splitting."}]
+      @stdio.stdout.write(diagnostic + "\n")
+      @env.exit(1)
+    }
+    { "kind": String("pyflakes-arguments"), .. } => {
+      assert_eq(args[1], "python argument")
+      ignore(@stdio.stdin.read_all())
+      @stdio.stderr.write("<stdin>:1:1: undefined name 'missing'\n")
+      @env.exit(1)
+    }
+    {
+      "stdout": String(stdout),
+      "stderr": String(stderr),
+      "code": Number(code, ..),
+      ..
+    } => {
+      ignore(@stdio.stdin.read_all())
+      @stdio.stdout.write(stdout)
+      @stdio.stderr.write(stderr)
+      @env.exit(code.to_int())
+    }
+    _ => abort("invalid mock checker configuration")
+  }
+}

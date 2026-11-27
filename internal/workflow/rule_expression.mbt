@@ -554,9 +554,10 @@ fn @model.Check::check_expressions(
               }
             }
             let name = id.value.to_lower()
-            input_props[name] = match input_props.get(name) {
-              Some(previous) => previous.merge(ty)
-              None => ty
+            input_props[name] = if input_props.get(name) is Some(previous) {
+              previous.merge(ty)
+            } else {
+              ty
             }
           }
           if event.value == "workflow_dispatch" &&

@@ -1,5 +1,11 @@
 # actionlint baseline behavior fixes and validation report
 
+This is the historical baseline audit. The former `scripts/test_cli.mjs` and
+`scripts/test_behavior.mjs` runners have been replaced by the Markdown suites in
+this directory; run `make testcli` for current validation. See [README.md](README.md)
+for fixture locations and expectation updates. Counts and artifact hashes below
+describe the original audit.
+
 The reference implementation is the read-only `baseline/` (actionlint 1.7.12).
 For this validation, the cached Go 1.25.0 toolchain was used to build
 `/tmp/actionlint-implementation-reference` separately from that directory, solely
@@ -46,12 +52,11 @@ expectations captured from the independently built baseline.
 | pyflakes_removal_cases.json | 11 | Single/double dashes, empty values, assigned values, standalone arguments, and help text; both expectation sets checked separately |
 | Total | 1602 | Upstream expectations checked against the independently built baseline |
 
-`scripts/test_behavior.mjs` runs all scenarios, checking isolated temporary projects
-concurrently while preserving case order in the results. Only temporary project
-paths are normalized to `$PROJECT`; non-UTF-8 output is stored losslessly as bytes
-in `{"hex": "..."}` form. Boundary cases involving Go pointer addresses observe
-results through len/reference comparisons, avoiding random addresses in fixed
-expectations.
+The migrated suites keep these inputs in `fixtures/{suite}.json` and assert
+outputs in `{suite}.md`. Temporary project paths are normalized to `$PROJECT`;
+non-UTF-8 output is compared as hexadecimal bytes. Boundary cases involving Go
+pointer addresses observe results through len/reference comparisons, avoiding
+random addresses in fixed expectations.
 
 ## Intentional differences
 
@@ -95,11 +100,7 @@ for the port were not updated merely to eliminate failures.
 ## Validation and reproduction
 
 ```sh
-(cd baseline && go build -o /tmp/actionlint-implementation-reference ./cmd/actionlint)
 make check test cli-test
-node scripts/test_behavior.mjs --target all --reference /tmp/actionlint-implementation-reference
-node scripts/test_cli.mjs --release --reference /tmp/actionlint-implementation-reference
-node scripts/test_cli.mjs --target wasm --release --reference /tmp/actionlint-implementation-reference
 moon info && moon fmt
 ```
 

@@ -1,8 +1,13 @@
 ///|
 fn node_present(n : @model.Node?) -> Bool {
-  match n {
-    None => false
-    Some(n) => if n.kind == 1 { n.value != "" } else { !n.children.is_empty() }
+  if n is Some(n) {
+    if n.kind == 1 {
+      n.value != ""
+    } else {
+      !n.children.is_empty()
+    }
+  } else {
+    false
   }
 }
 

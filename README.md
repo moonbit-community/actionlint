@@ -3,7 +3,6 @@
 A GitHub Actions workflow linter implemented in MoonBit, using this repository's
 `baseline/` (actionlint 1.7.12) as its compatibility reference. Supports native and
 wasm targets without invoking the original actionlint or depending on Go at runtime.
-The native C code is used only for process exit and terminal detection.
 
 ## Build and run
 
@@ -63,6 +62,10 @@ Exit codes: `0` for no issues, `1` for detected issues, `2` for CLI argument err
 and `3` for file, configuration, or runtime errors. `-version` displays the port's
 version and compatibility baseline.
 
+Standard diagnostics use ANSI colors by default, including when piped or
+redirected. Pass `-no-color` or set `NO_COLOR` to a nonempty value for plain text.
+`TERM=dumb` also disables colors unless `-color` is passed.
+
 Removing Pyflakes is an intentional incompatibility with actionlint 1.7.12.
 `-pyflakes`, `--pyflakes`, and their empty-value, assigned-value, and standalone
 forms are treated as unknown arguments and return exit code `2`. `shell: python`
@@ -73,7 +76,8 @@ and the SARIF rule list no longer include this integration.
 
 ## Validation
 
-The validation scripts and checker fixtures run on Node.js 22 or later.
+The Markdown CLI tests require a MoonBit toolchain with `moon testcli`.
+The remaining validation scripts run on Node.js 22 or later.
 
 ```sh
 make check
@@ -95,29 +99,43 @@ Failed CI runs attach any available regression reports.
 Tests cover the original **230 workflow fixtures and 30 project fixtures** on
 native and wasm, comparing diagnostic content, ordering, and positions. Additional
 tests cover JSON / JSONL / Markdown / SARIF output, configuration, and Unicode
-regressions. The CLI script includes **136 end-to-end scenarios** covering exit
-codes, stdout / stderr, configuration generation, templates, external command
-arguments, and large scripts piped through standard input.
-`scripts/behavior_cases.json` preserves the original 160 behavior scenarios;
-`scripts/audit_cases.json` contains all 320 inputs from the audit, and
-`scripts/boundary_cases.json` adds 135 related boundary scenarios.
-`scripts/review_cases.json` preserves all 717 inputs from the subsequent audit,
-and `scripts/review_boundary_cases.json` adds 259 boundary cases for the identified
-root causes. `scripts/pyflakes_removal_cases.json` adds 11 scenarios for legacy
-arguments and help text.
-Of the 1602 cases, 1600 compare complete stdout, stderr, and exit codes, replacing
-only the temporary project directory. Two verbose/debug scenarios check log events,
-filenames, and statistics. When templates produce non-UTF-8 bytes, expectations
-preserve all bytes in hexadecimal without lossy decoding.
-Regular regressions use stored expectations and do not require Go. Intentional
-differences store `expected`, `baseline_expected`, and `difference_reason`, with
-the reference binary checking the upstream expectations. Legacy Pyflakes inputs
-and upstream expectations are preserved; this project's expectations now require
-argument errors. CLI tests put a mock Pyflakes executable that records invocations
-on `PATH`, verifying that Python shells at all three levels never invoke it and
-that expression errors are still detected. Tests for the port do not automatically
-pass legacy arguments; the reference program still receives `-pyflakes=` to
-disable the default integration, while explicit test arguments are preserved.
+regressions. All **136 CLI end-to-end scenarios** and **1602 behavior regressions**
+now live in [tests/cli](tests/cli/README.md) as `mooncram` examples. They check
+stdout, stderr, and exit codes on native and wasm, including configuration
+creation, templates, Unicode, external command arguments, and large stdin inputs.
+`make cli-test` builds release artifacts and runs the complete Markdown suite on
+both targets.
+
+To run the CLI tests or update their expectations after an intentional output
+change, run from the repository root:
+
+```sh
+make testcli
+# Or select one target
+ACTIONLINT_TEST_TARGET=native moon testcli test tests/cli --target native
+ACTIONLINT_TEST_TARGET=wasm moon testcli test tests/cli --target wasm
+
+ACTIONLINT_TEST_TARGET=native moon testcli update tests/cli/cli.md --target native --dry-run
+ACTIONLINT_TEST_TARGET=native moon testcli update tests/cli/cli.md --target native
+make testcli
+```
+
+Review expectation changes before committing them. Inputs live under
+`tests/cli/fixtures`, with expected outputs in the matching Markdown documents.
+Plain files use `moonx cli/cat@0.2.4` for stdin. A MoonBit script supplies stdin
+from JSON fixtures, creates isolated temporary projects for file-based cases, and
+forwards the selected CLI's outputs and exit status. Set
+`ACTIONLINT_TEST_TARGET` to match `--target` when invoking `moon testcli`
+directly. The script uses this value to select the CLI artifact.
+Non-UTF-8 outputs are represented losslessly in hexadecimal. Verbose/debug cases
+assert all log lines with regexes only for elapsed milliseconds.
+
+The behavior collections retain the original 160 behavior, 320 audit, 135
+boundary, 717 review, 259 review-boundary, and 11 Pyflakes-removal inputs.
+Intentional differences retain their upstream `baseline_expected` and
+`difference_reason` in fixture data. Mock Pyflakes executables record invocations,
+verifying that Python shells at all three levels never invoke them and that
+expression errors are still detected.
 
 All five upstream Python workflow fixtures are executed. For the four that
 originally produced Pyflakes diagnostics, `scripts/fixture_differences.json`
@@ -131,24 +149,11 @@ ACTIONLINT_REQUIRE_CHECKERS=1 moon test --target native
 ACTIONLINT_REQUIRE_CHECKERS=1 moon test --target wasm
 ```
 
-Optionally compare CLI behavior with a separately built upstream binary, used
-only for testing:
-
-```sh
-node scripts/test_cli.mjs --release --reference /path/to/original/actionlint
-node scripts/test_cli.mjs --target wasm --release --reference /path/to/original/actionlint
-node scripts/test_behavior.mjs --target all --reference /path/to/original/actionlint
-
-# Check a single release artifact against stored expectations
-node scripts/test_behavior.mjs --target native
-node scripts/test_behavior.mjs --target wasm
-```
-
-Results are written to `_build/compatibility-{native,wasm}.json`,
-`_build/projects-{native,wasm}.json`, `_build/cli-{native,wasm}.json`, and
-`_build/behavior-report.json`. See
-[scripts/behavior_report.md](scripts/behavior_report.md) for before-and-after
-statistics and reproduction commands.
+The unit and fixture suites write `_build/compatibility-{native,wasm}.json` and
+`_build/projects-{native,wasm}.json`. CLI failures are reported directly by
+`moon testcli` with the Markdown location and output diff. See
+[tests/cli/behavior_report.md](tests/cli/behavior_report.md) for the historical
+baseline audit and the original before-and-after statistics.
 
 ## Compatibility scope
 
@@ -202,13 +207,12 @@ require Pyflakes logs to be absent.
 
 ## Code organization
 
-The root package is the CLI executable entry point, containing `main.mbt` and
-native / wasm process exit adapters. All application logic lives under
-`internal/`, organized by responsibility:
+The root package contains the CLI entry point in `main.mbt`. Application logic
+lives under `internal/`.
 
 | Subpackage | Responsibility |
 | --- | --- |
-| `cli` | Arguments, command execution, help text, and terminal detection |
+| `cli` | Arguments, command execution, and help text |
 | `model` | YAML nodes, diagnostics, error collectors, shared errors, and quoting |
 | `yaml` | YAML parsing, tag / numeric compatibility, and position corrections |
 | `json` | JSON access, numeric value preservation, syntax diagnostics, and encoding |
