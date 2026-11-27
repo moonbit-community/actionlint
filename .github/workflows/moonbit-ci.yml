@@ -60,7 +60,7 @@ jobs:
       - name: Run native and wasm tests with ShellCheck
         run: make test
 
-      - name: Test release CLIs and compare behavior on both targets
+      - name: Build release CLIs and run moon testcli on both targets
         run: make cli-test
 
       - name: Lint this repository's workflows
@@ -77,6 +77,4 @@ jobs:
           path: |
             _build/compatibility-*.json
             _build/projects-*.json
-            _build/cli-*.json
-            _build/behavior-report.json
           if-no-files-found: ignore

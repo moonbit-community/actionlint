@@ -8,12 +8,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:step:false",
@@ -24,12 +19,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:step:fromJSON(vars.FLAG)",
@@ -40,12 +30,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:job:true",
@@ -56,12 +41,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:job:false",
@@ -72,12 +52,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:job:fromJSON(vars.FLAG)",
@@ -88,12 +63,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:strategy:true",
@@ -104,12 +74,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:strategy:false",
@@ -120,12 +85,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:strategy:fromJSON(vars.FLAG)",
@@ -136,12 +96,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:concurrency:true",
@@ -152,12 +107,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:concurrency:false",
@@ -168,12 +118,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:concurrency:fromJSON(vars.FLAG)",
@@ -184,12 +129,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:environment:true",
@@ -200,12 +140,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:environment:false",
@@ -216,12 +151,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:environment:fromJSON(vars.FLAG)",
@@ -232,12 +162,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:dispatch-required:true",
@@ -248,12 +173,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:dispatch-required:false",
@@ -264,12 +184,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:call-required:true",
@@ -280,12 +195,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:bool-valid:call-required:false",
@@ -296,12 +206,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:if-truthiness:1",
@@ -312,12 +217,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:13: constant expression \"1\" in condition. remove the if: section [if-cond]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:if-truthiness:'false'",
@@ -328,12 +228,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:13: constant expression \"'false'\" in condition. remove the if: section [if-cond]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:if-truthiness:fromJSON('{}')",
@@ -344,12 +239,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {} [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:if-truthiness:fromJSON('[]')",
@@ -360,12 +250,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type array<any> [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:if-truthiness:null",
@@ -376,12 +261,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:13: constant expression \"null\" in condition. remove the if: section [if-cond]\n<stdin>:7:13: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type null [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:matrix-types:24",
@@ -392,12 +272,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:matrix-types:25",
@@ -408,12 +283,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:matrix-types:26",
@@ -424,12 +294,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:event-description:workflow_call:outputs",
@@ -440,12 +305,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:event-description:workflow_call:secrets",
@@ -456,12 +316,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:event-description:workflow_call:inputs",
@@ -472,12 +327,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:event-description:workflow_dispatch:inputs",
@@ -488,12 +338,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:5:26: undefined variable \"no_such\". available variables are \"env\", \"github\", \"inputs\", \"job\", \"matrix\", \"needs\", \"runner\", \"secrets\", \"steps\", \"strategy\", \"vars\" [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github.event.*.title[0]",
@@ -504,12 +349,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.discussion.title\", \"github.event.issue.title\", \"github.event.pull_request.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github.event.commits.*.message",
@@ -520,12 +360,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:23: \"github.event.commits.*.message\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github.event.issue.*[0]",
@@ -536,12 +371,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:23: object filter extracts potentially untrusted properties \"github.event.issue.body\", \"github.event.issue.title\". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:toJSON(github.event.issue.title)",
@@ -552,12 +382,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:30: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:contains(github.event.issue.title, '')",
@@ -568,12 +393,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github.event.issue[github.event.issue.title]",
@@ -584,12 +404,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:42: \"github.event.issue.title\" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks for more details [expression]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github.event.issue.title.bar.baz",
@@ -600,12 +415,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:security:github['event']['Issue']['title']",
@@ -616,12 +426,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:foo[!x]",
@@ -637,12 +442,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:foo[^x]",
@@ -658,12 +458,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:{foo,bar}",
@@ -679,12 +474,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"{foo,bar}\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:foo/**/bar",
@@ -700,12 +490,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo/**/bar\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:a**b",
@@ -721,12 +506,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"a**b\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:foo/**",
@@ -742,12 +522,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"foo/**\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:[a-]",
@@ -763,12 +538,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label pattern \"[a-]\" is an invalid glob. kindly check list of labels in actionlint.yaml config file: syntax error in pattern [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:[]",
@@ -784,12 +554,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label pattern \"[]\" is an invalid glob. kindly check list of labels in actionlint.yaml config file: syntax error in pattern [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:[!]",
@@ -805,12 +570,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[!]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:[z-a]",
@@ -826,12 +586,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[z-a]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:runner-pattern:[é-中]",
@@ -847,12 +602,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:14: label \"foo!\" is unknown. available labels are \"windows-latest\", \"windows-latest-8-cores\", \"windows-2025\", \"windows-2025-vs2026\", \"windows-2022\", \"windows-11-arm\", \"ubuntu-slim\", \"ubuntu-latest\", \"ubuntu-latest-4-cores\", \"ubuntu-latest-8-cores\", \"ubuntu-latest-16-cores\", \"ubuntu-24.04\", \"ubuntu-24.04-arm\", \"ubuntu-22.04\", \"ubuntu-22.04-arm\", \"macos-latest\", \"macos-latest-xlarge\", \"macos-latest-large\", \"macos-26-intel\", \"macos-26-xlarge\", \"macos-26-large\", \"macos-26\", \"macos-15-intel\", \"macos-15-xlarge\", \"macos-15-large\", \"macos-15\", \"macos-14-xlarge\", \"macos-14-large\", \"macos-14\", \"self-hosted\", \"x64\", \"arm\", \"arm64\", \"linux\", \"macos\", \"windows\", \"[é-中]\". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:[!]",
@@ -868,12 +618,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[!]\" in \"paths\"\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:[]",
@@ -889,12 +634,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"[]\" in \"paths\"\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:{foo,bar",
@@ -910,12 +650,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse config file \"custom.yml\": invalid glob pattern \"{foo,bar\" in \"paths\"\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:foo/**/bar",
@@ -931,12 +666,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:**/*.yml",
@@ -952,12 +682,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:{.github,other}/**/*.yml",
@@ -973,12 +698,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:[z-a]",
@@ -994,12 +714,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:config-pattern:foo[!x]",
@@ -1015,12 +730,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:[[:^alpha:]]",
@@ -1034,12 +744,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\P{Greek}",
@@ -1053,12 +758,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:(?i:a)(?-i:b)",
@@ -1072,12 +772,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:(?U:a+?)",
@@ -1091,12 +786,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\Afoo\\z",
@@ -1110,12 +800,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:a{01}",
@@ -1129,12 +814,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:(a)\\1",
@@ -1148,12 +828,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"(a)\\\\1\": error parsing regexp: invalid escape sequence: `\\1`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\8",
@@ -1167,12 +842,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"\\\\8\": error parsing regexp: invalid escape sequence: `\\8`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\u0041",
@@ -1186,12 +856,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"\\\\u0041\": error parsing regexp: invalid escape sequence: `\\u`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:[abc",
@@ -1205,12 +870,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"[abc\": error parsing regexp: missing closing ]: `[abc`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:(",
@@ -1224,12 +884,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"(\": error parsing regexp: missing closing ): `(`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:a{1001}",
@@ -1243,12 +898,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"a{1001}\": error parsing regexp: invalid repeat count: `{1001}`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:a{2,1}",
@@ -1262,12 +912,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"a{2,1}\": error parsing regexp: invalid repeat count: `{2,1}`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:[z-a]",
@@ -1281,12 +926,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "invalid regular expression for ignore pattern \"[z-a]\": error parsing regexp: invalid character class range: `z-a`\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\123",
@@ -1300,12 +940,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\x{41}",
@@ -1319,12 +954,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:\\Q[]{}\\E",
@@ -1338,12 +968,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:regex:(?i)\\Qab\\E+",
@@ -1357,12 +982,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:*/9223372036854775807 * * * *",
@@ -1373,12 +993,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:*/9223372036854775808 * * * *",
@@ -1389,12 +1004,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:3:13: invalid CRON format \"*/9223372036854775808 * * * *\" in schedule event: failed to parse int from 9223372036854775808: strconv.Atoi: parsing \"9223372036854775808\": value out of range [events]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:*/-1 * * * *",
@@ -1405,12 +1015,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:3:13: invalid CRON format \"*/-1 * * * *\" in schedule event: negative number (-1) not allowed: -1 [events]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:*/0 * * * *",
@@ -1421,12 +1026,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:3:13: invalid CRON format \"*/0 * * * *\" in schedule event: step of range should be a positive number: */0 [events]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:0 0 */2 * 1",
@@ -1437,12 +1037,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:0 0 */1 * 1",
@@ -1453,12 +1048,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:0 0 *-2 * *",
@@ -1469,12 +1059,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:0 0 1-2-3 * *",
@@ -1485,12 +1070,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:3:13: invalid CRON format \"0 0 1-2-3 * *\" in schedule event: too many hyphens: 1-2-3 [events]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:0 0 * * MON-FRI",
@@ -1501,12 +1081,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:cron:@hourly",
@@ -1517,12 +1092,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:3:13: invalid CRON format \"@hourly\" in schedule event: parser does not accept descriptors: @hourly [events]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:owner/repo/path@ref",
@@ -1533,12 +1103,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:owner/repo/path@@ref",
@@ -1549,12 +1114,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:owner/repo/@a@b",
@@ -1565,12 +1125,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/@a@b\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:owner/repo/path@",
@@ -1581,12 +1136,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:11: reusable workflow call \"owner/repo/path@\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:./workflows/build.yml",
@@ -1597,12 +1147,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:workflow-reference:./@a",
@@ -1614,11 +1159,6 @@
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:4:11: reusable workflow call \"./@a\" at \"uses\" is not following the format \"owner/repo/path/to/workflow.yml@ref\" nor \"./path/to/workflow.yml\". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]\n",
-      "stderr": ""
-    },
     "baseline_expected": {
       "code": 0,
       "stdout": "",
@@ -1638,12 +1178,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "innerouter",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{$x := \"outer\"}}{{if true}}{{$x = \"inner\"}}{{end}}{{$x}}",
@@ -1657,12 +1192,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "inner",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{$x := \"outer\"}}{{range .}}{{$x := \"inner\"}}{{end}}{{$x}}",
@@ -1676,12 +1206,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "outer",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{$x := \"outer\"}}{{range .}}{{$x = \"inner\"}}{{end}}{{$x}}",
@@ -1695,12 +1220,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "inner",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{if $x := true}}{{$x}}{{else}}{{$x}}{{end}}",
@@ -1714,12 +1234,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "true",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{$x := \"outer\"}}{{define \"t\"}}{{$x}}{{end}}{{template \"t\" .}}",
@@ -1733,12 +1248,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "template \"{{$x := \\\"outer\\\"}}{{define \\\"t\\\"}}{{$x}}{{end}}{{template \\\"t\\\" .}}\" to format error messages could not be parsed: template: error formatter:1: undefined variable \"$x\"\n"
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{define \"t\"}}{{$}}{{end}}{{template \"t\" \"inner\"}}",
@@ -1752,12 +1262,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "inner",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{and false (index . 99)}}",
@@ -1771,12 +1276,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "false",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{or true (index . 99)}}",
@@ -1790,12 +1290,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "true",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{and true (index . 99)}}",
@@ -1809,12 +1304,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{or false (index . 99)}}",
@@ -1828,12 +1318,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{eq 1 1.0}}",
@@ -1847,12 +1332,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{lt 1 \"2\"}}",
@@ -1866,12 +1346,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%T %T %T %T %T\" 1 1.0 true nil \"x\"}}",
@@ -1885,12 +1360,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "int float64 bool <nil> string",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%#b %#o %#x %#X\" 12 12 12 12}}",
@@ -1904,12 +1374,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "0b1100 014 0xc 0XC",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%d\" \"x\"}}",
@@ -1923,12 +1388,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "%!d(string=x)",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%s\"}}",
@@ -1942,12 +1402,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "%!s(MISSING)",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%s\" \"a\" \"b\"}}",
@@ -1961,12 +1416,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "a%!(EXTRA string=b)",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%d %T\" 9223372036854775807 9223372036854775807}}",
@@ -1980,12 +1430,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "9223372036854775807 int",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%c %q %U\" 65 65 65}}",
@@ -1999,12 +1444,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "A 'A' U+0041",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:template:{{printf \"%.2f\" 1.25}}",
@@ -2018,291 +1458,272 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "1.25",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:shellcheck:null",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"null\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "null\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 0,
-      "stdout": "",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[{}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[null]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[null]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[null]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:{}",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"{}\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal object into Go value of type []actionlint.shellcheckError: stdout=\"{}\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "{}\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:true",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"true\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal bool into Go value of type []actionlint.shellcheckError: stdout=\"true\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "true\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:42",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"42\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number into Go value of type []actionlint.shellcheckError: stdout=\"42\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "42\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:\"x\"",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"\\\"x\\\"\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal string into Go value of type []actionlint.shellcheckError: stdout=\"\\\"x\\\"\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "\"x\"\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[1]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[1]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number into Go value of type actionlint.shellcheckError: stdout=\"[1]\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "[1]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{\"line\":\"1\"}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"line\\\":\\\"1\\\"}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal string into Go struct field shellcheckError.line of type int: stdout=\"[{\\\"line\\\":\\\"1\\\"}]\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "[{\"line\":\"1\"}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{\"line\":1.0}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"line\\\":1.0}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 3,
-      "stdout": "",
-      "stderr": "could not parse JSON output from shellcheck: json: cannot unmarshal number 1.0 into Go struct field shellcheckError.line of type int: stdout=\"[{\\\"line\\\":1.0}]\\n\"\n"
+    "checker": {
+      "path": "checker",
+      "stdout": "[{\"line\":1.0}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{\"code\":2147483648}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"code\\\":2147483648}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC2147483648::-1:0:  [shellcheck]\n",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[{\"code\":2147483648}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{\"message\":null,\"level\":null}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"message\\\":null,\\\"level\\\":null}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[{\"message\":null,\"level\":null}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
     "id": "boundary:shellcheck:[{\"file\":{},\"endLine\":[],\"code\":0}]",
     "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
     "flags": [
-      "-shellcheck=./checker.mjs"
+      "-shellcheck=./checker"
     ],
-    "files": {
-      "checker.mjs": "#!/usr/bin/env node\nconsole.log(\"[{\\\"file\\\":{},\\\"endLine\\\":[],\\\"code\\\":0}]\");\n"
-    },
+    "files": {},
     "arguments": [
       "-"
     ],
     "stdin": true,
     "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:6:9: shellcheck reported issue in this script: SC0::-1:0:  [shellcheck]\n",
-      "stderr": ""
+    "checker": {
+      "path": "checker",
+      "stdout": "[{\"file\":{},\"endLine\":[],\"code\":0}]\n",
+      "stderr": "",
+      "code": 0
     }
   },
   {
@@ -2314,12 +1735,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: invalid float value: \".nan\": strconv.ParseFloat: parsing \".nan\": invalid syntax [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:.inf",
@@ -2330,12 +1746,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: invalid float value: \".inf\": strconv.ParseFloat: parsing \".inf\": invalid syntax [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:2026-01-01",
@@ -2346,12 +1757,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: expected scalar node for float value but found scalar node with \"!!timestamp\" tag [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:2026-02-30",
@@ -2362,12 +1768,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:1e-999",
@@ -2378,12 +1779,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: value at \"timeout-minutes\" must be greater than zero: 0 [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:1e999",
@@ -2394,12 +1790,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:NaN",
@@ -2410,12 +1801,7 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   },
   {
     "id": "boundary:yaml-timeout:Inf",
@@ -2426,11 +1812,6 @@
       "-"
     ],
     "stdin": true,
-    "write_workflow": false,
-    "expected": {
-      "code": 1,
-      "stdout": "<stdin>:7:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]\n",
-      "stderr": ""
-    }
+    "write_workflow": false
   }
 ]

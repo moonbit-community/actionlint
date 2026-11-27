@@ -1,0 +1,1244 @@
+[
+  {
+    "id": "control-valid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "control-invalid-runner",
+    "source": "on: push\njobs:\n  test:\n    runs-on: does-not-exist\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "format-placeholder-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{2147483648}', 1) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "comment-only-workflow",
+    "source": "# only a comment\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "explicit-yaml-int-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "timeout-hex-literal",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 0x10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "fromjson-key-uppercase-index",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1}')['Foo'] }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "fromjson-key-lowercase-index",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1}')['foo'] }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "format-escaped-braces",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{0}}', 'x') }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "docker-invalid-url",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: docker://a%xx\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "docker-nonempty-tag-ending-colon",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:b:\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "deprecated-command-false-positive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ::set-output::x\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "deprecated-command-tab-separator",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output\tname=x::v\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "cron-unsatisfiable-date",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 31 FEB *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "cron-invalid-timezone-prefix",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=Bad/Zone 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "composite-empty-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n"
+    }
+  },
+  {
+    "id": "action-steps-scalar",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: 1\n"
+    }
+  },
+  {
+    "id": "action-required-yaml-yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: yes\n"
+    }
+  },
+  {
+    "id": "action-required-invalid-string",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: garbage\n"
+    }
+  },
+  {
+    "id": "action-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  foo:\n    required: true\n    default: null\n"
+    }
+  },
+  {
+    "id": "action-empty-disallowed-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\n  args: []\n"
+    }
+  },
+  {
+    "id": "action-input-name-diagnostic-case",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps:\n    - run: echo hello\n      shell: bash\ninputs:\n  CamelCase:\n    required: true\n"
+    }
+  },
+  {
+    "id": "workflow-required-uppercase-true",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: True\njobs: {}\n"
+    }
+  },
+  {
+    "id": "workflow-required-invalid-string",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: garbage\njobs: {}\n"
+    }
+  },
+  {
+    "id": "workflow-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      foo:\n        type: string\n        required: true\n        default: null\njobs: {}\n"
+    }
+  },
+  {
+    "id": "ignore-re2-quoted-literal",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown\\E"
+    ],
+    "files": {}
+  },
+  {
+    "id": "ignore-re2-repeat-limit",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "unknown{1001}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "printf-zero-padding",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04d\" 3}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "template-parenthesized-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" (index . 0).Kind}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "template-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{break}}{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "template-unknown-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.Unknown}}{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "variadic-signature-diagnostic",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('x') }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "explicit-document-start-position",
+    "source": "---\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "invalid-yaml-parser-diagnostic",
+    "source": "on: [push\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "template-error-suppression",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ${{ fromJSON('null') }} ${{ no_such }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "pyflakes-missing-final-newline",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker"
+    ],
+    "files": {},
+    "baseline_expected": {
+      "code": 3,
+      "stdout": "",
+      "stderr": "error message from pyflakes does not end with \\n nor \\r\\n while checking script at line:6,col:9. output: \"<stdin>:1:1: undefined name missing\"\n"
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments.",
+    "checker": {
+      "path": "checker",
+      "stdout": "<stdin>:1:1: undefined name missing",
+      "stderr": "",
+      "code": 1
+    },
+    "stdin": false
+  },
+  {
+    "id": "boundary-format-int64-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{9223372036854775807}', 1) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-int64-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{9223372036854775808}', 1) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-huge-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{99999999999999999999999999999999999999999999999999999999999999999999999999999999}', 1) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-int32-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{2147483647}', 1) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-even-close",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-odd-close",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-escaped-opening",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{{0}}}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-restart",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{x{0}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-consecutive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0}{1}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-mixed",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{{0}} {1}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-trailing",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-format-leading-zeros",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ format('{0000}', 1, 2) }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-fromjson-distinct-keys",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ fromJSON('{\"Foo\":1,\"foo\":true}')['Foo'] }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-context-case-insensitive",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: ${{ GITHUB.WorkFlow }}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-interpolation-null-valid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: \"${{ null }} ${{ 1 }}\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-interpolation-error-before-null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        name: \"${{ no_such }} ${{ null }}\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-empty",
+    "source": "",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-blank",
+    "source": " \n\t\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-comments",
+    "source": "\n# hi\n# bye\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-document-comment",
+    "source": "# hi\n---\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-document-null",
+    "source": "---\nnull\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-document-content",
+    "source": "---\non: push\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-flow-map",
+    "source": "on: {push\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-flow-nested",
+    "source": "on:\n  push: [foo\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-flow-multiline",
+    "source": "on: [push,\n  pull_request\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-yaml-flow-mismatch",
+    "source": "on: [push}\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-explicit-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"-1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-verbatim-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !<tag:yaml.org,2002:int> \"1\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-explicit-invalid",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!int \"garbage\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-octal",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 0o10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-underscores",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 1_000\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 1e999\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: -1\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-number-float-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: !!float \"1.5\"\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-integer-hex",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 0x10\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-integer-int64-max",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 9223372036854775807\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-integer-int64-overflow",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: 9223372036854775808\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-integer-negative",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      max-parallel: -1\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-action-required-quoted-yes",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: \"yes\"\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-on",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: on\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-no",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: no\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-quoted-false",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: \"false\"\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-null",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: null\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-numeric",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: 1\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-sequence",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: []\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-empty-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: \"\"\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-false-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: false\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-map-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: true\n    default: {}\n"
+    }
+  },
+  {
+    "id": "boundary-action-required-null-default",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  CamelCase:\n    required: yes\n    default: ~\n"
+    }
+  },
+  {
+    "id": "boundary-action-missing-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n"
+    }
+  },
+  {
+    "id": "boundary-action-null-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: null\n"
+    }
+  },
+  {
+    "id": "boundary-action-map-steps",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: {}\n"
+    }
+  },
+  {
+    "id": "boundary-action-empty-env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  env: {}\n"
+    }
+  },
+  {
+    "id": "boundary-action-null-env",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  env: null\n"
+    }
+  },
+  {
+    "id": "boundary-action-null-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  args: null\n"
+    }
+  },
+  {
+    "id": "boundary-action-scalar-args",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  args: x\n"
+    }
+  },
+  {
+    "id": "boundary-action-empty-main",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\n  main: \"\"\n"
+    }
+  },
+  {
+    "id": "boundary-action-sequence-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: []\ndescription: Test\nruns:\n  using: composite\n  steps: []\n"
+    }
+  },
+  {
+    "id": "boundary-action-scalar-runs",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns: 1\n"
+    }
+  },
+  {
+    "id": "boundary-action-scalar-input",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: ./action\n",
+    "flags": [],
+    "files": {
+      "action/action.yml": "name: Test\ndescription: Test\nruns:\n  using: composite\n  steps: []\ninputs:\n  foo: 1\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-quoted-yes",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: \"yes\"\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-false",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: false\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-null",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: null\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-numeric",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: 1\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-empty-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: true\n        default: \"\"\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-map-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    inputs:\n      CamelCase:\n        required: true\n        default: {}\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-secret-default",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    secrets:\n      CamelCase:\n        required: true\n        default: \"\"\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-workflow-required-secret-yes",
+    "source": "on: push\njobs:\n  test:\n    uses: ./.github/workflows/callee.yml\n",
+    "flags": [],
+    "files": {
+      ".github/workflows/callee.yml": "on:\n  workflow_call:\n    secrets:\n      CamelCase:\n        required: yes\njobs: {}\n"
+    }
+  },
+  {
+    "id": "boundary-docker-empty-tag",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-host-space",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a b\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-host-ascii-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a%41\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-host-utf8-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a%ff\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-path-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a/x%zz\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-query-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a?x=%zz\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-fragment-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a#%zz\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-missing-bracket",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://[abc\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-tag-escape",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://a:b%zz\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-docker-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: \"docker://\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-empty-value",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=x::\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-digit-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=x1::v\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-bad-name",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::set-output name=1x::v\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-path",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::add-path::/bin\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-path-empty",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::add-path::\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-command-spaces",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo \"::save-state  name=x::v\"\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-bad-cron-tz",
+    "source": "on:\n  schedule:\n    - cron: \"CRON_TZ=No/Such 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-valid-tz",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=Asia/Shanghai 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-empty-tz",
+    "source": "on:\n  schedule:\n    - cron: \"TZ= 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-invalid-location",
+    "source": "on:\n  schedule:\n    - cron: \"TZ=../UTC 0 0 * * *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-feb-leap",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 29 FEB *\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-cron-feb-sunday",
+    "source": "on:\n  schedule:\n    - cron: \"0 0 31 FEB SUN\"\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-quoted-metachar",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown Webhook\\E"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-unclosed-quote",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-quoted-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "\\Qunknown{1001}\\E"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-max-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1000}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-open-repeat",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1000,}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-range-max",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1,1000}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-range-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{1,1001}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-nested-max",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(x{100}){10}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-nested-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "(x{100}){11}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-ignore-reversed",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-ignore",
+      "x{2,1}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-config-ignore-quoted",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {
+      ".github/actionlint.yaml": "paths:\n  '**':\n    ignore: ['\\Qunknown\\E']\n"
+    }
+  },
+  {
+    "id": "boundary-config-ignore-overflow",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [],
+    "files": {
+      ".github/actionlint.yaml": "paths:\n  '**':\n    ignore: ['unknown{1001}']\n"
+    }
+  },
+  {
+    "id": "boundary-template-printf-width",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04d|%6.2f|%-5s|%.2s\" 3 1.234 \"x\" \"hello\"}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-printf-sign",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%05d|%+05d|%5.3d\" -3 3 3}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-printf-hex",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%04x|%.3d|%8q\" 15 3 \"x\"}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-parenthesis-pipeline",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{printf \"%s\" ((index . 0).Kind)}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-continue",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}A{{continue}}B{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-nested-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}A{{range $x := $}}{{break}}B{{end}}C{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-conditional-break",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{if .Kind}}X{{break}}{{end}}Y{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-partial-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{range .}}X{{.Unknown}}Y{{end}}after"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-multi-partial-field",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{range .}}X{{.Unknown}}Y{{end}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ]
+  },
+  {
+    "id": "boundary-template-index-error",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{index . 99}}after"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-multi-index-error",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{index . 99}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ]
+  },
+  {
+    "id": "boundary-template-nil",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{nil}}after"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-multi-nil",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "before{{nil}}after"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ]
+  },
+  {
+    "id": "boundary-template-field-case",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.kind}}{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-template-multi-field-case",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{range .}}{{.kind}}{{end}}"
+    ],
+    "files": {
+      ".github/workflows/other.yml": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n"
+    },
+    "arguments": [
+      ".github/workflows/main.yml",
+      ".github/workflows/other.yml"
+    ]
+  },
+  {
+    "id": "boundary-template-break-outside",
+    "source": "on: typo\njobs:\n  test:\n    runs-on: unknown-runner\n    steps:\n      - run: echo hello\n",
+    "flags": [
+      "-format",
+      "{{break}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-empty-snippet",
+    "source": "",
+    "flags": [
+      "-format",
+      "{{range .}}[{{.Snippet}}]{{end}}"
+    ],
+    "files": {}
+  },
+  {
+    "id": "boundary-pyflakes-lf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker"
+    ],
+    "files": {},
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:1: undefined name missing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments.",
+    "checker": {
+      "path": "checker",
+      "stdout": "<stdin>:1:1: undefined name missing\n",
+      "stderr": "",
+      "code": 1
+    },
+    "stdin": false
+  },
+  {
+    "id": "boundary-pyflakes-crlf",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker"
+    ],
+    "files": {},
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:1: undefined name missing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments.",
+    "checker": {
+      "path": "checker",
+      "stdout": "<stdin>:1:1: undefined name missing\r\n",
+      "stderr": "",
+      "code": 1
+    },
+    "stdin": false
+  },
+  {
+    "id": "boundary-pyflakes-irrelevant",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker"
+    ],
+    "files": {},
+    "baseline_expected": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments.",
+    "checker": {
+      "path": "checker",
+      "stdout": "ignored output",
+      "stderr": "",
+      "code": 1
+    },
+    "stdin": false
+  },
+  {
+    "id": "boundary-pyflakes-syntax-tail",
+    "source": "on: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo hello\n        shell: python\n",
+    "flags": [
+      "-pyflakes={project}/checker"
+    ],
+    "files": {},
+    "baseline_expected": {
+      "code": 1,
+      "stdout": ".github/workflows/main.yml:6:9: pyflakes reported issue in this script: 1:7: unexpected EOF while parsing [pyflakes]\n",
+      "stderr": ""
+    },
+    "difference_reason": "This port intentionally removes Pyflakes integration, breaking compatibility with actionlint 1.7.12; all Pyflakes arguments are treated as unknown arguments.",
+    "checker": {
+      "path": "checker",
+      "stdout": "<stdin>:1:7: unexpected EOF while parsing\nprint(\n      ^",
+      "stderr": "",
+      "code": 1
+    },
+    "stdin": false
+  }
+]

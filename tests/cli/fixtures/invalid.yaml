@@ -1,0 +1,7 @@
+on: [typo]
+jobs:
+  test:
+    runs-on: no-such-runner
+    steps:
+      - run: echo hello
+        if: true
